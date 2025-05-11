@@ -26,14 +26,16 @@ namespace Market
         {
             string username = Username.Text;
             string password = Password.Text;
-            if (username == "youssef" && password == "1234")
+            
+            if (username == "Mohamed" && password == "1234")
             {
+
                 MessageBox.Show("Login successful!");
                 // Open the main form or perform any other action
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                    MessageBox.Show("Invalid username or password.");
             }
         }
     }
