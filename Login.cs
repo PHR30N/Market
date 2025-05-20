@@ -104,10 +104,10 @@ namespace Market
                 login_password.Hide();
                 login_password_label.Hide();
             }
-            else
+            if(!login_forgot_your_password.Checked)
             {
-                login_username.Show();
-                login_username_label.Show();
+                login_password.Show();
+                login_password_label.Show();
             }
         }
 
@@ -120,7 +120,20 @@ namespace Market
         private void login_show_password_CheckedChanged(object sender, EventArgs e)
         {
             // Toggle password visibility
-            login_password.UseSystemPasswordChar = !login_show_password.Checked;
+            
+            if(login_show_password.Checked)
+                login_password.UseSystemPasswordChar = false;
+            if (!login_show_password.Checked)
+                login_password.UseSystemPasswordChar = true;
+        }
+
+        private void login_password_TextChanged(object sender, EventArgs e)
+        {
+            login_password.UseSystemPasswordChar = true;
+            if (login_show_password.Checked)
+                login_password.UseSystemPasswordChar = false;
+            if (!login_show_password.Checked)
+                login_password.UseSystemPasswordChar = true;
         }
     }
 }

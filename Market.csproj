@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SQL_Scripts\Login&amp;Register.sql" />
     <Content Include="SQL_Scripts\SQLQuery1.sql" />
     <None Include="Resources\login.png" />
     <Content Include="SQL_Scripts\InitialSetup.sql" />
