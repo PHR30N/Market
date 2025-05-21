@@ -26,12 +26,11 @@ namespace Market
             string email = register_email.Text;
             string full_name = register_full_name.Text;
             string account_type = "Customer";
-            //if (register_confirm_password != register_password)
-            //{
-            //    MessageBox.Show("Password is diffrent from Confirm Password");
-            //    MessageBox.Show(register_confirm_password+" "+ register_password);
-            //    return;
-            //}
+            if (register_confirm_password.Text != register_password.Text)
+            {
+                MessageBox.Show("Password is diffrent from Confirm Password");
+                return;
+            }
             // check if data is not empty
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(full_name) || string.IsNullOrEmpty(account_type))
             {
@@ -53,8 +52,8 @@ namespace Market
                 MessageBox.Show("Username or email already exists.");
                 return;
             }
-            //if (register_confirm_password == register_password)
-            //{
+            if (register_confirm_password.Text == register_password.Text)
+            {
                 // Insert the new user into the database
                 string insertQuery = "INSERT INTO login (username, password, email, full_name,account_type) VALUES (@username, @password, @email, @full_name, @account_type)";
 
@@ -83,7 +82,7 @@ namespace Market
                 {
                     MessageBox.Show("Registration failed. Please try again.");
                 }
-            //}
+            }
         }
 
         private void register_show_password_CheckedChanged(object sender, EventArgs e)
