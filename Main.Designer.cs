@@ -38,12 +38,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.sign_out_button = new System.Windows.Forms.Button();
-            this.clothes_button = new System.Windows.Forms.Button();
-            this.food_button = new System.Windows.Forms.Button();
-            this.books_button = new System.Windows.Forms.Button();
             this.phones_button = new System.Windows.Forms.Button();
             this.electronics_button = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // main_menu_button
@@ -120,12 +120,9 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.sign_out_button);
-            this.panel1.Controls.Add(this.clothes_button);
-            this.panel1.Controls.Add(this.food_button);
-            this.panel1.Controls.Add(this.books_button);
             this.panel1.Controls.Add(this.phones_button);
             this.panel1.Controls.Add(this.electronics_button);
             this.panel1.Controls.Add(this.main_menu_button);
@@ -156,40 +153,10 @@
             this.sign_out_button.UseVisualStyleBackColor = true;
             this.sign_out_button.Click += new System.EventHandler(this.sign_out_button_Click);
             // 
-            // clothes_button
-            // 
-            this.clothes_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clothes_button.Location = new System.Drawing.Point(3, 512);
-            this.clothes_button.Name = "clothes_button";
-            this.clothes_button.Size = new System.Drawing.Size(194, 57);
-            this.clothes_button.TabIndex = 5;
-            this.clothes_button.Text = "Clothes";
-            this.clothes_button.UseVisualStyleBackColor = true;
-            // 
-            // food_button
-            // 
-            this.food_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.food_button.Location = new System.Drawing.Point(3, 438);
-            this.food_button.Name = "food_button";
-            this.food_button.Size = new System.Drawing.Size(194, 57);
-            this.food_button.TabIndex = 4;
-            this.food_button.Text = "Food";
-            this.food_button.UseVisualStyleBackColor = true;
-            // 
-            // books_button
-            // 
-            this.books_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.books_button.Location = new System.Drawing.Point(3, 364);
-            this.books_button.Name = "books_button";
-            this.books_button.Size = new System.Drawing.Size(194, 57);
-            this.books_button.TabIndex = 3;
-            this.books_button.Text = "Books";
-            this.books_button.UseVisualStyleBackColor = true;
-            // 
             // phones_button
             // 
             this.phones_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phones_button.Location = new System.Drawing.Point(3, 218);
+            this.phones_button.Location = new System.Drawing.Point(3, 272);
             this.phones_button.Name = "phones_button";
             this.phones_button.Size = new System.Drawing.Size(194, 57);
             this.phones_button.TabIndex = 2;
@@ -199,12 +166,30 @@
             // electronics_button
             // 
             this.electronics_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.electronics_button.Location = new System.Drawing.Point(3, 291);
+            this.electronics_button.Location = new System.Drawing.Point(3, 209);
             this.electronics_button.Name = "electronics_button";
             this.electronics_button.Size = new System.Drawing.Size(194, 57);
             this.electronics_button.TabIndex = 1;
             this.electronics_button.Text = "Electronics";
             this.electronics_button.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(256, 179);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel1.TabIndex = 10;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(234, 208);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
             // Main
             // 
@@ -212,8 +197,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.Turquoise;
+            this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1144, 654);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.search_button);
             this.Controls.Add(this.money_label);
@@ -221,10 +208,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.search_box);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
             this.Text = "Main";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,11 +229,10 @@
         private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sign_out_button;
-        private System.Windows.Forms.Button clothes_button;
-        private System.Windows.Forms.Button food_button;
-        private System.Windows.Forms.Button books_button;
         private System.Windows.Forms.Button phones_button;
         private System.Windows.Forms.Button electronics_button;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

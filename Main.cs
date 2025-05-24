@@ -12,8 +12,7 @@ namespace Market
 {
     public partial class Main : Form
     {
-        public string user_username;
-        public int user_money = 1000;
+        UsersData udata = new UsersData();
         public Main()
         {
             InitializeComponent();
@@ -21,9 +20,9 @@ namespace Market
         public Main(string in_username)
         {
             InitializeComponent();
-            this.user_username = in_username;
-            username_label.Text = user_username;
-            money_label.Text = user_money.ToString();
+            udata.Connect(in_username);
+            username_label.Text = udata.username;
+            money_label.Text = udata.money.ToString();
         }
 
         private void search_button_Click(object sender, EventArgs e)
