@@ -74,9 +74,11 @@ namespace Market
                 // Check if the insert was successful   
                 if (rowsAffected > 0)
                 {
-                    MessageBox.Show("Registration successful!");
+                   // MessageBox.Show("Registration successful!");
                     // Optionally, you can redirect the user to the login form or another form
-                    this.Close(); // Close the registration form
+                    this.Hide(); // Close the registration form
+                    Main main = new Main(username);
+                    main.Show();
                 }
                 else
                 {
@@ -104,7 +106,7 @@ namespace Market
         {
             Login login = new Login();
             login.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void register_password_TextChanged(object sender, EventArgs e)

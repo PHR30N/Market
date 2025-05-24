@@ -48,7 +48,10 @@ namespace Market
                 // Check if user exists
                 if (userExists1 > 0)
                 {
-                    MessageBox.Show("Login successful!");
+                    //MessageBox.Show("Login successful!");
+                    this.Close();
+                    Main main = new Main(username1);
+                    main.Hide();
                     // Open the main form or perform any other action
                 }
                 else
@@ -81,7 +84,10 @@ namespace Market
             // Check if user exists
             if (userExists > 0)
             {
-                MessageBox.Show("Login successful!");
+                //MessageBox.Show("Login successful!");
+                this.Hide();
+                Main main = new Main(username);
+                main.Show();
                 // Open the main form or perform any other action
             }
             else
@@ -94,7 +100,7 @@ namespace Market
         {
             Register register = new Register();
             register.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void login_forgot_your_password_CheckedChanged(object sender, EventArgs e)
