@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Electronics.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,7 +127,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="InitialSetup.sql" />
+    <Content Include="Login&amp;Register.sql" />
+    <Content Include="Phones1.sql" />
     <Content Include="SQL_Scripts\Login&amp;Register.sql" />
+    <Content Include="SQL_Scripts\Phones1.sql" />
     <Content Include="SQL_Scripts\SQLQuery1.sql" />
     <None Include="Resources\login.png" />
     <Content Include="SQL_Scripts\InitialSetup.sql" />

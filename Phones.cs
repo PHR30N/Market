@@ -12,7 +12,7 @@ namespace Market
 {
     public partial class Phones: Form
     {
-        public Phones()
+        public Phones(string in_name)
         {
             InitializeComponent();
         }
