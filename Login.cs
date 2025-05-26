@@ -141,5 +141,10 @@ namespace Market
             if (!login_show_password.Checked)
                 login_password.UseSystemPasswordChar = true;
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
