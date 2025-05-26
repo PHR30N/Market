@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ElectronicsTables1.sql" />
     <Content Include="InitialSetup.sql" />
     <Content Include="Login&amp;Register.sql" />
     <Content Include="Phones1.sql" />
