@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Text;
-using System.Threading.Tasks; // Required for async operations
+using System.Threading.Tasks;
+using System.Windows.Forms; // Required for async operations
 
 namespace Market
 {
@@ -130,8 +131,15 @@ namespace Market
                     cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
                     cmd.Parameters.AddWithValue("@tablet", tablet);
 
-                    await conn.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
+                    try
+                    {
+                        await conn.OpenAsync();
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Database Error: {ex.Message}");
+                    }
                 }
             }
         }
@@ -141,41 +149,59 @@ namespace Market
             string selectQuery = "SELECT * FROM Phones WHERE name = @name";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@name", in_name);
-                    await conn.OpenAsync();
+                cmd.Parameters.AddWithValue("@name", in_name);
+                await conn.OpenAsync();
 
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    
+                    if (await reader.ReadAsync())
                     {
-                        if (await reader.ReadAsync())
-                        {
-                            this.name = reader["name"].ToString();
-                            this.brand = reader["brand"].ToString();
-                            this.model = reader["model"].ToString();
-                            this.color = reader["color"].ToString();
-                            this.price = Convert.ToSingle(reader["price"]);
-                            this.id = Convert.ToInt32(reader["id"]);
-                            this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                            this.quantity = Convert.ToInt32(reader["quantity"]);
-                            this.imagePath = reader["imagePath"].ToString();
-                            this.QRCode = reader["QRCode"].ToString();
-                            this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
-                            this.screenSize = Convert.ToSingle(reader["screenSize"]);
-                            this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
-                            this.ramSize = Convert.ToInt32(reader["ramSize"]);
-                            this.cameraQuality = Convert.ToInt32(reader["cameraQuality"]);
-                            this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
-                            this.batteryCapacity = Convert.ToInt32(reader["batteryCapacity"]);
-                            this.tablet = Convert.ToBoolean(reader["tablet"]);
-                        }
-                        // Else: object remains in its current state if not found
+                        this.name = reader["name"].ToString();
+                        this.brand = reader["brand"].ToString();
+                        this.model = reader["model"].ToString();
+                        this.color = reader["color"].ToString();
+                        this.price = Convert.ToSingle(reader["price"]);
+                        this.id = Convert.ToInt32(reader["id"]);
+                        this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                        this.quantity = Convert.ToInt32(reader["quantity"]);
+                        this.imagePath = reader["imagePath"].ToString();
+                        this.QRCode = reader["QRCode"].ToString();
+                        this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
+                        this.screenSize = Convert.ToSingle(reader["screenSize"]);
+                        this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
+                        this.ramSize = Convert.ToInt32(reader["ramSize"]);
+                        this.cameraQuality = Convert.ToInt32(reader["cameraQuality"]);
+                        this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
+                        this.batteryCapacity = Convert.ToInt32(reader["batteryCapacity"]);
+                        this.tablet = Convert.ToBoolean(reader["tablet"]);
+                        //MessageBox.Show("Entered Method" + this.batteryCapacity);
                     }
                 }
             }
         }
-
+        /*
+        private void UpdateAdminFields(Phone myPhone)
+        {
+            admin_brand.Text = myPhone.brand;
+            admin_model.Text = myPhone.model;
+            admin_color.Text = myPhone.color;
+            admin_price.Value = (decimal)myPhone.price;
+            admin_description.Text = myPhone.description;
+            admin_quantity.Value = myPhone.quantity;
+            admin_image_path.Text = myPhone.imagePath;
+            admin_qrcode.Text = myPhone.QRCode;
+            admin_phone_os.Text = myPhone.operatingSystem;
+            admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
+            admin_phone_storage.Value = myPhone.storageCapacity;
+            admin_ram_size.Value = myPhone.ramSize;
+            admin_phone_camera.Value = myPhone.cameraQuality;
+            admin_phone_cpu.Text = myPhone.cpuType;
+            admin_phone_battery.Value = myPhone.batteryCapacity;
+            admin_tablet.Checked = myPhone.tablet;
+        }*/
         public override string ToString()
         {
             return $"Phone: {name}, Brand: {brand}, Model: {model}, Color: {color}, Price: {price:C}, ID: {id}, Quantity: {quantity}, QRCode: {QRCode}, OS: {operatingSystem}, Screen: {screenSize}\", Storage: {storageCapacity}GB, RAM: {ramSize}GB, Camera: {cameraQuality}MP, CPU: {cpuType}, Battery: {batteryCapacity}mAh, Tablet: {tablet}\nDescription: {description}\nImage: {imagePath}";

@@ -165,47 +165,79 @@ namespace Market
         private void admin_add_Click(object sender, EventArgs e)
         {
             string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
-            //Phone myPhone = new Phone(
-            // name: admin_name.Text,
-            // brand: admin_brand.Text,
-            // model: admin_model.Text,
-            // color: admin_color.Text,
-            // price: (float)admin_price.Value,
-            // description: admin_description.Text,
-            // quantity: (int)admin_quantity.Value,
-            // imagePath: admin_image_path.Text,
-            // qrCode: admin_qrcode.Text,
-            // operatingSystem: admin_phone_os.Text,
-            // screenSize: (float)admin_phone_screen_size.Value,
-            // storageCapacity: (int)admin_phone_storage.Value,
-            // ramSize: (int)admin_ram_size.Value,
-            // cameraQuality: (int)admin_phone_camera.Value,
-            // cpuType: admin_phone_cpu.Text,
-            // batteryCapacity: (int)admin_phone_battery.Value,
-            // tablet: admin_tablet.Checked
-            // );
             Phone myPhone = new Phone(
-            name: "Galaxy S24 Ultra",
-            brand: "Samsung",
-            model: "SM-S928B",
-            color: "Titanium Gray",
-            price: 1299.99f,
-            id: 101,
-            description: "The latest flagship with AI features.",
-            quantity: 50,
-            imagePath: "/images/s24ultra.png",
-            qrCode: "S24ULTRA101QR",
-            operatingSystem: "Android 14",
-            screenSize: 6.8f,
-            storageCapacity: 512,
-            ramSize: 12,
-            cameraQuality: 200,
-            cpuType: "Snapdragon 8 Gen 3 for Galaxy",
-            batteryCapacity: 5000,
-            tablet: false
+            name: admin_name.Text,
+            brand: admin_brand.Text,
+            model: admin_model.Text,
+            color: admin_color.Text,
+            price: (float)admin_price.Value,
+            description: admin_description.Text,
+            quantity: (int)admin_quantity.Value,
+            imagePath: admin_image_path.Text,
+            qrCode: admin_qrcode.Text,
+            operatingSystem: admin_phone_os.Text,
+            screenSize: (float)admin_phone_screen_size.Value,
+            storageCapacity: (int)admin_phone_storage.Value,
+            ramSize: (int)admin_ram_size.Value,
+            cameraQuality: (int)admin_phone_camera.Value,
+            cpuType: admin_phone_cpu.Text,
+            batteryCapacity: (int)admin_phone_battery.Value,
+            tablet: admin_tablet.Checked
             );
+            //Phone myPhone = new Phone(
+            //name: "Galaxy S24 Ultra",
+            //brand: "Samsung",
+            //model: "SM-S928B",
+            //color: "Titanium Gray",
+            //price: 1299.99f,
+            //id: 101,
+            //description: "The latest flagship with AI features.",
+            //quantity: 50,
+            //imagePath: "/images/s24ultra.png",
+            //qrCode: "S24ULTRA101QR",
+            //operatingSystem: "Android 14",
+            //screenSize: 6.8f,
+            //storageCapacity: 512,
+            //ramSize: 12,
+            //cameraQuality: 200,
+            //cpuType: "Snapdragon 8 Gen 3 for Galaxy",
+            //batteryCapacity: 5000,
+            //tablet: false
+            //);
             _ = myPhone.SaveToDbAsync(myConnectionString);
             MessageBox.Show("Phone saved!");
+        }
+
+        private void admin_show_button_Click(object sender, EventArgs e)
+        {
+            string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
+            string phone_name = "Galaxy S24 Ultra";
+            Phone myPhone = new Phone();
+            myPhone.GetDataAsync(in_name: phone_name, connectionString: myConnectionString);
+            //if (!found)
+            //{
+            //    MessageBox.Show("Phone not found in database.");
+            //    return;
+            //}
+            MessageBox.Show("Entered Method" + myPhone.model);
+            admin_name.Text = myPhone.name;
+            admin_brand.Text = myPhone.brand;
+            admin_model.Text = myPhone.model;
+            admin_color.Text = myPhone.color;
+            admin_price.Value = (decimal)myPhone.price;
+            admin_description.Text = myPhone.description;
+            admin_quantity.Value = myPhone.quantity;
+            admin_image_path.Text = myPhone.imagePath;
+            admin_qrcode.Text = myPhone.QRCode;
+            admin_phone_os.Text = myPhone.operatingSystem;
+            admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
+            admin_phone_storage.Value = myPhone.storageCapacity;
+            admin_ram_size.Value = myPhone.ramSize;
+            admin_phone_camera.Value = myPhone.cameraQuality;
+            admin_phone_cpu.Text = myPhone.cpuType;
+            admin_phone_battery.Value = myPhone.batteryCapacity;
+            admin_tablet.Checked = myPhone.tablet;
+            //MessageBox.Show("Entered Method" + myPhone.operatingSystem);
         }
     }
 }
