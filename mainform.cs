@@ -12,7 +12,12 @@ namespace Market
 {
     public partial class mainform: Form
     {
+        public string in_username { get; set; }
         public mainform()
+        {
+            InitializeComponent();
+        }
+        public mainform(string in_username)
         {
             InitializeComponent();
         }
@@ -35,6 +40,11 @@ namespace Market
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+                this.Close();
         }
     }
 }

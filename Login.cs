@@ -50,8 +50,17 @@ namespace Market
                 {
                     //MessageBox.Show("Login successful!");
                     this.Hide();
-                    Main main = new Main(username1);
-                    main.Show();
+                    if(username1 == "admin")
+                    {                         // Open the admin main form or perform any other action
+                        AdminMain adminMain = new AdminMain();
+                        adminMain.Show();
+                    }
+                    else
+                    {
+                        // Open the user main form or perform any other action
+                        mainform main = new mainform(username1);
+                        main.Show();
+                    }
                     // Open the main form or perform any other action
                 }
                 else
@@ -84,10 +93,19 @@ namespace Market
             // Check if user exists
             if (userExists > 0)
             {
+                this.Hide(); 
                 //MessageBox.Show("Login successful!");
-                this.Hide();
-                Main main = new Main(username);
-                main.Show();
+                if (username == "admin")
+                {                         // Open the admin main form or perform any other action
+                    AdminMain adminMain = new AdminMain();
+                    adminMain.Show();
+                }
+                else
+                {
+                    // Open the user main form or perform any other action
+                    mainform main = new mainform(username);
+                    main.Show();
+                }
                 // Open the main form or perform any other action
             }
             else
@@ -145,6 +163,11 @@ namespace Market
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

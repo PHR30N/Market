@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
+            this.cpu_button = new System.Windows.Forms.Button();
+            this.gpu_button = new System.Windows.Forms.Button();
+            this.laptop_button = new System.Windows.Forms.Button();
+            this.phones_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -48,8 +49,8 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -64,55 +65,25 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.cpu_button);
+            this.panel1.Controls.Add(this.gpu_button);
+            this.panel1.Controls.Add(this.laptop_button);
+            this.panel1.Controls.Add(this.phones_button);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 458);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button1
+            // label3
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.button1.Location = new System.Drawing.Point(44, 122);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 48);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "phones";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.button2.Location = new System.Drawing.Point(44, 185);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 48);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "laptops";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.button3.Location = new System.Drawing.Point(44, 249);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 48);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "GPU";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.button4.Location = new System.Drawing.Point(44, 317);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(150, 48);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "CPU";
-            this.button4.UseVisualStyleBackColor = false;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(21, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 55);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "martek\'";
             // 
             // button5
             // 
@@ -123,6 +94,46 @@
             this.button5.TabIndex = 4;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = false;
+            // 
+            // cpu_button
+            // 
+            this.cpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
+            this.cpu_button.Location = new System.Drawing.Point(44, 317);
+            this.cpu_button.Name = "cpu_button";
+            this.cpu_button.Size = new System.Drawing.Size(150, 48);
+            this.cpu_button.TabIndex = 3;
+            this.cpu_button.Text = "CPU";
+            this.cpu_button.UseVisualStyleBackColor = false;
+            // 
+            // gpu_button
+            // 
+            this.gpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
+            this.gpu_button.Location = new System.Drawing.Point(44, 249);
+            this.gpu_button.Name = "gpu_button";
+            this.gpu_button.Size = new System.Drawing.Size(150, 48);
+            this.gpu_button.TabIndex = 2;
+            this.gpu_button.Text = "GPU";
+            this.gpu_button.UseVisualStyleBackColor = false;
+            // 
+            // laptop_button
+            // 
+            this.laptop_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
+            this.laptop_button.Location = new System.Drawing.Point(44, 185);
+            this.laptop_button.Name = "laptop_button";
+            this.laptop_button.Size = new System.Drawing.Size(150, 48);
+            this.laptop_button.TabIndex = 1;
+            this.laptop_button.Text = "laptops";
+            this.laptop_button.UseVisualStyleBackColor = false;
+            // 
+            // phones_button
+            // 
+            this.phones_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
+            this.phones_button.Location = new System.Drawing.Point(44, 122);
+            this.phones_button.Name = "phones_button";
+            this.phones_button.Size = new System.Drawing.Size(150, 48);
+            this.phones_button.TabIndex = 0;
+            this.phones_button.Text = "phones";
+            this.phones_button.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -254,16 +265,6 @@
             this.pictureBox6.TabIndex = 16;
             this.pictureBox6.TabStop = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("LCDMono2", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(201, 43);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "martek\'";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -275,12 +276,24 @@
             this.label4.Text = " selles";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Red;
+            this.button6.Location = new System.Drawing.Point(769, 12);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 20;
+            this.button6.Text = "Close";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(856, 456);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox5);
@@ -297,8 +310,10 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "mainform";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "main";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -317,10 +332,10 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cpu_button;
+        private System.Windows.Forms.Button gpu_button;
+        private System.Windows.Forms.Button laptop_button;
+        private System.Windows.Forms.Button phones_button;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
@@ -337,5 +352,6 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button6;
     }
 }

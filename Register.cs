@@ -77,7 +77,7 @@ namespace Market
                    // MessageBox.Show("Registration successful!");
                     // Optionally, you can redirect the user to the login form or another form
                     this.Hide(); // Close the registration form
-                    Main main = new Main(username);
+                    mainform main = new mainform(username);
                     main.Show();
                 }
                 else

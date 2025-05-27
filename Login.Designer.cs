@@ -42,6 +42,7 @@
             this.login_email_label = new System.Windows.Forms.Label();
             this.login_email = new System.Windows.Forms.TextBox();
             this.login_forgot_your_password = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -230,6 +231,17 @@
             this.login_forgot_your_password.UseVisualStyleBackColor = true;
             this.login_forgot_your_password.CheckedChanged += new System.EventHandler(this.login_forgot_your_password_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(743, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(45, 24);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +250,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.login_username);
             this.Controls.Add(this.login_username_label);
             this.Controls.Add(this.login_forgot_your_password);
@@ -279,6 +292,7 @@
         private System.Windows.Forms.Label login_email_label;
         private System.Windows.Forms.TextBox login_email;
         private System.Windows.Forms.CheckBox login_forgot_your_password;
+        private System.Windows.Forms.Button button1;
     }
 }
 
