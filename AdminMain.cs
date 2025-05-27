@@ -165,27 +165,46 @@ namespace Market
         private void admin_add_Click(object sender, EventArgs e)
         {
             string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
+            //Phone myPhone = new Phone(
+            // name: admin_name.Text,
+            // brand: admin_brand.Text,
+            // model: admin_model.Text,
+            // color: admin_color.Text,
+            // price: (float)admin_price.Value,
+            // description: admin_description.Text,
+            // quantity: (int)admin_quantity.Value,
+            // imagePath: admin_image_path.Text,
+            // qrCode: admin_qrcode.Text,
+            // operatingSystem: admin_phone_os.Text,
+            // screenSize: (float)admin_phone_screen_size.Value,
+            // storageCapacity: (int)admin_phone_storage.Value,
+            // ramSize: (int)admin_ram_size.Value,
+            // cameraQuality: (int)admin_phone_camera.Value,
+            // cpuType: admin_phone_cpu.Text,
+            // batteryCapacity: (int)admin_phone_battery.Value,
+            // tablet: admin_tablet.Checked
+            // );
             Phone myPhone = new Phone(
-             name: admin_name.Text,
-             brand: admin_brand.Text,
-             model: admin_model.Text,
-             color: admin_color.Text,
-             price: (float)admin_price.Value,
-             description: admin_description.Text,
-             quantity: (int)admin_quantity.Value,
-             imagePath: admin_image_path.Text,
-             qrCode: admin_qrcode.Text,
-             operatingSystem: admin_phone_os.Text,
-             screenSize: (float)admin_phone_screen_size.Value,
-             storageCapacity: (int)admin_phone_storage.Value,
-             ramSize: (int)admin_ram_size.Value,
-             cameraQuality: (int)admin_phone_camera.Value,
-             cpuType: admin_phone_cpu.Text,
-             batteryCapacity: (int)admin_phone_battery.Value,
-             tablet: admin_tablet.Checked
-             );
-
-            myPhone.SaveToDbAsync(myConnectionString);
+            name: "Galaxy S24 Ultra",
+            brand: "Samsung",
+            model: "SM-S928B",
+            color: "Titanium Gray",
+            price: 1299.99f,
+            id: 101,
+            description: "The latest flagship with AI features.",
+            quantity: 50,
+            imagePath: "/images/s24ultra.png",
+            qrCode: "S24ULTRA101QR",
+            operatingSystem: "Android 14",
+            screenSize: 6.8f,
+            storageCapacity: 512,
+            ramSize: 12,
+            cameraQuality: 200,
+            cpuType: "Snapdragon 8 Gen 3 for Galaxy",
+            batteryCapacity: 5000,
+            tablet: false
+            );
+            _ = myPhone.SaveToDbAsync(myConnectionString);
             MessageBox.Show("Phone saved!");
         }
     }
