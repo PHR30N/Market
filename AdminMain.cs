@@ -7,11 +7,145 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Market.Fold;
 
 namespace Market
 {
     public partial class AdminMain : Form
     {
+        public static void SetPropertiesFromDictionary(object target, Dictionary<string, object> values)
+        {
+            var targetType = target.GetType();
+            foreach (var kvp in values)
+            {
+                var property = targetType.GetProperty(kvp.Key);
+                if (property != null && property.CanWrite)
+                {
+                    var value = kvp.Value;
+                    if (value != null && property.PropertyType != value.GetType())
+                    {
+                        value = Convert.ChangeType(value, property.PropertyType);
+                    }
+                    property.SetValue(target, value);
+                }
+            }
+        }
+        public Dictionary<string, object> BuildFinalDictionary()
+        {
+            var finalData = new Dictionary<string, object>();
+
+            var electronicsData = new Dictionary<string, object>
+            {
+                { "name", admin_name.Text },
+                { "brand", admin_brand.Text },
+                { "model", admin_model.Text },
+                { "color", admin_color.Text },
+                { "price", (float)admin_price.Value },
+                { "description", admin_description.Text },
+                { "quantity", (int)admin_quantity.Value },
+                { "imagePath", admin_image_path.Text },
+                { "QRCode", admin_qrcode.Text }
+            };
+
+            var phoneData = new Dictionary<string, object>
+            {
+                { "operatingSystem", admin_phone_os.Text },
+                { "screenSize", (float)admin_phone_screen_size.Value },
+                { "storageCapacity", (int)admin_phone_storage.Value },
+                { "ramSize", (int)admin_ram_size.Value },
+                { "cameraQuality", (int)admin_phone_camera.Value },
+                { "cpuType", admin_phone_cpu.Text },
+                { "batteryCapacity", (int)admin_phone_battery.Value },
+                { "tablet", admin_tablet.Checked }
+            };
+
+            var foldData = new Dictionary<string, object>
+            {
+                { "foldType", admin_fold_type.Text },
+                { "hingeMaterial", admin_hinge_type_type.Text },
+                { "displayType", admin_display_type_type.Text },
+                { "durabilityRating", admin_durability_rating_type.Text },
+                { "sizeOfOpenedScreen", (float)admin_size_of_opened_screen_type.Value }
+            };
+
+            var laptopData = new Dictionary<string, object>
+            {
+                { "operatingSystem", admin_os.Text },
+                { "storageCapacity", (int)admin_storage.Value },
+                { "ramSize", (int)admin_ram.Value },
+                { "graphicsCard", admin_gpu.Text },
+                { "cpuType", admin_cpu.Text },
+                { "screenSize", (float)admin_screen_size.Value },
+                { "batteryLife", admin_battery_life.Value.ToString() }
+            };
+
+            var gamingLaptopData = new Dictionary<string, object>
+            {
+                { "coolingSystem", admin_cooling_system.Text },
+                { "keyboardType", admin_keyboard_type.Text },
+                { "frameRate", (int)admin_frame_rate.Value }
+            };
+
+            var twoInOneData = new Dictionary<string, object>
+            {
+                { "detachableKeyboard", admin_detachable_keyboard_checkBox.Checked },
+                { "hingeType", admin_hinge_type.Text }
+            };
+
+            var cpuData = new Dictionary<string, object>
+            {
+                { "cores", (int)admin_cores.Value },
+                { "frequencyGHz", (float)admin_frequency_ghz.Value },
+                { "socketType", admin_socket_type.Text }
+            };
+
+            var gpuData = new Dictionary<string, object>
+            {
+                { "memoryGB", (int)admin_memory_gb.Value },
+                { "chipset", admin_chipset.Text }
+            };
+
+            // Base: Always include electronics
+            MergeDict(finalData, electronicsData);
+
+            // Conditional logic based on UI selections
+            if (admin_phones_radioButton.Checked)
+                MergeDict(finalData, phoneData);
+
+            if (admin_fold_radioButton.Checked)
+                MergeDict(finalData, foldData);
+
+            if (admin_laptop_radioButton.Checked)
+                MergeDict(finalData, laptopData);
+
+            if (admin_gaming_laptop_radioButton.Checked)
+            {
+                MergeDict(finalData, laptopData); // Inherits from Laptop
+                MergeDict(finalData, gamingLaptopData);
+            }
+
+            if (admin_two_in_one_radioButton.Checked)
+            {
+                MergeDict(finalData, laptopData); // Inherits from Laptop
+                MergeDict(finalData, twoInOneData);
+            }
+
+            if (admin_cpu_radioButton.Checked)
+                MergeDict(finalData, cpuData);
+
+            if (admin_gpu_radioButton.Checked)
+                MergeDict(finalData, gpuData);
+
+            return finalData;
+        }
+
+        private void MergeDict(Dictionary<string, object> target, Dictionary<string, object> source)
+        {
+            foreach (var kvp in source)
+                target[kvp.Key] = kvp.Value; // Overwrites if key already exists
+        }
+
+
         public AdminMain()
         {
             InitializeComponent();
@@ -161,29 +295,57 @@ namespace Market
                 admin_gpu_groupbox.Hide();
             }
         }
-
+        
         private void admin_add_Click(object sender, EventArgs e)
         {
             string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
-            Phone myPhone = new Phone(
-            name: admin_name.Text,
-            brand: admin_brand.Text,
-            model: admin_model.Text,
-            color: admin_color.Text,
-            price: (float)admin_price.Value,
-            description: admin_description.Text,
-            quantity: (int)admin_quantity.Value,
-            imagePath: admin_image_path.Text,
-            qrCode: admin_qrcode.Text,
-            operatingSystem: admin_phone_os.Text,
-            screenSize: (float)admin_phone_screen_size.Value,
-            storageCapacity: (int)admin_phone_storage.Value,
-            ramSize: (int)admin_ram_size.Value,
-            cameraQuality: (int)admin_phone_camera.Value,
-            cpuType: admin_phone_cpu.Text,
-            batteryCapacity: (int)admin_phone_battery.Value,
-            tablet: admin_tablet.Checked
-            );
+            //Phone myPhone = new Phone(
+            //name: admin_name.Text,
+            //brand: admin_brand.Text,
+            //model: admin_model.Text,
+            //color: admin_color.Text,
+            //price: (float)admin_price.Value,
+            //description: admin_description.Text,
+            //quantity: (int)admin_quantity.Value,
+            //imagePath: admin_image_path.Text,
+            //qrCode: admin_qrcode.Text,
+            //operatingSystem: admin_phone_os.Text,
+            //screenSize: (float)admin_phone_screen_size.Value,
+            //storageCapacity: (int)admin_phone_storage.Value,
+            //ramSize: (int)admin_ram_size.Value,
+            //cameraQuality: (int)admin_phone_camera.Value,
+            //cpuType: admin_phone_cpu.Text,
+            //batteryCapacity: (int)admin_phone_battery.Value,
+            //tablet: admin_tablet.Checked
+            //);
+            Dictionary<string, object> data = BuildFinalDictionary();
+
+            object myDeviceInstance;
+
+            if (admin_phones_radioButton.Checked)
+                myDeviceInstance = new Phone();
+            else if (admin_fold_radioButton.Checked)
+                myDeviceInstance = new Fold();
+            else if (admin_gaming_laptop_radioButton.Checked)
+                myDeviceInstance = new GamingLaptop();
+            else if (admin_two_in_one_radioButton.Checked)
+                myDeviceInstance = new TwoInOne();
+            else if (admin_laptop_radioButton.Checked)
+                myDeviceInstance = new Laptop();
+            else if (admin_cpu_radioButton.Checked)
+                myDeviceInstance = new Cpu();
+            else if (admin_gpu_radioButton.Checked)
+                myDeviceInstance = new Gpu();
+            else
+                throw new InvalidOperationException("No device type selected.");
+
+            // Set properties using dictionary
+            SetPropertiesFromDictionary(myDeviceInstance, data);
+
+            // Save to database
+            ////Polymorphic save based on type
+            ((Electronics)myDeviceInstance).SaveToDb(myConnectionString);
+            
             //Phone myPhone = new Phone(
             //name: "Galaxy S24 Ultra",
             //brand: "Samsung",
@@ -204,8 +366,8 @@ namespace Market
             //batteryCapacity: 5000,
             //tablet: false
             //);
-            _ = myPhone.SaveToDbAsync(myConnectionString);
-            MessageBox.Show("Phone saved!");
+            //myPhone.SaveToDb(myConnectionString);
+            //MessageBox.Show("Phone saved!");
         }
 
         private void admin_show_button_Click(object sender, EventArgs e)
@@ -213,13 +375,13 @@ namespace Market
             string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
             string phone_name = "Galaxy S24 Ultra";
             Phone myPhone = new Phone();
-            myPhone.GetDataAsync(in_name: phone_name, connectionString: myConnectionString);
+            myPhone.GetData(in_name: phone_name, connectionString: myConnectionString);
             //if (!found)
             //{
             //    MessageBox.Show("Phone not found in database.");
             //    return;
             //}
-            MessageBox.Show("Entered Method" + myPhone.model);
+            //MessageBox.Show("Showing " + phone_name);
             admin_name.Text = myPhone.name;
             admin_brand.Text = myPhone.brand;
             admin_model.Text = myPhone.model;

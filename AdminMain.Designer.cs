@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.admin_show_button = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.admin_add = new System.Windows.Forms.Button();
             this.admin_cpu_button = new System.Windows.Forms.Button();
@@ -57,18 +58,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.admin_phone_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_laptop_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_cpu_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_gpu_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_memory_gb = new System.Windows.Forms.NumericUpDown();
-            this.admin_chipset = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.admin_socket_type = new System.Windows.Forms.TextBox();
-            this.admin_cores = new System.Windows.Forms.NumericUpDown();
-            this.admin_frequency_ghz = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.admin_battery_life = new System.Windows.Forms.NumericUpDown();
             this.admin_screen_size = new System.Windows.Forms.NumericUpDown();
             this.admin_ram = new System.Windows.Forms.NumericUpDown();
@@ -98,6 +87,18 @@
             this.admin_phone_cpu = new System.Windows.Forms.TextBox();
             this.admin_phone_os = new System.Windows.Forms.TextBox();
             this.admin_phone_battery = new System.Windows.Forms.NumericUpDown();
+            this.admin_cpu_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_gpu_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_memory_gb = new System.Windows.Forms.NumericUpDown();
+            this.admin_chipset = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.admin_socket_type = new System.Windows.Forms.TextBox();
+            this.admin_cores = new System.Windows.Forms.NumericUpDown();
+            this.admin_frequency_ghz = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.admin_fold_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_gaming_laptop_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_two_in_one_laptop_groupbox = new System.Windows.Forms.GroupBox();
@@ -130,18 +131,12 @@
             this.admin_cpu_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_phones_radioButton = new System.Windows.Forms.RadioButton();
-            this.admin_show_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.admin_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_price)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_quantity)).BeginInit();
             this.admin_phone_groupbox.SuspendLayout();
             this.admin_laptop_groupbox.SuspendLayout();
-            this.admin_cpu_groupbox.SuspendLayout();
-            this.admin_gpu_groupbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_battery_life)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_screen_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_ram)).BeginInit();
@@ -151,6 +146,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_storage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_screen_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_battery)).BeginInit();
+            this.admin_cpu_groupbox.SuspendLayout();
+            this.admin_gpu_groupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).BeginInit();
             this.admin_fold_groupbox.SuspendLayout();
             this.admin_gaming_laptop_groupbox.SuspendLayout();
             this.admin_two_in_one_laptop_groupbox.SuspendLayout();
@@ -175,6 +175,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 693);
             this.panel1.TabIndex = 1;
+            // 
+            // admin_show_button
+            // 
+            this.admin_show_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
+            this.admin_show_button.Location = new System.Drawing.Point(44, 450);
+            this.admin_show_button.Name = "admin_show_button";
+            this.admin_show_button.Size = new System.Drawing.Size(150, 48);
+            this.admin_show_button.TabIndex = 20;
+            this.admin_show_button.Text = "Show";
+            this.admin_show_button.UseVisualStyleBackColor = false;
+            this.admin_show_button.Click += new System.EventHandler(this.admin_show_button_Click);
             // 
             // label3
             // 
@@ -479,130 +490,6 @@
             this.admin_laptop_groupbox.TabStop = false;
             this.admin_laptop_groupbox.Text = "Laptop Parameters";
             // 
-            // admin_cpu_groupbox
-            // 
-            this.admin_cpu_groupbox.Controls.Add(this.admin_gpu_groupbox);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_socket_type);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_cores);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_frequency_ghz);
-            this.admin_cpu_groupbox.Controls.Add(this.label35);
-            this.admin_cpu_groupbox.Controls.Add(this.label34);
-            this.admin_cpu_groupbox.Controls.Add(this.label33);
-            this.admin_cpu_groupbox.Location = new System.Drawing.Point(693, 171);
-            this.admin_cpu_groupbox.Name = "admin_cpu_groupbox";
-            this.admin_cpu_groupbox.Size = new System.Drawing.Size(434, 260);
-            this.admin_cpu_groupbox.TabIndex = 11;
-            this.admin_cpu_groupbox.TabStop = false;
-            this.admin_cpu_groupbox.Text = "CPU Parameters";
-            // 
-            // admin_gpu_groupbox
-            // 
-            this.admin_gpu_groupbox.Controls.Add(this.admin_memory_gb);
-            this.admin_gpu_groupbox.Controls.Add(this.admin_chipset);
-            this.admin_gpu_groupbox.Controls.Add(this.label37);
-            this.admin_gpu_groupbox.Controls.Add(this.label36);
-            this.admin_gpu_groupbox.Location = new System.Drawing.Point(0, 0);
-            this.admin_gpu_groupbox.Name = "admin_gpu_groupbox";
-            this.admin_gpu_groupbox.Size = new System.Drawing.Size(434, 260);
-            this.admin_gpu_groupbox.TabIndex = 12;
-            this.admin_gpu_groupbox.TabStop = false;
-            this.admin_gpu_groupbox.Text = "GPU Parameters";
-            // 
-            // admin_memory_gb
-            // 
-            this.admin_memory_gb.Location = new System.Drawing.Point(95, 17);
-            this.admin_memory_gb.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_memory_gb.Name = "admin_memory_gb";
-            this.admin_memory_gb.Size = new System.Drawing.Size(120, 20);
-            this.admin_memory_gb.TabIndex = 3;
-            // 
-            // admin_chipset
-            // 
-            this.admin_chipset.Location = new System.Drawing.Point(95, 43);
-            this.admin_chipset.Name = "admin_chipset";
-            this.admin_chipset.Size = new System.Drawing.Size(100, 20);
-            this.admin_chipset.TabIndex = 2;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(25, 45);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(42, 13);
-            this.label37.TabIndex = 1;
-            this.label37.Text = "Chipset";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(25, 20);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(62, 13);
-            this.label36.TabIndex = 0;
-            this.label36.Text = "Memory GB";
-            // 
-            // admin_socket_type
-            // 
-            this.admin_socket_type.Location = new System.Drawing.Point(108, 68);
-            this.admin_socket_type.Name = "admin_socket_type";
-            this.admin_socket_type.Size = new System.Drawing.Size(100, 20);
-            this.admin_socket_type.TabIndex = 5;
-            // 
-            // admin_cores
-            // 
-            this.admin_cores.Location = new System.Drawing.Point(105, 17);
-            this.admin_cores.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_cores.Name = "admin_cores";
-            this.admin_cores.Size = new System.Drawing.Size(120, 20);
-            this.admin_cores.TabIndex = 4;
-            // 
-            // admin_frequency_ghz
-            // 
-            this.admin_frequency_ghz.Location = new System.Drawing.Point(108, 42);
-            this.admin_frequency_ghz.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_frequency_ghz.Name = "admin_frequency_ghz";
-            this.admin_frequency_ghz.Size = new System.Drawing.Size(120, 20);
-            this.admin_frequency_ghz.TabIndex = 3;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(20, 46);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(81, 13);
-            this.label35.TabIndex = 2;
-            this.label35.Text = "Frequency GHz";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(22, 23);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(34, 13);
-            this.label34.TabIndex = 1;
-            this.label34.Text = "Cores";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(20, 71);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(68, 13);
-            this.label33.TabIndex = 0;
-            this.label33.Text = "Socket Type";
-            // 
             // admin_battery_life
             // 
             this.admin_battery_life.Location = new System.Drawing.Point(308, 106);
@@ -881,6 +768,130 @@
             this.admin_phone_battery.Name = "admin_phone_battery";
             this.admin_phone_battery.Size = new System.Drawing.Size(120, 20);
             this.admin_phone_battery.TabIndex = 17;
+            // 
+            // admin_cpu_groupbox
+            // 
+            this.admin_cpu_groupbox.Controls.Add(this.admin_gpu_groupbox);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_socket_type);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_cores);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_frequency_ghz);
+            this.admin_cpu_groupbox.Controls.Add(this.label35);
+            this.admin_cpu_groupbox.Controls.Add(this.label34);
+            this.admin_cpu_groupbox.Controls.Add(this.label33);
+            this.admin_cpu_groupbox.Location = new System.Drawing.Point(693, 171);
+            this.admin_cpu_groupbox.Name = "admin_cpu_groupbox";
+            this.admin_cpu_groupbox.Size = new System.Drawing.Size(434, 260);
+            this.admin_cpu_groupbox.TabIndex = 11;
+            this.admin_cpu_groupbox.TabStop = false;
+            this.admin_cpu_groupbox.Text = "CPU Parameters";
+            // 
+            // admin_gpu_groupbox
+            // 
+            this.admin_gpu_groupbox.Controls.Add(this.admin_memory_gb);
+            this.admin_gpu_groupbox.Controls.Add(this.admin_chipset);
+            this.admin_gpu_groupbox.Controls.Add(this.label37);
+            this.admin_gpu_groupbox.Controls.Add(this.label36);
+            this.admin_gpu_groupbox.Location = new System.Drawing.Point(0, 0);
+            this.admin_gpu_groupbox.Name = "admin_gpu_groupbox";
+            this.admin_gpu_groupbox.Size = new System.Drawing.Size(434, 260);
+            this.admin_gpu_groupbox.TabIndex = 12;
+            this.admin_gpu_groupbox.TabStop = false;
+            this.admin_gpu_groupbox.Text = "GPU Parameters";
+            // 
+            // admin_memory_gb
+            // 
+            this.admin_memory_gb.Location = new System.Drawing.Point(95, 17);
+            this.admin_memory_gb.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_memory_gb.Name = "admin_memory_gb";
+            this.admin_memory_gb.Size = new System.Drawing.Size(120, 20);
+            this.admin_memory_gb.TabIndex = 3;
+            // 
+            // admin_chipset
+            // 
+            this.admin_chipset.Location = new System.Drawing.Point(95, 43);
+            this.admin_chipset.Name = "admin_chipset";
+            this.admin_chipset.Size = new System.Drawing.Size(100, 20);
+            this.admin_chipset.TabIndex = 2;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(25, 45);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(42, 13);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Chipset";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(25, 20);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(62, 13);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Memory GB";
+            // 
+            // admin_socket_type
+            // 
+            this.admin_socket_type.Location = new System.Drawing.Point(108, 68);
+            this.admin_socket_type.Name = "admin_socket_type";
+            this.admin_socket_type.Size = new System.Drawing.Size(100, 20);
+            this.admin_socket_type.TabIndex = 5;
+            // 
+            // admin_cores
+            // 
+            this.admin_cores.Location = new System.Drawing.Point(105, 17);
+            this.admin_cores.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_cores.Name = "admin_cores";
+            this.admin_cores.Size = new System.Drawing.Size(120, 20);
+            this.admin_cores.TabIndex = 4;
+            // 
+            // admin_frequency_ghz
+            // 
+            this.admin_frequency_ghz.Location = new System.Drawing.Point(108, 42);
+            this.admin_frequency_ghz.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_frequency_ghz.Name = "admin_frequency_ghz";
+            this.admin_frequency_ghz.Size = new System.Drawing.Size(120, 20);
+            this.admin_frequency_ghz.TabIndex = 3;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(20, 46);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(81, 13);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "Frequency GHz";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(22, 23);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(34, 13);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "Cores";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(20, 71);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(68, 13);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "Socket Type";
             // 
             // admin_fold_groupbox
             // 
@@ -1221,17 +1232,6 @@
             this.admin_phones_radioButton.UseVisualStyleBackColor = true;
             this.admin_phones_radioButton.CheckedChanged += new System.EventHandler(this.admin_phones_radioButton_CheckedChanged);
             // 
-            // admin_show_button
-            // 
-            this.admin_show_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.admin_show_button.Location = new System.Drawing.Point(44, 450);
-            this.admin_show_button.Name = "admin_show_button";
-            this.admin_show_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_show_button.TabIndex = 20;
-            this.admin_show_button.Text = "Show";
-            this.admin_show_button.UseVisualStyleBackColor = false;
-            this.admin_show_button.Click += new System.EventHandler(this.admin_show_button_Click);
-            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1260,13 +1260,6 @@
             this.admin_phone_groupbox.PerformLayout();
             this.admin_laptop_groupbox.ResumeLayout(false);
             this.admin_laptop_groupbox.PerformLayout();
-            this.admin_cpu_groupbox.ResumeLayout(false);
-            this.admin_cpu_groupbox.PerformLayout();
-            this.admin_gpu_groupbox.ResumeLayout(false);
-            this.admin_gpu_groupbox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_battery_life)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_screen_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_ram)).EndInit();
@@ -1276,6 +1269,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_storage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_screen_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_battery)).EndInit();
+            this.admin_cpu_groupbox.ResumeLayout(false);
+            this.admin_cpu_groupbox.PerformLayout();
+            this.admin_gpu_groupbox.ResumeLayout(false);
+            this.admin_gpu_groupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).EndInit();
             this.admin_fold_groupbox.ResumeLayout(false);
             this.admin_fold_groupbox.PerformLayout();
             this.admin_gaming_laptop_groupbox.ResumeLayout(false);

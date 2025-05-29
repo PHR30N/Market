@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms; // Required for async operations
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Market
 {
@@ -47,11 +49,34 @@ namespace Market
             this.imagePath = imagePath;
             this.QRCode = qrCode;
         }
+        public virtual void SetFromFormDictionary(Dictionary<string, object> formValues)
+        {
+            foreach (var prop in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                if (formValues.TryGetValue(prop.Name, out object value))
+                {
+                    if (value != null && prop.FieldType.IsAssignableFrom(value.GetType()))
+                    {
+                        prop.SetValue(this, value);
+                    }
+                    else if (value != null)
+                    {
+                        try
+                        {
+                            object convertedValue = Convert.ChangeType(value, prop.FieldType);
+                            prop.SetValue(this, convertedValue);
+                        }
+                        catch { /* ignore conversion errors */ }
+                    }
+                }
+            }
+        }
+
         // Abstract method to save to DB, to be implemented by derived classes
-        public abstract Task SaveToDbAsync(string connectionString);
+        public abstract void SaveToDb(string connectionString);
 
         // Abstract method to get data, to be implemented by derived classes
-        public abstract Task GetDataAsync(string in_name, string connectionString);
+        public abstract void GetData(string in_name, string connectionString);
 
         // ToString remains abstract as its representation is entity-specific
         public abstract override string ToString();
@@ -102,49 +127,68 @@ namespace Market
 
         // Parameterless constructor for cases where you might create an empty object then load data
         public Phone() : base(null, null, null, null, 0, null, 0, null, null) { }
-
-
-        public override async Task SaveToDbAsync(string connectionString)
+        public override void SaveToDb(string connectionString)
         {
-            string insertQuery = "INSERT INTO Phones (name, brand, model, color, price, description, quantity, imagePath, QRCode, operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet) " +
-                                 "VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @imagePath, @QRCode, @operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet)";
+            string mergeQuery = @"
+        MERGE INTO Phones AS Target
+        USING (SELECT @name AS name) AS Source
+        ON Target.name = Source.name
+        WHEN MATCHED THEN 
+            UPDATE SET 
+                brand = @brand,
+                model = @model,
+                color = @color,
+                price = @price,
+                description = @description,
+                quantity = @quantity,
+                imagePath = @imagePath,
+                QRCode = @QRCode,
+                operatingSystem = @operatingSystem,
+                screenSize = @screenSize,
+                storageCapacity = @storageCapacity,
+                ramSize = @ramSize,
+                cameraQuality = @cameraQuality,
+                cpuType = @cpuType,
+                batteryCapacity = @batteryCapacity,
+                tablet = @tablet
+        WHEN NOT MATCHED THEN
+            INSERT (name, brand, model, color, price, description, quantity, imagePath, QRCode, operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet)
+            VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @imagePath, @QRCode, @operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet);";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(mergeQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@brand", brand);
-                    cmd.Parameters.AddWithValue("@model", model);
-                    cmd.Parameters.AddWithValue("@color", color);
-                    cmd.Parameters.AddWithValue("@price", price);
-                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
-                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
-                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
-                    cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
-                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
-                    cmd.Parameters.AddWithValue("@tablet", tablet);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@brand", brand);
+                cmd.Parameters.AddWithValue("@model", model);
+                cmd.Parameters.AddWithValue("@color", color);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
+                cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
+                cmd.Parameters.AddWithValue("@tablet", tablet);
 
-                    try
-                    {
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Database Error: {ex.Message}");
-                    }
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}");
                 }
             }
         }
 
-        public override async Task GetDataAsync(string in_name, string connectionString)
+        public override void GetData(string in_name, string connectionString)
         {
             string selectQuery = "SELECT * FROM Phones WHERE name = @name";
 
@@ -152,12 +196,11 @@ namespace Market
             using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
             {
                 cmd.Parameters.AddWithValue("@name", in_name);
-                await conn.OpenAsync();
+                conn.Open();
 
-                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    
-                    if (await reader.ReadAsync())
+                    if (reader.Read())
                     {
                         this.name = reader["name"].ToString();
                         this.brand = reader["brand"].ToString();
@@ -177,11 +220,11 @@ namespace Market
                         this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
                         this.batteryCapacity = Convert.ToInt32(reader["batteryCapacity"]);
                         this.tablet = Convert.ToBoolean(reader["tablet"]);
-                        //MessageBox.Show("Entered Method" + this.batteryCapacity);
                     }
                 }
             }
         }
+      
         /*
         private void UpdateAdminFields(Phone myPhone)
         {
@@ -254,9 +297,8 @@ namespace Market
 
         public Fold() : base() { } // For empty object creation
 
-        public override async Task SaveToDbAsync(string connectionString)
+        public override void SaveToDb(string connectionString)
         {
-            // Note: This assumes you want to save all Phone properties + Fold properties
             string insertQuery = "INSERT INTO Folds (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                  "operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet, " +
                                  "foldType, hingeMaterial, displayType, durabilityRating, sizeOfOpenedScreen) " +
@@ -265,87 +307,84 @@ namespace Market
                                  "@foldType, @hingeMaterial, @displayType, @durabilityRating, @sizeOfOpenedScreen)";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                {
-                    // Phone Properties
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@brand", brand);
-                    cmd.Parameters.AddWithValue("@model", model);
-                    cmd.Parameters.AddWithValue("@color", color);
-                    cmd.Parameters.AddWithValue("@price", price);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
-                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
-                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
-                    cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
-                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
-                    cmd.Parameters.AddWithValue("@tablet", tablet);
-                    // Fold Specific Properties
-                    cmd.Parameters.AddWithValue("@foldType", foldType);
-                    cmd.Parameters.AddWithValue("@hingeMaterial", hingeMaterial);
-                    cmd.Parameters.AddWithValue("@displayType", displayType);
-                    cmd.Parameters.AddWithValue("@durabilityRating", durabilityRating);
-                    cmd.Parameters.AddWithValue("@sizeOfOpenedScreen", sizeOfOpenedScreen);
+                // Phone properties
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@brand", brand);
+                cmd.Parameters.AddWithValue("@model", model);
+                cmd.Parameters.AddWithValue("@color", color);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
+                cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
+                cmd.Parameters.AddWithValue("@tablet", tablet);
 
-                    await conn.OpenAsync();
-                    await cmd.ExecuteNonQueryAsync();
-                }
+                // Fold-specific properties
+                cmd.Parameters.AddWithValue("@foldType", foldType);
+                cmd.Parameters.AddWithValue("@hingeMaterial", hingeMaterial);
+                cmd.Parameters.AddWithValue("@displayType", displayType);
+                cmd.Parameters.AddWithValue("@durabilityRating", durabilityRating);
+                cmd.Parameters.AddWithValue("@sizeOfOpenedScreen", sizeOfOpenedScreen);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
-
-        public override async Task GetDataAsync(string in_name, string connectionString)
+        public override void GetData(string in_name, string connectionString)
         {
             string selectQuery = "SELECT * FROM Folds WHERE name = @name";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                cmd.Parameters.AddWithValue("@name", in_name);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    cmd.Parameters.AddWithValue("@name", in_name);
-                    await conn.OpenAsync();
-
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    if (reader.Read())
                     {
-                        if (await reader.ReadAsync())
-                        {
-                            // Base Phone properties
-                            this.name = reader["name"].ToString();
-                            this.brand = reader["brand"].ToString();
-                            this.model = reader["model"].ToString();
-                            // ... (all phone properties as in Phone.GetDataAsync)
-                            this.price = Convert.ToSingle(reader["price"]);
-                            this.id = Convert.ToInt32(reader["id"]);
-                            this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                            this.quantity = Convert.ToInt32(reader["quantity"]);
-                            this.imagePath = reader["imagePath"].ToString();
-                            this.QRCode = reader["QRCode"].ToString();
-                            this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
-                            this.screenSize = Convert.ToSingle(reader["screenSize"]);
-                            this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
-                            this.ramSize = Convert.ToInt32(reader["ramSize"]);
-                            this.cameraQuality = Convert.ToInt32(reader["cameraQuality"]);
-                            this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
-                            this.batteryCapacity = Convert.ToInt32(reader["batteryCapacity"]);
-                            this.tablet = Convert.ToBoolean(reader["tablet"]);
+                        // Phone properties
+                        this.name = reader["name"].ToString();
+                        this.brand = reader["brand"].ToString();
+                        this.model = reader["model"].ToString();
+                        this.color = reader["color"].ToString();
+                        this.price = Convert.ToSingle(reader["price"]);
+                        this.id = Convert.ToInt32(reader["id"]);
+                        this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                        this.quantity = Convert.ToInt32(reader["quantity"]);
+                        this.imagePath = reader["imagePath"].ToString();
+                        this.QRCode = reader["QRCode"].ToString();
+                        this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
+                        this.screenSize = Convert.ToSingle(reader["screenSize"]);
+                        this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
+                        this.ramSize = Convert.ToInt32(reader["ramSize"]);
+                        this.cameraQuality = Convert.ToInt32(reader["cameraQuality"]);
+                        this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
+                        this.batteryCapacity = Convert.ToInt32(reader["batteryCapacity"]);
+                        this.tablet = Convert.ToBoolean(reader["tablet"]);
 
-                            // Fold specific properties
-                            this.foldType = reader["foldType"].ToString();
-                            this.hingeMaterial = reader["hingeMaterial"].ToString();
-                            this.displayType = reader["displayType"].ToString();
-                            this.durabilityRating = reader["durabilityRating"].ToString();
-                            this.sizeOfOpenedScreen = Convert.ToSingle(reader["sizeOfOpenedScreen"]);
-                        }
+                        // Fold-specific properties
+                        this.foldType = reader["foldType"].ToString();
+                        this.hingeMaterial = reader["hingeMaterial"].ToString();
+                        this.displayType = reader["displayType"].ToString();
+                        this.durabilityRating = reader["durabilityRating"].ToString();
+                        this.sizeOfOpenedScreen = Convert.ToSingle(reader["sizeOfOpenedScreen"]);
                     }
                 }
             }
         }
+
 
         public override string ToString()
         {
@@ -393,74 +432,75 @@ namespace Market
             public Laptop() : base(null, null, null, null, 0, 0, null, 0, null, null) { }
 
 
-            public override async Task SaveToDbAsync(string connectionString)
+            public override void SaveToDb(string connectionString)
             {
                 string insertQuery = "INSERT INTO Laptops (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife)";
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@brand", brand);
-                        cmd.Parameters.AddWithValue("@model", model);
-                        // ... (all Electronics + Laptop specific params, ensuring DBNull for nullables)
-                        cmd.Parameters.AddWithValue("@color", color);
-                        cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                        cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                        cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
-                        cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
-                        cmd.Parameters.AddWithValue("@ramSize", ramSize);
-                        cmd.Parameters.AddWithValue("@graphicsCard", graphicsCard);
-                        cmd.Parameters.AddWithValue("@cpuType", cpuType);
-                        cmd.Parameters.AddWithValue("@screenSize", screenSize);
-                        cmd.Parameters.AddWithValue("@batteryLife", batteryLife);
 
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    // Electronics properties
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+
+                    // Laptop-specific properties
+                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", (object)graphicsCard ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", (object)batteryLife ?? DBNull.Value);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            public override async Task GetDataAsync(string in_name, string connectionString)
+            public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM Laptops WHERE name = @name";
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                    cmd.Parameters.AddWithValue("@name", in_name);
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@name", in_name);
-                        await conn.OpenAsync();
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        if (reader.Read())
                         {
-                            if (await reader.ReadAsync())
-                            {
-                                // Electronics properties
-                                this.name = reader["name"].ToString();
-                                this.brand = reader["brand"].ToString();
-                                this.model = reader["model"].ToString();
-                                this.color = reader["color"].ToString();
-                                this.price = Convert.ToSingle(reader["price"]);
-                                this.id = Convert.ToInt32(reader["id"]);
-                                this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                                this.quantity = Convert.ToInt32(reader["quantity"]);
-                                this.imagePath = reader["imagePath"].ToString();
-                                this.QRCode = reader["QRCode"].ToString();
-                                // Laptop specific
-                                this.operatingSystem = reader["operatingSystem"].ToString();
-                                this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
-                                this.ramSize = Convert.ToInt32(reader["ramSize"]);
-                                this.graphicsCard = reader["graphicsCard"].ToString();
-                                this.cpuType = reader["cpuType"].ToString();
-                                this.screenSize = Convert.ToSingle(reader["screenSize"]);
-                                this.batteryLife = reader["batteryLife"].ToString();
-                            }
+                            // Electronics properties
+                            this.name = reader["name"].ToString();
+                            this.brand = reader["brand"].ToString();
+                            this.model = reader["model"].ToString();
+                            this.color = reader["color"].ToString();
+                            this.price = Convert.ToSingle(reader["price"]);
+                            this.id = Convert.ToInt32(reader["id"]);
+                            this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                            this.quantity = Convert.ToInt32(reader["quantity"]);
+                            this.imagePath = reader["imagePath"].ToString();
+                            this.QRCode = reader["QRCode"].ToString();
+
+                            // Laptop-specific properties
+                            this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
+                            this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
+                            this.ramSize = Convert.ToInt32(reader["ramSize"]);
+                            this.graphicsCard = reader["graphicsCard"] != DBNull.Value ? reader["graphicsCard"].ToString() : null;
+                            this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
+                            this.screenSize = Convert.ToSingle(reader["screenSize"]);
+                            this.batteryLife = reader["batteryLife"] != DBNull.Value ? reader["batteryLife"].ToString() : null;
                         }
                     }
                 }
@@ -516,92 +556,87 @@ namespace Market
             public GamingLaptop() : base() { }
 
 
-            public override async Task SaveToDbAsync(string connectionString)
+            public override void SaveToDb(string connectionString)
             {
-                // Using GammingLaptops table name as per DDL
                 string insertQuery = "INSERT INTO GammingLaptops (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
                                      "coolingSystem, keyboardType, frameRate) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
                                      "@coolingSystem, @keyboardType, @frameRate)";
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        // Laptop params
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@brand", brand);
-                        // ... (all Laptop params)
-                        cmd.Parameters.AddWithValue("@model", model);
-                        cmd.Parameters.AddWithValue("@color", color);
-                        cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                        cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                        cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
-                        cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
-                        cmd.Parameters.AddWithValue("@ramSize", ramSize);
-                        cmd.Parameters.AddWithValue("@graphicsCard", graphicsCard);
-                        cmd.Parameters.AddWithValue("@cpuType", cpuType);
-                        cmd.Parameters.AddWithValue("@screenSize", screenSize);
-                        cmd.Parameters.AddWithValue("@batteryLife", batteryLife);
-                        // GamingLaptop params
-                        cmd.Parameters.AddWithValue("@coolingSystem", coolingSystem);
-                        cmd.Parameters.AddWithValue("@keyboardType", keyboardType);
-                        cmd.Parameters.AddWithValue("@frameRate", frameRate);
 
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    // Laptop base attributes
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", (object)graphicsCard ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", (object)batteryLife ?? DBNull.Value);
+
+                    // GamingLaptop-specific attributes
+                    cmd.Parameters.AddWithValue("@coolingSystem", (object)coolingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@keyboardType", (object)keyboardType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@frameRate", frameRate);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            public override async Task GetDataAsync(string in_name, string connectionString)
+            public override void GetData(string in_name, string connectionString)
             {
-                // Using GammingLaptops table name as per DDL
                 string selectQuery = "SELECT * FROM GammingLaptops WHERE name = @name";
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                    cmd.Parameters.AddWithValue("@name", in_name);
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@name", in_name);
-                        await conn.OpenAsync();
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        if (reader.Read())
                         {
-                            if (await reader.ReadAsync())
-                            {
-                                // Laptop properties
-                                this.name = reader["name"].ToString();
-                                this.brand = reader["brand"].ToString();
-                                // ... (all Laptop properties)
-                                this.model = reader["model"].ToString();
-                                this.color = reader["color"].ToString();
-                                this.price = Convert.ToSingle(reader["price"]);
-                                this.id = Convert.ToInt32(reader["id"]);
-                                this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                                this.quantity = Convert.ToInt32(reader["quantity"]);
-                                this.imagePath = reader["imagePath"].ToString();
-                                this.QRCode = reader["QRCode"].ToString();
-                                this.operatingSystem = reader["operatingSystem"].ToString();
-                                this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
-                                this.ramSize = Convert.ToInt32(reader["ramSize"]);
-                                this.graphicsCard = reader["graphicsCard"].ToString();
-                                this.cpuType = reader["cpuType"].ToString();
-                                this.screenSize = Convert.ToSingle(reader["screenSize"]);
-                                this.batteryLife = reader["batteryLife"].ToString();
-                                // GamingLaptop specific
-                                this.coolingSystem = reader["coolingSystem"].ToString();
-                                this.keyboardType = reader["keyboardType"].ToString();
-                                this.frameRate = Convert.ToInt32(reader["frameRate"]);
-                            }
+                            // Laptop base attributes
+                            this.name = reader["name"].ToString();
+                            this.brand = reader["brand"].ToString();
+                            this.model = reader["model"].ToString();
+                            this.color = reader["color"].ToString();
+                            this.price = Convert.ToSingle(reader["price"]);
+                            this.id = Convert.ToInt32(reader["id"]);
+                            this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                            this.quantity = Convert.ToInt32(reader["quantity"]);
+                            this.imagePath = reader["imagePath"].ToString();
+                            this.QRCode = reader["QRCode"].ToString();
+                            this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
+                            this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
+                            this.ramSize = Convert.ToInt32(reader["ramSize"]);
+                            this.graphicsCard = reader["graphicsCard"] != DBNull.Value ? reader["graphicsCard"].ToString() : null;
+                            this.cpuType = reader["cpuType"] != DBNull.Value ? reader["cpuType"].ToString() : null;
+                            this.screenSize = Convert.ToSingle(reader["screenSize"]);
+                            this.batteryLife = reader["batteryLife"] != DBNull.Value ? reader["batteryLife"].ToString() : null;
+
+                            // GamingLaptop-specific attributes
+                            this.coolingSystem = reader["coolingSystem"] != DBNull.Value ? reader["coolingSystem"].ToString() : null;
+                            this.keyboardType = reader["keyboardType"] != DBNull.Value ? reader["keyboardType"].ToString() : null;
+                            this.frameRate = Convert.ToInt32(reader["frameRate"]);
                         }
                     }
                 }
             }
-
 
             public override string ToString()
             {
@@ -641,7 +676,7 @@ namespace Market
 
             public TwoInOne() : base() { }
 
-            public override async Task SaveToDbAsync(string connectionString)
+            public override void SaveToDb(string connectionString)
             {
                 string insertQuery = "INSERT INTO TwoInOnes (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
@@ -650,78 +685,69 @@ namespace Market
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
                                      "@detachableKeyboard, @hingeType)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        // Laptop params
-                        cmd.Parameters.AddWithValue("@name", name);
-                        // ... (all Laptop params)
-                        cmd.Parameters.AddWithValue("@brand", brand);
-                        cmd.Parameters.AddWithValue("@model", model);
-                        cmd.Parameters.AddWithValue("@color", color);
-                        cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                        cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                        cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
-                        cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
-                        cmd.Parameters.AddWithValue("@ramSize", ramSize);
-                        cmd.Parameters.AddWithValue("@graphicsCard", graphicsCard);
-                        cmd.Parameters.AddWithValue("@cpuType", cpuType);
-                        cmd.Parameters.AddWithValue("@screenSize", screenSize);
-                        cmd.Parameters.AddWithValue("@batteryLife", batteryLife);
-                        // TwoInOne params
-                        cmd.Parameters.AddWithValue("@detachableKeyboard", detachableKeyboard);
-                        cmd.Parameters.AddWithValue("@hingeType", hingeType);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", graphicsCard);
+                    cmd.Parameters.AddWithValue("@cpuType", cpuType);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", batteryLife);
+                    cmd.Parameters.AddWithValue("@detachableKeyboard", detachableKeyboard);
+                    cmd.Parameters.AddWithValue("@hingeType", hingeType);
 
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
 
-            public override async Task GetDataAsync(string in_name, string connectionString)
+            public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM TwoInOnes WHERE name = @name";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                    cmd.Parameters.AddWithValue("@name", in_name);
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@name", in_name);
-                        await conn.OpenAsync();
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        if (reader.Read())
                         {
-                            if (await reader.ReadAsync())
-                            {
-                                // Laptop properties
-                                this.name = reader["name"].ToString();
-                                // ... (all Laptop properties)
-                                this.brand = reader["brand"].ToString();
-                                this.model = reader["model"].ToString();
-                                this.color = reader["color"].ToString();
-                                this.price = Convert.ToSingle(reader["price"]);
-                                this.id = Convert.ToInt32(reader["id"]);
-                                this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                                this.quantity = Convert.ToInt32(reader["quantity"]);
-                                this.imagePath = reader["imagePath"].ToString();
-                                this.QRCode = reader["QRCode"].ToString();
-                                this.operatingSystem = reader["operatingSystem"].ToString();
-                                this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
-                                this.ramSize = Convert.ToInt32(reader["ramSize"]);
-                                this.graphicsCard = reader["graphicsCard"].ToString();
-                                this.cpuType = reader["cpuType"].ToString();
-                                this.screenSize = Convert.ToSingle(reader["screenSize"]);
-                                this.batteryLife = reader["batteryLife"].ToString();
-                                // TwoInOne specific
-                                this.detachableKeyboard = Convert.ToBoolean(reader["detachableKeyboard"]);
-                                this.hingeType = reader["hingeType"].ToString();
-                            }
+                            name = reader["name"].ToString();
+                            brand = reader["brand"].ToString();
+                            model = reader["model"].ToString();
+                            color = reader["color"].ToString();
+                            price = Convert.ToSingle(reader["price"]);
+                            id = Convert.ToInt32(reader["id"]);
+                            description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                            quantity = Convert.ToInt32(reader["quantity"]);
+                            imagePath = reader["imagePath"].ToString();
+                            QRCode = reader["QRCode"].ToString();
+                            operatingSystem = reader["operatingSystem"].ToString();
+                            storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
+                            ramSize = Convert.ToInt32(reader["ramSize"]);
+                            graphicsCard = reader["graphicsCard"].ToString();
+                            cpuType = reader["cpuType"].ToString();
+                            screenSize = Convert.ToSingle(reader["screenSize"]);
+                            batteryLife = reader["batteryLife"].ToString();
+                            detachableKeyboard = Convert.ToBoolean(reader["detachableKeyboard"]);
+                            hingeType = reader["hingeType"].ToString();
                         }
                     }
                 }
             }
+
 
             public override string ToString()
             {
@@ -757,71 +783,64 @@ namespace Market
 
             public Cpu() : base(null, null, null, null, 0, 0, null, 0, null, null) { }
 
-            public override async Task SaveToDbAsync(string connectionString)
+            public override void SaveToDb(string connectionString)
             {
                 string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                      "cores, frequencyGHz, socketType) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
                                      "@cores, @frequencyGHz, @socketType)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        // Electronics params
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@brand", brand);
-                        cmd.Parameters.AddWithValue("@model", model);
-                        cmd.Parameters.AddWithValue("@color", color);
-                        cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                        cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                        // Cpu params
-                        cmd.Parameters.AddWithValue("@cores", cores);
-                        cmd.Parameters.AddWithValue("@frequencyGHz", frequencyGHz);
-                        cmd.Parameters.AddWithValue("@socketType", socketType);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@cores", cores);
+                    cmd.Parameters.AddWithValue("@frequencyGHz", frequencyGHz);
+                    cmd.Parameters.AddWithValue("@socketType", socketType);
 
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
 
-            public override async Task GetDataAsync(string in_name, string connectionString)
+            public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM Cpus WHERE name = @name";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                    cmd.Parameters.AddWithValue("@name", in_name);
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@name", in_name);
-                        await conn.OpenAsync();
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        if (reader.Read())
                         {
-                            if (await reader.ReadAsync())
-                            {
-                                // Electronics properties
-                                this.name = reader["name"].ToString();
-                                this.brand = reader["brand"].ToString();
-                                this.model = reader["model"].ToString();
-                                this.color = reader["color"].ToString();
-                                this.price = Convert.ToSingle(reader["price"]);
-                                this.id = Convert.ToInt32(reader["id"]);
-                                this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                                this.quantity = Convert.ToInt32(reader["quantity"]);
-                                this.imagePath = reader["imagePath"].ToString();
-                                this.QRCode = reader["QRCode"].ToString();
-                                // Cpu specific
-                                this.cores = Convert.ToInt32(reader["cores"]);
-                                this.frequencyGHz = Convert.ToSingle(reader["frequencyGHz"]);
-                                this.socketType = reader["socketType"].ToString();
-                            }
+                            name = reader["name"].ToString();
+                            brand = reader["brand"].ToString();
+                            model = reader["model"].ToString();
+                            color = reader["color"].ToString();
+                            price = Convert.ToSingle(reader["price"]);
+                            id = Convert.ToInt32(reader["id"]);
+                            description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                            quantity = Convert.ToInt32(reader["quantity"]);
+                            imagePath = reader["imagePath"].ToString();
+                            QRCode = reader["QRCode"].ToString();
+                            cores = Convert.ToInt32(reader["cores"]);
+                            frequencyGHz = Convert.ToSingle(reader["frequencyGHz"]);
+                            socketType = reader["socketType"].ToString();
                         }
                     }
                 }
             }
+
 
             public override string ToString()
             {
@@ -860,65 +879,58 @@ namespace Market
             public Gpu() : base(null, null, null, null, 0, 0, null, 0, null, null) { }
 
 
-            public override async Task SaveToDbAsync(string connectionString)
+
+            public override void SaveToDb(string connectionString)
             {
                 string insertQuery = "INSERT INTO Gpus (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
                                      "memoryGB, chipset) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
                                      "@memoryGB, @chipset)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        // Electronics params
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@brand", brand);
-                        cmd.Parameters.AddWithValue("@model", model);
-                        cmd.Parameters.AddWithValue("@color", color);
-                        cmd.Parameters.AddWithValue("@price", price);
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@quantity", quantity);
-                        cmd.Parameters.AddWithValue("@imagePath", imagePath);
-                        cmd.Parameters.AddWithValue("@QRCode", QRCode);
-                        // Gpu params
-                        cmd.Parameters.AddWithValue("@memoryGB", memoryGB);
-                        cmd.Parameters.AddWithValue("@chipset", chipset);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@memoryGB", memoryGB);
+                    cmd.Parameters.AddWithValue("@chipset", chipset);
 
-                        await conn.OpenAsync();
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
 
-            public override async Task GetDataAsync(string in_name, string connectionString)
+            public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM Gpus WHERE name = @name";
                 using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+                    cmd.Parameters.AddWithValue("@name", in_name);
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@name", in_name);
-                        await conn.OpenAsync();
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        if (reader.Read())
                         {
-                            if (await reader.ReadAsync())
-                            {
-                                // Electronics properties
-                                this.name = reader["name"].ToString();
-                                this.brand = reader["brand"].ToString();
-                                this.model = reader["model"].ToString();
-                                this.color = reader["color"].ToString();
-                                this.price = Convert.ToSingle(reader["price"]);
-                                this.id = Convert.ToInt32(reader["id"]);
-                                this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
-                                this.quantity = Convert.ToInt32(reader["quantity"]);
-                                this.imagePath = reader["imagePath"].ToString();
-                                this.QRCode = reader["QRCode"].ToString();
-                                // Gpu specific
-                                this.memoryGB = Convert.ToInt32(reader["memoryGB"]);
-                                this.chipset = reader["chipset"].ToString();
-                            }
+                            name = reader["name"].ToString();
+                            brand = reader["brand"].ToString();
+                            model = reader["model"].ToString();
+                            color = reader["color"].ToString();
+                            price = Convert.ToSingle(reader["price"]);
+                            id = Convert.ToInt32(reader["id"]);
+                            description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
+                            quantity = Convert.ToInt32(reader["quantity"]);
+                            imagePath = reader["imagePath"].ToString();
+                            QRCode = reader["QRCode"].ToString();
+                            memoryGB = Convert.ToInt32(reader["memoryGB"]);
+                            chipset = reader["chipset"].ToString();
                         }
                     }
                 }
