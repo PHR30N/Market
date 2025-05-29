@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.cpu_button = new System.Windows.Forms.Button();
-            this.gpu_button = new System.Windows.Forms.Button();
-            this.laptop_button = new System.Windows.Forms.Button();
-            this.phones_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -49,8 +43,15 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.admin_cpu_button = new System.Windows.Forms.Button();
+            this.admin_gpu_button = new System.Windows.Forms.Button();
+            this.admin_laptop_button = new System.Windows.Forms.Button();
+            this.admin_phones_button = new System.Windows.Forms.Button();
+            this.admin_add = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -58,90 +59,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.cpu_button);
-            this.panel1.Controls.Add(this.gpu_button);
-            this.panel1.Controls.Add(this.laptop_button);
-            this.panel1.Controls.Add(this.phones_button);
+            this.panel1.Controls.Add(this.admin_phones_button);
+            this.panel1.Controls.Add(this.admin_laptop_button);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.admin_gpu_button);
+            this.panel1.Controls.Add(this.admin_cpu_button);
+            this.panel1.Controls.Add(this.admin_add);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(234, 458);
+            this.panel1.Size = new System.Drawing.Size(351, 809);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 55);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "martek\'";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.button5.Location = new System.Drawing.Point(44, 383);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 48);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // cpu_button
-            // 
-            this.cpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.cpu_button.Location = new System.Drawing.Point(44, 317);
-            this.cpu_button.Name = "cpu_button";
-            this.cpu_button.Size = new System.Drawing.Size(150, 48);
-            this.cpu_button.TabIndex = 3;
-            this.cpu_button.Text = "CPU";
-            this.cpu_button.UseVisualStyleBackColor = false;
-            // 
-            // gpu_button
-            // 
-            this.gpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.gpu_button.Location = new System.Drawing.Point(44, 249);
-            this.gpu_button.Name = "gpu_button";
-            this.gpu_button.Size = new System.Drawing.Size(150, 48);
-            this.gpu_button.TabIndex = 2;
-            this.gpu_button.Text = "GPU";
-            this.gpu_button.UseVisualStyleBackColor = false;
-            // 
-            // laptop_button
-            // 
-            this.laptop_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.laptop_button.Location = new System.Drawing.Point(44, 185);
-            this.laptop_button.Name = "laptop_button";
-            this.laptop_button.Size = new System.Drawing.Size(150, 48);
-            this.laptop_button.TabIndex = 1;
-            this.laptop_button.Text = "laptops";
-            this.laptop_button.UseVisualStyleBackColor = false;
-            // 
-            // phones_button
-            // 
-            this.phones_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(153)))));
-            this.phones_button.Location = new System.Drawing.Point(44, 122);
-            this.phones_button.Name = "phones_button";
-            this.phones_button.Size = new System.Drawing.Size(150, 48);
-            this.phones_button.TabIndex = 0;
-            this.phones_button.Text = "phones";
-            this.phones_button.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(475, 9);
+            this.label1.Location = new System.Drawing.Point(688, 100);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 30);
+            this.label1.Size = new System.Drawing.Size(185, 45);
             this.label1.TabIndex = 5;
             this.label1.Text = "best sellers";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -149,9 +93,10 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(305, 203);
+            this.linkLabel1.Location = new System.Drawing.Point(458, 477);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(80, 20);
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "linkLabel1";
@@ -159,9 +104,10 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(498, 203);
+            this.linkLabel2.Location = new System.Drawing.Point(747, 477);
+            this.linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(80, 20);
             this.linkLabel2.TabIndex = 7;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "linkLabel2";
@@ -169,9 +115,10 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(702, 203);
+            this.linkLabel3.Location = new System.Drawing.Point(1053, 477);
+            this.linkLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(80, 20);
             this.linkLabel3.TabIndex = 8;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "linkLabel3";
@@ -179,9 +126,10 @@
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(305, 401);
+            this.linkLabel4.Location = new System.Drawing.Point(458, 732);
+            this.linkLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel4.Size = new System.Drawing.Size(80, 20);
             this.linkLabel4.TabIndex = 9;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "linkLabel4";
@@ -189,9 +137,10 @@
             // linkLabel5
             // 
             this.linkLabel5.AutoSize = true;
-            this.linkLabel5.Location = new System.Drawing.Point(498, 401);
+            this.linkLabel5.Location = new System.Drawing.Point(747, 732);
+            this.linkLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel5.Size = new System.Drawing.Size(80, 20);
             this.linkLabel5.TabIndex = 10;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "linkLabel5";
@@ -199,9 +148,10 @@
             // linkLabel6
             // 
             this.linkLabel6.AutoSize = true;
-            this.linkLabel6.Location = new System.Drawing.Point(702, 401);
+            this.linkLabel6.Location = new System.Drawing.Point(1053, 732);
+            this.linkLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel6.Size = new System.Drawing.Size(80, 20);
             this.linkLabel6.TabIndex = 11;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "linkLabel6";
@@ -210,91 +160,180 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(283, 267);
+            this.label2.Location = new System.Drawing.Point(424, 526);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 30);
+            this.label2.Size = new System.Drawing.Size(83, 45);
             this.label2.TabIndex = 12;
             this.label2.Text = "salls";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(272, 66);
+            this.pictureBox1.Location = new System.Drawing.Point(408, 267);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox1.Size = new System.Drawing.Size(196, 175);
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(464, 66);
+            this.pictureBox2.Location = new System.Drawing.Point(696, 267);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox2.Size = new System.Drawing.Size(196, 175);
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(675, 66);
+            this.pictureBox3.Location = new System.Drawing.Point(1012, 267);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox3.Size = new System.Drawing.Size(196, 175);
             this.pictureBox3.TabIndex = 15;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(675, 267);
+            this.pictureBox4.Location = new System.Drawing.Point(1012, 526);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox4.Size = new System.Drawing.Size(196, 175);
             this.pictureBox4.TabIndex = 18;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(464, 267);
+            this.pictureBox5.Location = new System.Drawing.Point(696, 526);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox5.Size = new System.Drawing.Size(196, 175);
             this.pictureBox5.TabIndex = 17;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(272, 267);
+            this.pictureBox6.Location = new System.Drawing.Point(408, 526);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(131, 114);
+            this.pictureBox6.Size = new System.Drawing.Size(196, 175);
             this.pictureBox6.TabIndex = 16;
             this.pictureBox6.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(482, 222);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 30);
-            this.label4.TabIndex = 19;
-            this.label4.Text = " selles";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.Red;
-            this.button6.Location = new System.Drawing.Point(769, 12);
+            this.button6.Location = new System.Drawing.Point(1278, 14);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(112, 35);
             this.button6.TabIndex = 20;
             this.button6.Text = "Close";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Location = new System.Drawing.Point(408, 18);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(196, 175);
+            this.pictureBox7.TabIndex = 22;
+            this.pictureBox7.TabStop = false;
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(458, 228);
+            this.linkLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(80, 20);
+            this.linkLabel7.TabIndex = 21;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "linkLabel7";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("LCDMono2", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(20, 30);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(300, 64);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "martek\'";
+            // 
+            // admin_cpu_button
+            // 
+            this.admin_cpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_cpu_button.Font = new System.Drawing.Font("LCDMono2", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_cpu_button.Location = new System.Drawing.Point(50, 474);
+            this.admin_cpu_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_cpu_button.Name = "admin_cpu_button";
+            this.admin_cpu_button.Size = new System.Drawing.Size(225, 74);
+            this.admin_cpu_button.TabIndex = 24;
+            this.admin_cpu_button.Text = "CPU";
+            this.admin_cpu_button.UseVisualStyleBackColor = false;
+            // 
+            // admin_gpu_button
+            // 
+            this.admin_gpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_gpu_button.Font = new System.Drawing.Font("LCDMono2", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_gpu_button.Location = new System.Drawing.Point(50, 369);
+            this.admin_gpu_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_gpu_button.Name = "admin_gpu_button";
+            this.admin_gpu_button.Size = new System.Drawing.Size(225, 74);
+            this.admin_gpu_button.TabIndex = 23;
+            this.admin_gpu_button.Text = "GPU";
+            this.admin_gpu_button.UseVisualStyleBackColor = false;
+            // 
+            // admin_laptop_button
+            // 
+            this.admin_laptop_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_laptop_button.Font = new System.Drawing.Font("LCDMono2", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_laptop_button.Location = new System.Drawing.Point(50, 271);
+            this.admin_laptop_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_laptop_button.Name = "admin_laptop_button";
+            this.admin_laptop_button.Size = new System.Drawing.Size(225, 74);
+            this.admin_laptop_button.TabIndex = 22;
+            this.admin_laptop_button.Text = "laptops";
+            this.admin_laptop_button.UseVisualStyleBackColor = false;
+            // 
+            // admin_phones_button
+            // 
+            this.admin_phones_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_phones_button.Font = new System.Drawing.Font("LCDMono2", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_phones_button.Location = new System.Drawing.Point(50, 174);
+            this.admin_phones_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_phones_button.Name = "admin_phones_button";
+            this.admin_phones_button.Size = new System.Drawing.Size(225, 74);
+            this.admin_phones_button.TabIndex = 21;
+            this.admin_phones_button.Text = "phones";
+            this.admin_phones_button.UseVisualStyleBackColor = false;
+            // 
+            // admin_add
+            // 
+            this.admin_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_add.Font = new System.Drawing.Font("LCDMono2", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_add.Location = new System.Drawing.Point(50, 575);
+            this.admin_add.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_add.Name = "admin_add";
+            this.admin_add.Size = new System.Drawing.Size(225, 74);
+            this.admin_add.TabIndex = 25;
+            this.admin_add.Text = "ADD";
+            this.admin_add.UseVisualStyleBackColor = false;
+            // 
             // mainform
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(856, 456);
+            this.ClientSize = new System.Drawing.Size(1400, 800);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.linkLabel7);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox6);
@@ -311,7 +350,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "mainform";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "main";
@@ -323,6 +361,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,11 +370,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button cpu_button;
-        private System.Windows.Forms.Button gpu_button;
-        private System.Windows.Forms.Button laptop_button;
-        private System.Windows.Forms.Button phones_button;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
@@ -350,8 +384,14 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.Button admin_phones_button;
+        private System.Windows.Forms.Button admin_laptop_button;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button admin_gpu_button;
+        private System.Windows.Forms.Button admin_cpu_button;
+        private System.Windows.Forms.Button admin_add;
     }
 }

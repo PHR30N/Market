@@ -58,6 +58,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.admin_phone_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_laptop_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_cpu_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_gpu_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_memory_gb = new System.Windows.Forms.NumericUpDown();
+            this.admin_chipset = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.admin_socket_type = new System.Windows.Forms.TextBox();
+            this.admin_cores = new System.Windows.Forms.NumericUpDown();
+            this.admin_frequency_ghz = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.admin_battery_life = new System.Windows.Forms.NumericUpDown();
             this.admin_screen_size = new System.Windows.Forms.NumericUpDown();
             this.admin_ram = new System.Windows.Forms.NumericUpDown();
@@ -87,30 +99,7 @@
             this.admin_phone_cpu = new System.Windows.Forms.TextBox();
             this.admin_phone_os = new System.Windows.Forms.TextBox();
             this.admin_phone_battery = new System.Windows.Forms.NumericUpDown();
-            this.admin_cpu_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_gpu_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_memory_gb = new System.Windows.Forms.NumericUpDown();
-            this.admin_chipset = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.admin_socket_type = new System.Windows.Forms.TextBox();
-            this.admin_cores = new System.Windows.Forms.NumericUpDown();
-            this.admin_frequency_ghz = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.admin_fold_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_gaming_laptop_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_two_in_one_laptop_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_hinge_type = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.admin_detachable_keyboard_checkBox = new System.Windows.Forms.CheckBox();
-            this.admin_frame_rate = new System.Windows.Forms.NumericUpDown();
-            this.admin_keyboard_type = new System.Windows.Forms.TextBox();
-            this.admin_cooling_system = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.admin_display_type_type = new System.Windows.Forms.TextBox();
             this.admin_hinge_type_type = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -121,22 +110,39 @@
             this.label17 = new System.Windows.Forms.Label();
             this.admin_durability_rating_type = new System.Windows.Forms.TextBox();
             this.admin_size_of_opened_screen_type = new System.Windows.Forms.NumericUpDown();
+            this.admin_gaming_laptop_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_frame_rate = new System.Windows.Forms.NumericUpDown();
+            this.admin_keyboard_type = new System.Windows.Forms.TextBox();
+            this.admin_cooling_system = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.admin_two_in_one_laptop_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_hinge_type = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.admin_detachable_keyboard_checkBox = new System.Windows.Forms.CheckBox();
             this.admin_electronics_groupBox = new System.Windows.Forms.GroupBox();
+            this.admin_phones_radio_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_fold_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_laptop_radio_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_gaming_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_two_in_one_radioButton = new System.Windows.Forms.RadioButton();
-            this.admin_phones_radio_groupbox = new System.Windows.Forms.GroupBox();
-            this.admin_fold_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_gpu_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_cpu_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_phones_radioButton = new System.Windows.Forms.RadioButton();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.admin_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_price)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_quantity)).BeginInit();
             this.admin_phone_groupbox.SuspendLayout();
             this.admin_laptop_groupbox.SuspendLayout();
+            this.admin_cpu_groupbox.SuspendLayout();
+            this.admin_gpu_groupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_battery_life)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_screen_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_ram)).BeginInit();
@@ -146,19 +152,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_storage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_screen_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_battery)).BeginInit();
-            this.admin_cpu_groupbox.SuspendLayout();
-            this.admin_gpu_groupbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).BeginInit();
             this.admin_fold_groupbox.SuspendLayout();
-            this.admin_gaming_laptop_groupbox.SuspendLayout();
-            this.admin_two_in_one_laptop_groupbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_size_of_opened_screen_type)).BeginInit();
+            this.admin_gaming_laptop_groupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
+            this.admin_two_in_one_laptop_groupbox.SuspendLayout();
             this.admin_electronics_groupBox.SuspendLayout();
-            this.admin_laptop_radio_groupbox.SuspendLayout();
             this.admin_phones_radio_groupbox.SuspendLayout();
+            this.admin_laptop_radio_groupbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -540,6 +541,149 @@
             this.admin_laptop_groupbox.Text = "Laptop Parameters";
             this.admin_laptop_groupbox.Enter += new System.EventHandler(this.admin_laptop_groupbox_Enter);
             // 
+            // admin_cpu_groupbox
+            // 
+            this.admin_cpu_groupbox.Controls.Add(this.admin_gpu_groupbox);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_socket_type);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_cores);
+            this.admin_cpu_groupbox.Controls.Add(this.admin_frequency_ghz);
+            this.admin_cpu_groupbox.Controls.Add(this.label35);
+            this.admin_cpu_groupbox.Controls.Add(this.label34);
+            this.admin_cpu_groupbox.Controls.Add(this.label33);
+            this.admin_cpu_groupbox.Location = new System.Drawing.Point(0, 0);
+            this.admin_cpu_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_cpu_groupbox.Name = "admin_cpu_groupbox";
+            this.admin_cpu_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_cpu_groupbox.Size = new System.Drawing.Size(651, 400);
+            this.admin_cpu_groupbox.TabIndex = 11;
+            this.admin_cpu_groupbox.TabStop = false;
+            this.admin_cpu_groupbox.Text = "CPU Parameters";
+            // 
+            // admin_gpu_groupbox
+            // 
+            this.admin_gpu_groupbox.Controls.Add(this.admin_memory_gb);
+            this.admin_gpu_groupbox.Controls.Add(this.admin_chipset);
+            this.admin_gpu_groupbox.Controls.Add(this.label37);
+            this.admin_gpu_groupbox.Controls.Add(this.label36);
+            this.admin_gpu_groupbox.Location = new System.Drawing.Point(0, 0);
+            this.admin_gpu_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_gpu_groupbox.Name = "admin_gpu_groupbox";
+            this.admin_gpu_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_gpu_groupbox.Size = new System.Drawing.Size(675, 400);
+            this.admin_gpu_groupbox.TabIndex = 12;
+            this.admin_gpu_groupbox.TabStop = false;
+            this.admin_gpu_groupbox.Text = "GPU Parameters";
+            // 
+            // admin_memory_gb
+            // 
+            this.admin_memory_gb.Location = new System.Drawing.Point(139, 50);
+            this.admin_memory_gb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_memory_gb.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_memory_gb.Name = "admin_memory_gb";
+            this.admin_memory_gb.Size = new System.Drawing.Size(180, 26);
+            this.admin_memory_gb.TabIndex = 3;
+            // 
+            // admin_chipset
+            // 
+            this.admin_chipset.Location = new System.Drawing.Point(139, 111);
+            this.admin_chipset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_chipset.Name = "admin_chipset";
+            this.admin_chipset.Size = new System.Drawing.Size(180, 26);
+            this.admin_chipset.TabIndex = 2;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(35, 114);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(77, 16);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Chipset";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(35, 55);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(97, 16);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Memory GB";
+            // 
+            // admin_socket_type
+            // 
+            this.admin_socket_type.Location = new System.Drawing.Point(194, 102);
+            this.admin_socket_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_socket_type.Name = "admin_socket_type";
+            this.admin_socket_type.Size = new System.Drawing.Size(148, 26);
+            this.admin_socket_type.TabIndex = 5;
+            // 
+            // admin_cores
+            // 
+            this.admin_cores.Location = new System.Drawing.Point(190, 23);
+            this.admin_cores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_cores.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_cores.Name = "admin_cores";
+            this.admin_cores.Size = new System.Drawing.Size(180, 26);
+            this.admin_cores.TabIndex = 4;
+            // 
+            // admin_frequency_ghz
+            // 
+            this.admin_frequency_ghz.Location = new System.Drawing.Point(194, 62);
+            this.admin_frequency_ghz.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_frequency_ghz.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_frequency_ghz.Name = "admin_frequency_ghz";
+            this.admin_frequency_ghz.Size = new System.Drawing.Size(180, 26);
+            this.admin_frequency_ghz.TabIndex = 3;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(30, 71);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(137, 16);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "Frequency GHz";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(33, 35);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(57, 16);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "Cores";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(30, 109);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(117, 16);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "Socket Type";
+            // 
             // admin_battery_life
             // 
             this.admin_battery_life.Location = new System.Drawing.Point(132, 343);
@@ -864,149 +1008,6 @@
             this.admin_phone_battery.Size = new System.Drawing.Size(180, 26);
             this.admin_phone_battery.TabIndex = 17;
             // 
-            // admin_cpu_groupbox
-            // 
-            this.admin_cpu_groupbox.Controls.Add(this.admin_gpu_groupbox);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_socket_type);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_cores);
-            this.admin_cpu_groupbox.Controls.Add(this.admin_frequency_ghz);
-            this.admin_cpu_groupbox.Controls.Add(this.label35);
-            this.admin_cpu_groupbox.Controls.Add(this.label34);
-            this.admin_cpu_groupbox.Controls.Add(this.label33);
-            this.admin_cpu_groupbox.Location = new System.Drawing.Point(0, 0);
-            this.admin_cpu_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_cpu_groupbox.Name = "admin_cpu_groupbox";
-            this.admin_cpu_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_cpu_groupbox.Size = new System.Drawing.Size(651, 400);
-            this.admin_cpu_groupbox.TabIndex = 11;
-            this.admin_cpu_groupbox.TabStop = false;
-            this.admin_cpu_groupbox.Text = "CPU Parameters";
-            // 
-            // admin_gpu_groupbox
-            // 
-            this.admin_gpu_groupbox.Controls.Add(this.admin_memory_gb);
-            this.admin_gpu_groupbox.Controls.Add(this.admin_chipset);
-            this.admin_gpu_groupbox.Controls.Add(this.label37);
-            this.admin_gpu_groupbox.Controls.Add(this.label36);
-            this.admin_gpu_groupbox.Location = new System.Drawing.Point(0, 0);
-            this.admin_gpu_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_gpu_groupbox.Name = "admin_gpu_groupbox";
-            this.admin_gpu_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_gpu_groupbox.Size = new System.Drawing.Size(675, 400);
-            this.admin_gpu_groupbox.TabIndex = 12;
-            this.admin_gpu_groupbox.TabStop = false;
-            this.admin_gpu_groupbox.Text = "GPU Parameters";
-            // 
-            // admin_memory_gb
-            // 
-            this.admin_memory_gb.Location = new System.Drawing.Point(139, 50);
-            this.admin_memory_gb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_memory_gb.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_memory_gb.Name = "admin_memory_gb";
-            this.admin_memory_gb.Size = new System.Drawing.Size(180, 26);
-            this.admin_memory_gb.TabIndex = 3;
-            // 
-            // admin_chipset
-            // 
-            this.admin_chipset.Location = new System.Drawing.Point(139, 111);
-            this.admin_chipset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_chipset.Name = "admin_chipset";
-            this.admin_chipset.Size = new System.Drawing.Size(180, 26);
-            this.admin_chipset.TabIndex = 2;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(35, 114);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(77, 16);
-            this.label37.TabIndex = 1;
-            this.label37.Text = "Chipset";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(35, 55);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(97, 16);
-            this.label36.TabIndex = 0;
-            this.label36.Text = "Memory GB";
-            // 
-            // admin_socket_type
-            // 
-            this.admin_socket_type.Location = new System.Drawing.Point(194, 102);
-            this.admin_socket_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_socket_type.Name = "admin_socket_type";
-            this.admin_socket_type.Size = new System.Drawing.Size(148, 26);
-            this.admin_socket_type.TabIndex = 5;
-            // 
-            // admin_cores
-            // 
-            this.admin_cores.Location = new System.Drawing.Point(190, 23);
-            this.admin_cores.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_cores.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_cores.Name = "admin_cores";
-            this.admin_cores.Size = new System.Drawing.Size(180, 26);
-            this.admin_cores.TabIndex = 4;
-            // 
-            // admin_frequency_ghz
-            // 
-            this.admin_frequency_ghz.Location = new System.Drawing.Point(194, 62);
-            this.admin_frequency_ghz.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_frequency_ghz.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_frequency_ghz.Name = "admin_frequency_ghz";
-            this.admin_frequency_ghz.Size = new System.Drawing.Size(180, 26);
-            this.admin_frequency_ghz.TabIndex = 3;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(30, 71);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(137, 16);
-            this.label35.TabIndex = 2;
-            this.label35.Text = "Frequency GHz";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(33, 35);
-            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(57, 16);
-            this.label34.TabIndex = 1;
-            this.label34.Text = "Cores";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(30, 109);
-            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(117, 16);
-            this.label33.TabIndex = 0;
-            this.label33.Text = "Socket Type";
-            // 
             // admin_fold_groupbox
             // 
             this.admin_fold_groupbox.Controls.Add(this.admin_display_type_type);
@@ -1027,130 +1028,6 @@
             this.admin_fold_groupbox.TabIndex = 6;
             this.admin_fold_groupbox.TabStop = false;
             this.admin_fold_groupbox.Text = "Fold Parameters";
-            // 
-            // admin_gaming_laptop_groupbox
-            // 
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_frame_rate);
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_keyboard_type);
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_cooling_system);
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.label31);
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.label30);
-            this.admin_gaming_laptop_groupbox.Controls.Add(this.label29);
-            this.admin_gaming_laptop_groupbox.Location = new System.Drawing.Point(911, 694);
-            this.admin_gaming_laptop_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_gaming_laptop_groupbox.Name = "admin_gaming_laptop_groupbox";
-            this.admin_gaming_laptop_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_gaming_laptop_groupbox.Size = new System.Drawing.Size(549, 262);
-            this.admin_gaming_laptop_groupbox.TabIndex = 10;
-            this.admin_gaming_laptop_groupbox.TabStop = false;
-            this.admin_gaming_laptop_groupbox.Text = "Gaming Parameters";
-            // 
-            // admin_two_in_one_laptop_groupbox
-            // 
-            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.admin_hinge_type);
-            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.label32);
-            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.admin_detachable_keyboard_checkBox);
-            this.admin_two_in_one_laptop_groupbox.Location = new System.Drawing.Point(911, 704);
-            this.admin_two_in_one_laptop_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_two_in_one_laptop_groupbox.Name = "admin_two_in_one_laptop_groupbox";
-            this.admin_two_in_one_laptop_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_two_in_one_laptop_groupbox.Size = new System.Drawing.Size(549, 262);
-            this.admin_two_in_one_laptop_groupbox.TabIndex = 3;
-            this.admin_two_in_one_laptop_groupbox.TabStop = false;
-            this.admin_two_in_one_laptop_groupbox.Text = "Two IN One";
-            // 
-            // admin_hinge_type
-            // 
-            this.admin_hinge_type.Location = new System.Drawing.Point(147, 96);
-            this.admin_hinge_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_hinge_type.Name = "admin_hinge_type";
-            this.admin_hinge_type.Size = new System.Drawing.Size(182, 26);
-            this.admin_hinge_type.TabIndex = 2;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(16, 100);
-            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(107, 16);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "Hinge Type";
-            // 
-            // admin_detachable_keyboard_checkBox
-            // 
-            this.admin_detachable_keyboard_checkBox.AutoSize = true;
-            this.admin_detachable_keyboard_checkBox.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_detachable_keyboard_checkBox.Location = new System.Drawing.Point(20, 38);
-            this.admin_detachable_keyboard_checkBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_detachable_keyboard_checkBox.Name = "admin_detachable_keyboard_checkBox";
-            this.admin_detachable_keyboard_checkBox.Size = new System.Drawing.Size(213, 21);
-            this.admin_detachable_keyboard_checkBox.TabIndex = 0;
-            this.admin_detachable_keyboard_checkBox.Text = "detachableKeyboard";
-            this.admin_detachable_keyboard_checkBox.UseVisualStyleBackColor = true;
-            // 
-            // admin_frame_rate
-            // 
-            this.admin_frame_rate.Location = new System.Drawing.Point(194, 139);
-            this.admin_frame_rate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_frame_rate.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_frame_rate.Name = "admin_frame_rate";
-            this.admin_frame_rate.Size = new System.Drawing.Size(180, 26);
-            this.admin_frame_rate.TabIndex = 5;
-            // 
-            // admin_keyboard_type
-            // 
-            this.admin_keyboard_type.Location = new System.Drawing.Point(191, 86);
-            this.admin_keyboard_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_keyboard_type.Name = "admin_keyboard_type";
-            this.admin_keyboard_type.Size = new System.Drawing.Size(183, 26);
-            this.admin_keyboard_type.TabIndex = 4;
-            // 
-            // admin_cooling_system
-            // 
-            this.admin_cooling_system.Location = new System.Drawing.Point(194, 38);
-            this.admin_cooling_system.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_cooling_system.Name = "admin_cooling_system";
-            this.admin_cooling_system.Size = new System.Drawing.Size(180, 26);
-            this.admin_cooling_system.TabIndex = 3;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(20, 143);
-            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(107, 16);
-            this.label31.TabIndex = 2;
-            this.label31.Text = "Frame Rate";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(17, 90);
-            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(137, 16);
-            this.label30.TabIndex = 1;
-            this.label30.Text = "Keyboard Type";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(20, 45);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(147, 16);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "Cooling System";
             // 
             // admin_display_type_type
             // 
@@ -1262,6 +1139,130 @@
             this.admin_size_of_opened_screen_type.Size = new System.Drawing.Size(180, 26);
             this.admin_size_of_opened_screen_type.TabIndex = 26;
             // 
+            // admin_gaming_laptop_groupbox
+            // 
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_frame_rate);
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_keyboard_type);
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.admin_cooling_system);
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.label31);
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.label30);
+            this.admin_gaming_laptop_groupbox.Controls.Add(this.label29);
+            this.admin_gaming_laptop_groupbox.Location = new System.Drawing.Point(911, 694);
+            this.admin_gaming_laptop_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_gaming_laptop_groupbox.Name = "admin_gaming_laptop_groupbox";
+            this.admin_gaming_laptop_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_gaming_laptop_groupbox.Size = new System.Drawing.Size(549, 262);
+            this.admin_gaming_laptop_groupbox.TabIndex = 10;
+            this.admin_gaming_laptop_groupbox.TabStop = false;
+            this.admin_gaming_laptop_groupbox.Text = "Gaming Parameters";
+            // 
+            // admin_frame_rate
+            // 
+            this.admin_frame_rate.Location = new System.Drawing.Point(194, 139);
+            this.admin_frame_rate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_frame_rate.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_frame_rate.Name = "admin_frame_rate";
+            this.admin_frame_rate.Size = new System.Drawing.Size(180, 26);
+            this.admin_frame_rate.TabIndex = 5;
+            // 
+            // admin_keyboard_type
+            // 
+            this.admin_keyboard_type.Location = new System.Drawing.Point(191, 86);
+            this.admin_keyboard_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_keyboard_type.Name = "admin_keyboard_type";
+            this.admin_keyboard_type.Size = new System.Drawing.Size(183, 26);
+            this.admin_keyboard_type.TabIndex = 4;
+            // 
+            // admin_cooling_system
+            // 
+            this.admin_cooling_system.Location = new System.Drawing.Point(194, 38);
+            this.admin_cooling_system.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_cooling_system.Name = "admin_cooling_system";
+            this.admin_cooling_system.Size = new System.Drawing.Size(180, 26);
+            this.admin_cooling_system.TabIndex = 3;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(20, 143);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(107, 16);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "Frame Rate";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(17, 90);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(137, 16);
+            this.label30.TabIndex = 1;
+            this.label30.Text = "Keyboard Type";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(20, 45);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(147, 16);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "Cooling System";
+            // 
+            // admin_two_in_one_laptop_groupbox
+            // 
+            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.admin_hinge_type);
+            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.label32);
+            this.admin_two_in_one_laptop_groupbox.Controls.Add(this.admin_detachable_keyboard_checkBox);
+            this.admin_two_in_one_laptop_groupbox.Location = new System.Drawing.Point(911, 704);
+            this.admin_two_in_one_laptop_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_two_in_one_laptop_groupbox.Name = "admin_two_in_one_laptop_groupbox";
+            this.admin_two_in_one_laptop_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_two_in_one_laptop_groupbox.Size = new System.Drawing.Size(549, 262);
+            this.admin_two_in_one_laptop_groupbox.TabIndex = 3;
+            this.admin_two_in_one_laptop_groupbox.TabStop = false;
+            this.admin_two_in_one_laptop_groupbox.Text = "Two IN One";
+            // 
+            // admin_hinge_type
+            // 
+            this.admin_hinge_type.Location = new System.Drawing.Point(147, 96);
+            this.admin_hinge_type.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_hinge_type.Name = "admin_hinge_type";
+            this.admin_hinge_type.Size = new System.Drawing.Size(182, 26);
+            this.admin_hinge_type.TabIndex = 2;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(16, 100);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(107, 16);
+            this.label32.TabIndex = 1;
+            this.label32.Text = "Hinge Type";
+            // 
+            // admin_detachable_keyboard_checkBox
+            // 
+            this.admin_detachable_keyboard_checkBox.AutoSize = true;
+            this.admin_detachable_keyboard_checkBox.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_detachable_keyboard_checkBox.Location = new System.Drawing.Point(20, 38);
+            this.admin_detachable_keyboard_checkBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_detachable_keyboard_checkBox.Name = "admin_detachable_keyboard_checkBox";
+            this.admin_detachable_keyboard_checkBox.Size = new System.Drawing.Size(213, 21);
+            this.admin_detachable_keyboard_checkBox.TabIndex = 0;
+            this.admin_detachable_keyboard_checkBox.Text = "detachableKeyboard";
+            this.admin_detachable_keyboard_checkBox.UseVisualStyleBackColor = true;
+            // 
             // admin_electronics_groupBox
             // 
             this.admin_electronics_groupBox.Controls.Add(this.admin_phones_radio_groupbox);
@@ -1279,6 +1280,31 @@
             this.admin_electronics_groupBox.TabStop = false;
             this.admin_electronics_groupBox.Text = "Electronics";
             this.admin_electronics_groupBox.Enter += new System.EventHandler(this.admin_electronics_groupBox_Enter);
+            // 
+            // admin_phones_radio_groupbox
+            // 
+            this.admin_phones_radio_groupbox.Controls.Add(this.admin_fold_radioButton);
+            this.admin_phones_radio_groupbox.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.admin_phones_radio_groupbox.Location = new System.Drawing.Point(14, 58);
+            this.admin_phones_radio_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_phones_radio_groupbox.Name = "admin_phones_radio_groupbox";
+            this.admin_phones_radio_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_phones_radio_groupbox.Size = new System.Drawing.Size(105, 91);
+            this.admin_phones_radio_groupbox.TabIndex = 7;
+            this.admin_phones_radio_groupbox.TabStop = false;
+            // 
+            // admin_fold_radioButton
+            // 
+            this.admin_fold_radioButton.AutoSize = true;
+            this.admin_fold_radioButton.Location = new System.Drawing.Point(0, 29);
+            this.admin_fold_radioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.admin_fold_radioButton.Name = "admin_fold_radioButton";
+            this.admin_fold_radioButton.Size = new System.Drawing.Size(72, 20);
+            this.admin_fold_radioButton.TabIndex = 1;
+            this.admin_fold_radioButton.TabStop = true;
+            this.admin_fold_radioButton.Text = "Fold";
+            this.admin_fold_radioButton.UseVisualStyleBackColor = true;
+            this.admin_fold_radioButton.CheckedChanged += new System.EventHandler(this.admin_fold_radioButton_CheckedChanged);
             // 
             // admin_laptop_radio_groupbox
             // 
@@ -1318,31 +1344,6 @@
             this.admin_two_in_one_radioButton.Text = "2 In 1";
             this.admin_two_in_one_radioButton.UseVisualStyleBackColor = true;
             this.admin_two_in_one_radioButton.CheckedChanged += new System.EventHandler(this.admin_two_in_one_radioButton_CheckedChanged);
-            // 
-            // admin_phones_radio_groupbox
-            // 
-            this.admin_phones_radio_groupbox.Controls.Add(this.admin_fold_radioButton);
-            this.admin_phones_radio_groupbox.Font = new System.Drawing.Font("LCDMono2", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_phones_radio_groupbox.Location = new System.Drawing.Point(14, 58);
-            this.admin_phones_radio_groupbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_phones_radio_groupbox.Name = "admin_phones_radio_groupbox";
-            this.admin_phones_radio_groupbox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_phones_radio_groupbox.Size = new System.Drawing.Size(105, 91);
-            this.admin_phones_radio_groupbox.TabIndex = 7;
-            this.admin_phones_radio_groupbox.TabStop = false;
-            // 
-            // admin_fold_radioButton
-            // 
-            this.admin_fold_radioButton.AutoSize = true;
-            this.admin_fold_radioButton.Location = new System.Drawing.Point(0, 29);
-            this.admin_fold_radioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.admin_fold_radioButton.Name = "admin_fold_radioButton";
-            this.admin_fold_radioButton.Size = new System.Drawing.Size(72, 20);
-            this.admin_fold_radioButton.TabIndex = 1;
-            this.admin_fold_radioButton.TabStop = true;
-            this.admin_fold_radioButton.Text = "Fold";
-            this.admin_fold_radioButton.UseVisualStyleBackColor = true;
-            this.admin_fold_radioButton.CheckedChanged += new System.EventHandler(this.admin_fold_radioButton_CheckedChanged);
             // 
             // admin_gpu_radioButton
             // 
@@ -1400,12 +1401,24 @@
             this.admin_phones_radioButton.UseVisualStyleBackColor = true;
             this.admin_phones_radioButton.CheckedChanged += new System.EventHandler(this.admin_phones_radioButton_CheckedChanged);
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Red;
+            this.button6.Location = new System.Drawing.Point(1375, 14);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(112, 35);
+            this.button6.TabIndex = 21;
+            this.button6.Text = "Close";
+            this.button6.UseVisualStyleBackColor = false;
+            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1731, 1065);
+            this.ClientSize = new System.Drawing.Size(1500, 1000);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.admin_gaming_laptop_groupbox);
             this.Controls.Add(this.admin_two_in_one_laptop_groupbox);
             this.Controls.Add(this.admin_electronics_groupBox);
@@ -1430,6 +1443,13 @@
             this.admin_phone_groupbox.PerformLayout();
             this.admin_laptop_groupbox.ResumeLayout(false);
             this.admin_laptop_groupbox.PerformLayout();
+            this.admin_cpu_groupbox.ResumeLayout(false);
+            this.admin_cpu_groupbox.PerformLayout();
+            this.admin_gpu_groupbox.ResumeLayout(false);
+            this.admin_gpu_groupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_battery_life)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_screen_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_ram)).EndInit();
@@ -1439,27 +1459,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_storage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_screen_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_phone_battery)).EndInit();
-            this.admin_cpu_groupbox.ResumeLayout(false);
-            this.admin_cpu_groupbox.PerformLayout();
-            this.admin_gpu_groupbox.ResumeLayout(false);
-            this.admin_gpu_groupbox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_memory_gb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_cores)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frequency_ghz)).EndInit();
             this.admin_fold_groupbox.ResumeLayout(false);
             this.admin_fold_groupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_size_of_opened_screen_type)).EndInit();
             this.admin_gaming_laptop_groupbox.ResumeLayout(false);
             this.admin_gaming_laptop_groupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).EndInit();
             this.admin_two_in_one_laptop_groupbox.ResumeLayout(false);
             this.admin_two_in_one_laptop_groupbox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_size_of_opened_screen_type)).EndInit();
             this.admin_electronics_groupBox.ResumeLayout(false);
             this.admin_electronics_groupBox.PerformLayout();
-            this.admin_laptop_radio_groupbox.ResumeLayout(false);
-            this.admin_laptop_radio_groupbox.PerformLayout();
             this.admin_phones_radio_groupbox.ResumeLayout(false);
             this.admin_phones_radio_groupbox.PerformLayout();
+            this.admin_laptop_radio_groupbox.ResumeLayout(false);
+            this.admin_laptop_radio_groupbox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1569,5 +1582,6 @@
         private System.Windows.Forms.NumericUpDown admin_ram_size;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button admin_show_button;
+        private System.Windows.Forms.Button button6;
     }
 }
