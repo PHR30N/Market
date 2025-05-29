@@ -401,5 +401,20 @@ namespace Market
             admin_tablet.Checked = myPhone.tablet;
             //MessageBox.Show("Entered Method" + myPhone.operatingSystem);
         }
+
+        private void admin_laptop_groupbox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void admin_electronics_groupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void admin_fold_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
