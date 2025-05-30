@@ -15,7 +15,7 @@ namespace Market
     public partial class AdminMain : Form
     {
         private Form _loginForm;
-
+        string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
         public static void SetPropertiesFromDictionary(object target, Dictionary<string, object> values)
         {
             var targetType = target.GetType();
@@ -319,7 +319,7 @@ namespace Market
         
         private void admin_add_Click(object sender, EventArgs e)
         {
-            string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
+            //string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
             //Phone myPhone = new Phone(
             //name: admin_name.Text,
             //brand: admin_brand.Text,
@@ -387,22 +387,14 @@ namespace Market
             //batteryCapacity: 5000,
             //tablet: false
             //);
-            //myPhone.SaveToDb(myConnectionString);
-            //MessageBox.Show("Phone saved!");
         }
 
         private void admin_show_button_Click(object sender, EventArgs e)
         {
-            string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
+            //string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
             string phone_name = "Galaxy S24 Ultra";
             Phone myPhone = new Phone();
             myPhone.GetData(in_name: phone_name, connectionString: myConnectionString);
-            //if (!found)
-            //{
-            //    MessageBox.Show("Phone not found in database.");
-            //    return;
-            //}
-            //MessageBox.Show("Showing " + phone_name);
             admin_name.Text = myPhone.name;
             admin_brand.Text = myPhone.brand;
             admin_model.Text = myPhone.model;
@@ -420,8 +412,7 @@ namespace Market
             admin_phone_cpu.Text = myPhone.cpuType;
             admin_phone_battery.Value = myPhone.batteryCapacity;
             admin_tablet.Checked = myPhone.tablet;
-            //admin_pictureBox.ImageLocation = Path.Combine(Application.StartupPath, myPhone.imagePath);
-            //MessageBox.Show("Entered Method" + myPhone.operatingSystem);
+            admin_pictureBox.ImageLocation = Path.Combine(Application.StartupPath, myPhone.imagePath);
         }
 
         private void admin_laptop_groupbox_Enter(object sender, EventArgs e)
@@ -439,5 +430,15 @@ namespace Market
 
         }
 
+        private void admin_search_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void login_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            _loginForm.Show();
+        }
     }
 }

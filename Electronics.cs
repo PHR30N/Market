@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms; // Required for async operations
 using System.Collections.Generic;
 using System.Reflection;
+using System.Drawing;
 
 namespace Market
 {
@@ -19,11 +20,11 @@ namespace Market
         public int id { get; set; }
         public string description { get; set; }
         public int quantity { get; set; }
-        public string imagePath { get; set; }
+        public Image imagePath { get; set; }
         public string QRCode { get; set; } // Already string, good.
 
         // Constructor for base properties
-        protected Electronics(string name, string brand, string model, string color, float price, string description, int quantity, string imagePath, string qrCode)
+        protected Electronics(string name, string brand, string model, string color, float price, string description, int quantity, Image imagePath, string qrCode)
         {
             this.name = name;
             this.brand = brand;
@@ -36,7 +37,7 @@ namespace Market
             this.QRCode = qrCode;
         }
         // Parameterless constructor for cases where you might create an empty object then load data
-        protected Electronics(string name, string brand, string model, string color, float price, int id, string description, int quantity, string imagePath, string qrCode)
+        protected Electronics(string name, string brand, string model, string color, float price, int id, string description, int quantity, Image imagePath, string qrCode)
         {
             this.name = name;
             this.brand = brand;
@@ -49,28 +50,28 @@ namespace Market
             this.imagePath = imagePath;
             this.QRCode = qrCode;
         }
-        public virtual void SetFromFormDictionary(Dictionary<string, object> formValues)
-        {
-            foreach (var prop in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
-            {
-                if (formValues.TryGetValue(prop.Name, out object value))
-                {
-                    if (value != null && prop.FieldType.IsAssignableFrom(value.GetType()))
-                    {
-                        prop.SetValue(this, value);
-                    }
-                    else if (value != null)
-                    {
-                        try
-                        {
-                            object convertedValue = Convert.ChangeType(value, prop.FieldType);
-                            prop.SetValue(this, convertedValue);
-                        }
-                        catch { /* ignore conversion errors */ }
-                    }
-                }
-            }
-        }
+        //public virtual void SetFromFormDictionary(Dictionary<string, object> formValues)
+        //{
+        //    foreach (var prop in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+        //    {
+        //        if (formValues.TryGetValue(prop.Name, out object value))
+        //        {
+        //            if (value != null && prop.FieldType.IsAssignableFrom(value.GetType()))
+        //            {
+        //                prop.SetValue(this, value);
+        //            }
+        //            else if (value != null)
+        //            {
+        //                try
+        //                {
+        //                    object convertedValue = Convert.ChangeType(value, prop.FieldType);
+        //                    prop.SetValue(this, convertedValue);
+        //                }
+        //                catch { /* ignore conversion errors */ }
+        //            }
+        //        }
+        //    }
+        //}
 
         // Abstract method to save to DB, to be implemented by derived classes
         public abstract void SaveToDb(string connectionString);
@@ -210,7 +211,7 @@ namespace Market
                         this.id = Convert.ToInt32(reader["id"]);
                         this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                         this.quantity = Convert.ToInt32(reader["quantity"]);
-                        this.imagePath = reader["imagePath"].ToString();
+                        this.imagePath = reader["imagePath"];
                         this.QRCode = reader["QRCode"].ToString();
                         this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
                         this.screenSize = Convert.ToSingle(reader["screenSize"]);
@@ -225,26 +226,7 @@ namespace Market
             }
         }
       
-        /*
-        private void UpdateAdminFields(Phone myPhone)
-        {
-            admin_brand.Text = myPhone.brand;
-            admin_model.Text = myPhone.model;
-            admin_color.Text = myPhone.color;
-            admin_price.Value = (decimal)myPhone.price;
-            admin_description.Text = myPhone.description;
-            admin_quantity.Value = myPhone.quantity;
-            admin_image_path.Text = myPhone.imagePath;
-            admin_qrcode.Text = myPhone.QRCode;
-            admin_phone_os.Text = myPhone.operatingSystem;
-            admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
-            admin_phone_storage.Value = myPhone.storageCapacity;
-            admin_ram_size.Value = myPhone.ramSize;
-            admin_phone_camera.Value = myPhone.cameraQuality;
-            admin_phone_cpu.Text = myPhone.cpuType;
-            admin_phone_battery.Value = myPhone.batteryCapacity;
-            admin_tablet.Checked = myPhone.tablet;
-        }*/
+        
         public override string ToString()
         {
             return $"Phone: {name}, Brand: {brand}, Model: {model}, Color: {color}, Price: {price:C}, ID: {id}, Quantity: {quantity}, QRCode: {QRCode}, OS: {operatingSystem}, Screen: {screenSize}\", Storage: {storageCapacity}GB, RAM: {ramSize}GB, Camera: {cameraQuality}MP, CPU: {cpuType}, Battery: {batteryCapacity}mAh, Tablet: {tablet}\nDescription: {description}\nImage: {imagePath}";
@@ -318,7 +300,7 @@ namespace Market
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                cmd.Parameters.AddWithValue("@imagePath", (Image)imagePath);
                 cmd.Parameters.AddWithValue("@QRCode", QRCode);
                 cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@screenSize", screenSize);

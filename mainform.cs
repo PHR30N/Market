@@ -52,5 +52,11 @@ namespace Market
             this.Close();
             _loginForm.Close();
         }
+
+        private void login_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            _loginForm.Show();
+        }
     }
 }

@@ -132,6 +132,9 @@
             this.admin_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_phones_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_pictureBox = new System.Windows.Forms.PictureBox();
+            this.admin_search_textBox = new System.Windows.Forms.TextBox();
+            this.admin_search = new System.Windows.Forms.Button();
+            this.login = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.admin_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_price)).BeginInit();
@@ -166,6 +169,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
+            this.panel1.Controls.Add(this.login);
             this.panel1.Controls.Add(this.admin_show_button);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.admin_add);
@@ -906,7 +910,7 @@
             // admin_memory_gb
             // 
             this.admin_memory_gb.DecimalPlaces = 2;
-            this.admin_memory_gb.Location = new System.Drawing.Point(93, 32);
+            this.admin_memory_gb.Location = new System.Drawing.Point(103, 31);
             this.admin_memory_gb.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -918,7 +922,7 @@
             // 
             // admin_chipset
             // 
-            this.admin_chipset.Location = new System.Drawing.Point(93, 72);
+            this.admin_chipset.Location = new System.Drawing.Point(102, 74);
             this.admin_chipset.Name = "admin_chipset";
             this.admin_chipset.Size = new System.Drawing.Size(121, 20);
             this.admin_chipset.TabIndex = 2;
@@ -1309,12 +1313,45 @@
             this.admin_pictureBox.TabIndex = 4;
             this.admin_pictureBox.TabStop = false;
             // 
+            // admin_search_textBox
+            // 
+            this.admin_search_textBox.Location = new System.Drawing.Point(367, 145);
+            this.admin_search_textBox.Name = "admin_search_textBox";
+            this.admin_search_textBox.Size = new System.Drawing.Size(266, 20);
+            this.admin_search_textBox.TabIndex = 13;
+            // 
+            // admin_search
+            // 
+            this.admin_search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
+            this.admin_search.Location = new System.Drawing.Point(239, 136);
+            this.admin_search.Name = "admin_search";
+            this.admin_search.Size = new System.Drawing.Size(125, 34);
+            this.admin_search.TabIndex = 21;
+            this.admin_search.Text = "Search";
+            this.admin_search.UseVisualStyleBackColor = false;
+            this.admin_search.Click += new System.EventHandler(this.admin_search_Click);
+            // 
+            // login
+            // 
+            this.login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login.Location = new System.Drawing.Point(44, 519);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(150, 48);
+            this.login.TabIndex = 28;
+            this.login.Text = "Login";
+            this.login.UseVisualStyleBackColor = false;
+            this.login.Click += new System.EventHandler(this.login_Click);
+            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1161, 673);
+            this.Controls.Add(this.admin_search);
+            this.Controls.Add(this.admin_search_textBox);
             this.Controls.Add(this.admin_pictureBox);
             this.Controls.Add(this.admin_gaming_laptop_groupbox);
             this.Controls.Add(this.admin_gpu_groupbox);
@@ -1374,6 +1411,7 @@
             this.admin_laptop_radio_groupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1483,5 +1521,8 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button admin_show_button;
         private System.Windows.Forms.PictureBox admin_pictureBox;
+        private System.Windows.Forms.TextBox admin_search_textBox;
+        private System.Windows.Forms.Button admin_search;
+        private System.Windows.Forms.Button login;
     }
 }

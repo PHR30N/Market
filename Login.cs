@@ -169,5 +169,12 @@ namespace Market
         {
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form form = new Form1();
+            form.Show();
+        }
     }
 }
