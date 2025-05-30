@@ -29,20 +29,16 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.admin_show_button = new System.Windows.Forms.Button();
+            this.sign_out = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.admin_add = new System.Windows.Forms.Button();
-            this.admin_cpu_button = new System.Windows.Forms.Button();
-            this.admin_gpu_button = new System.Windows.Forms.Button();
-            this.admin_laptop_button = new System.Windows.Forms.Button();
-            this.admin_phones_button = new System.Windows.Forms.Button();
             this.close_button = new System.Windows.Forms.Button();
             this.admin_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_upload_image = new System.Windows.Forms.Button();
             this.admin_price = new System.Windows.Forms.NumericUpDown();
             this.admin_description = new System.Windows.Forms.TextBox();
             this.admin_color = new System.Windows.Forms.TextBox();
             this.admin_qrcode = new System.Windows.Forms.TextBox();
-            this.admin_image_path = new System.Windows.Forms.TextBox();
             this.admin_model = new System.Windows.Forms.TextBox();
             this.admin_brand = new System.Windows.Forms.TextBox();
             this.admin_name = new System.Windows.Forms.TextBox();
@@ -134,7 +130,6 @@
             this.admin_pictureBox = new System.Windows.Forms.PictureBox();
             this.admin_search_textBox = new System.Windows.Forms.TextBox();
             this.admin_search = new System.Windows.Forms.Button();
-            this.login = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.admin_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_price)).BeginInit();
@@ -169,30 +164,25 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
-            this.panel1.Controls.Add(this.login);
-            this.panel1.Controls.Add(this.admin_show_button);
+            this.panel1.Controls.Add(this.sign_out);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.admin_add);
-            this.panel1.Controls.Add(this.admin_cpu_button);
-            this.panel1.Controls.Add(this.admin_gpu_button);
-            this.panel1.Controls.Add(this.admin_laptop_button);
-            this.panel1.Controls.Add(this.admin_phones_button);
             this.panel1.Location = new System.Drawing.Point(-5, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 693);
             this.panel1.TabIndex = 1;
             // 
-            // admin_show_button
+            // sign_out
             // 
-            this.admin_show_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.admin_show_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_show_button.Location = new System.Drawing.Point(44, 450);
-            this.admin_show_button.Name = "admin_show_button";
-            this.admin_show_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_show_button.TabIndex = 20;
-            this.admin_show_button.Text = "Show";
-            this.admin_show_button.UseVisualStyleBackColor = false;
-            this.admin_show_button.Click += new System.EventHandler(this.admin_show_button_Click);
+            this.sign_out.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.sign_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sign_out.Location = new System.Drawing.Point(44, 519);
+            this.sign_out.Name = "sign_out";
+            this.sign_out.Size = new System.Drawing.Size(150, 48);
+            this.sign_out.TabIndex = 28;
+            this.sign_out.Text = "Sign Out";
+            this.sign_out.UseVisualStyleBackColor = false;
+            this.sign_out.Click += new System.EventHandler(this.login_Click);
             // 
             // label3
             // 
@@ -208,58 +198,13 @@
             // 
             this.admin_add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
             this.admin_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_add.Location = new System.Drawing.Point(44, 383);
+            this.admin_add.Location = new System.Drawing.Point(44, 117);
             this.admin_add.Name = "admin_add";
-            this.admin_add.Size = new System.Drawing.Size(150, 48);
+            this.admin_add.Size = new System.Drawing.Size(150, 99);
             this.admin_add.TabIndex = 4;
-            this.admin_add.Text = "ADD";
+            this.admin_add.Text = "ADD and Modify";
             this.admin_add.UseVisualStyleBackColor = false;
             this.admin_add.Click += new System.EventHandler(this.admin_add_Click);
-            // 
-            // admin_cpu_button
-            // 
-            this.admin_cpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.admin_cpu_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_cpu_button.Location = new System.Drawing.Point(44, 317);
-            this.admin_cpu_button.Name = "admin_cpu_button";
-            this.admin_cpu_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_cpu_button.TabIndex = 3;
-            this.admin_cpu_button.Text = "CPU";
-            this.admin_cpu_button.UseVisualStyleBackColor = false;
-            // 
-            // admin_gpu_button
-            // 
-            this.admin_gpu_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.admin_gpu_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_gpu_button.Location = new System.Drawing.Point(44, 249);
-            this.admin_gpu_button.Name = "admin_gpu_button";
-            this.admin_gpu_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_gpu_button.TabIndex = 2;
-            this.admin_gpu_button.Text = "GPU";
-            this.admin_gpu_button.UseVisualStyleBackColor = false;
-            // 
-            // admin_laptop_button
-            // 
-            this.admin_laptop_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.admin_laptop_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_laptop_button.Location = new System.Drawing.Point(44, 185);
-            this.admin_laptop_button.Name = "admin_laptop_button";
-            this.admin_laptop_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_laptop_button.TabIndex = 1;
-            this.admin_laptop_button.Text = "laptops";
-            this.admin_laptop_button.UseVisualStyleBackColor = false;
-            // 
-            // admin_phones_button
-            // 
-            this.admin_phones_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.admin_phones_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_phones_button.Location = new System.Drawing.Point(44, 122);
-            this.admin_phones_button.Name = "admin_phones_button";
-            this.admin_phones_button.Size = new System.Drawing.Size(150, 48);
-            this.admin_phones_button.TabIndex = 0;
-            this.admin_phones_button.Text = "phones";
-            this.admin_phones_button.UseVisualStyleBackColor = false;
-            this.admin_phones_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // close_button
             // 
@@ -274,11 +219,11 @@
             // 
             // admin_groupbox
             // 
+            this.admin_groupbox.Controls.Add(this.admin_upload_image);
             this.admin_groupbox.Controls.Add(this.admin_price);
             this.admin_groupbox.Controls.Add(this.admin_description);
             this.admin_groupbox.Controls.Add(this.admin_color);
             this.admin_groupbox.Controls.Add(this.admin_qrcode);
-            this.admin_groupbox.Controls.Add(this.admin_image_path);
             this.admin_groupbox.Controls.Add(this.admin_model);
             this.admin_groupbox.Controls.Add(this.admin_brand);
             this.admin_groupbox.Controls.Add(this.admin_name);
@@ -298,6 +243,18 @@
             this.admin_groupbox.TabIndex = 3;
             this.admin_groupbox.TabStop = false;
             this.admin_groupbox.Text = "Genral Parameters";
+            // 
+            // admin_upload_image
+            // 
+            this.admin_upload_image.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.admin_upload_image.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.admin_upload_image.Location = new System.Drawing.Point(288, 51);
+            this.admin_upload_image.Name = "admin_upload_image";
+            this.admin_upload_image.Size = new System.Drawing.Size(141, 32);
+            this.admin_upload_image.TabIndex = 29;
+            this.admin_upload_image.Text = "Upload Image";
+            this.admin_upload_image.UseVisualStyleBackColor = false;
+            this.admin_upload_image.Click += new System.EventHandler(this.admin_upload_image_Click);
             // 
             // admin_price
             // 
@@ -333,13 +290,6 @@
             this.admin_qrcode.Name = "admin_qrcode";
             this.admin_qrcode.Size = new System.Drawing.Size(100, 20);
             this.admin_qrcode.TabIndex = 14;
-            // 
-            // admin_image_path
-            // 
-            this.admin_image_path.Location = new System.Drawing.Point(316, 55);
-            this.admin_image_path.Name = "admin_image_path";
-            this.admin_image_path.Size = new System.Drawing.Size(100, 20);
-            this.admin_image_path.TabIndex = 13;
             // 
             // admin_model
             // 
@@ -378,9 +328,9 @@
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(225, 55);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 15);
+            this.label9.Size = new System.Drawing.Size(47, 15);
             this.label9.TabIndex = 8;
-            this.label9.Text = "Image Path";
+            this.label9.Text = "Image";
             // 
             // admin_quantity
             // 
@@ -671,7 +621,6 @@
             this.admin_laptop_groupbox.TabIndex = 8;
             this.admin_laptop_groupbox.TabStop = false;
             this.admin_laptop_groupbox.Text = "Laptop Parameters";
-            this.admin_laptop_groupbox.Enter += new System.EventHandler(this.admin_laptop_groupbox_Enter);
             // 
             // admin_battery_life
             // 
@@ -1035,7 +984,6 @@
             this.admin_fold_type.Name = "admin_fold_type";
             this.admin_fold_type.Size = new System.Drawing.Size(121, 21);
             this.admin_fold_type.TabIndex = 1;
-            this.admin_fold_type.SelectedIndexChanged += new System.EventHandler(this.admin_fold_type_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -1193,7 +1141,6 @@
             this.admin_electronics_groupBox.TabIndex = 9;
             this.admin_electronics_groupBox.TabStop = false;
             this.admin_electronics_groupBox.Text = "Electronics";
-            this.admin_electronics_groupBox.Enter += new System.EventHandler(this.admin_electronics_groupBox_Enter);
             // 
             // admin_phones_radio_groupbox
             // 
@@ -1332,18 +1279,6 @@
             this.admin_search.UseVisualStyleBackColor = false;
             this.admin_search.Click += new System.EventHandler(this.admin_search_Click);
             // 
-            // login
-            // 
-            this.login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login.Location = new System.Drawing.Point(44, 519);
-            this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(150, 48);
-            this.login.TabIndex = 28;
-            this.login.Text = "Login";
-            this.login.UseVisualStyleBackColor = false;
-            this.login.Click += new System.EventHandler(this.login_Click);
-            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1420,10 +1355,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button admin_add;
-        private System.Windows.Forms.Button admin_cpu_button;
-        private System.Windows.Forms.Button admin_gpu_button;
-        private System.Windows.Forms.Button admin_laptop_button;
-        private System.Windows.Forms.Button admin_phones_button;
         private System.Windows.Forms.Button close_button;
         private System.Windows.Forms.GroupBox admin_groupbox;
         private System.Windows.Forms.Label label1;
@@ -1432,7 +1363,6 @@
         private System.Windows.Forms.TextBox admin_description;
         private System.Windows.Forms.TextBox admin_color;
         private System.Windows.Forms.TextBox admin_qrcode;
-        private System.Windows.Forms.TextBox admin_image_path;
         private System.Windows.Forms.TextBox admin_model;
         private System.Windows.Forms.TextBox admin_brand;
         private System.Windows.Forms.TextBox admin_name;
@@ -1519,10 +1449,10 @@
         private System.Windows.Forms.NumericUpDown admin_phone_screen_size;
         private System.Windows.Forms.NumericUpDown admin_ram_size;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button admin_show_button;
         private System.Windows.Forms.PictureBox admin_pictureBox;
         private System.Windows.Forms.TextBox admin_search_textBox;
         private System.Windows.Forms.Button admin_search;
-        private System.Windows.Forms.Button login;
+        private System.Windows.Forms.Button sign_out;
+        private System.Windows.Forms.Button admin_upload_image;
     }
 }

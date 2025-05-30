@@ -20,11 +20,13 @@ namespace Market
         public int id { get; set; }
         public string description { get; set; }
         public int quantity { get; set; }
-        public Image imagePath { get; set; }
+        public byte[] image { get; set; }
         public string QRCode { get; set; } // Already string, good.
+        public int soldCounter { get; set; }
+
 
         // Constructor for base properties
-        protected Electronics(string name, string brand, string model, string color, float price, string description, int quantity, Image imagePath, string qrCode)
+        protected Electronics(string name, string brand, string model, string color, float price, string description, int quantity, byte[] image, string qrCode, int soldCounter = 0)
         {
             this.name = name;
             this.brand = brand;
@@ -33,11 +35,12 @@ namespace Market
             this.price = price;
             this.description = description;
             this.quantity = quantity;
-            this.imagePath = imagePath;
+            this.image = image;
             this.QRCode = qrCode;
+            this.soldCounter = soldCounter;
         }
-        // Parameterless constructor for cases where you might create an empty object then load data
-        protected Electronics(string name, string brand, string model, string color, float price, int id, string description, int quantity, Image imagePath, string qrCode)
+
+        protected Electronics(string name, string brand, string model, string color, float price, int id, string description, int quantity, byte[] image, string qrCode, int soldCounter = 0)
         {
             this.name = name;
             this.brand = brand;
@@ -47,9 +50,11 @@ namespace Market
             this.price = price;
             this.description = description;
             this.quantity = quantity;
-            this.imagePath = imagePath;
+            this.image = image;
             this.QRCode = qrCode;
+            this.soldCounter = soldCounter;
         }
+
         //public virtual void SetFromFormDictionary(Dictionary<string, object> formValues)
         //{
         //    foreach (var prop in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
@@ -95,10 +100,10 @@ namespace Market
         // Constructor
         public Phone(
             string name, string brand, string model, string color, float price,
-            string description, int quantity, string imagePath, string qrCode,
+            string description, int quantity, byte[] image, string qrCode,
             string operatingSystem, float screenSize, int storageCapacity, int ramSize,
-            int cameraQuality, string cpuType, int batteryCapacity, bool tablet)
-            : base(name, brand, model, color, price, description, quantity, imagePath, qrCode)
+            int cameraQuality, string cpuType, int batteryCapacity, bool tablet, int soldCounter = 0)
+            : base(name, brand, model, color, price, description, quantity, image, qrCode, soldCounter)
         {
             this.operatingSystem = operatingSystem;
             this.screenSize = screenSize;
@@ -111,10 +116,10 @@ namespace Market
         }
         public Phone(
             string name, string brand, string model, string color, float price, int id,
-            string description, int quantity, string imagePath, string qrCode,
+            string description, int quantity, byte[] image, string qrCode,
             string operatingSystem, float screenSize, int storageCapacity, int ramSize,
-            int cameraQuality, string cpuType, int batteryCapacity, bool tablet)
-            : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode)
+            int cameraQuality, string cpuType, int batteryCapacity, bool tablet, int soldCounter = 0)
+            : base(name, brand, model, color, price, id, description, quantity, image, qrCode, soldCounter)
         {
             this.operatingSystem = operatingSystem;
             this.screenSize = screenSize;
@@ -142,8 +147,9 @@ namespace Market
                 price = @price,
                 description = @description,
                 quantity = @quantity,
-                imagePath = @imagePath,
+                image = @image,
                 QRCode = @QRCode,
+                soldCounter = @soldCounter,
                 operatingSystem = @operatingSystem,
                 screenSize = @screenSize,
                 storageCapacity = @storageCapacity,
@@ -153,8 +159,8 @@ namespace Market
                 batteryCapacity = @batteryCapacity,
                 tablet = @tablet
         WHEN NOT MATCHED THEN
-            INSERT (name, brand, model, color, price, description, quantity, imagePath, QRCode, operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet)
-            VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @imagePath, @QRCode, @operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet);";
+            INSERT (name, brand, model, color, price, description, quantity, image, QRCode, operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity,tablet, soldCounter)
+            VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @image, @QRCode, @operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet, @soldCounter);";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(mergeQuery, conn))
@@ -166,8 +172,9 @@ namespace Market
                 cmd.Parameters.AddWithValue("@price", price);
                 cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                cmd.Parameters.AddWithValue("@image", image);
                 cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                 cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@screenSize", screenSize);
                 cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
@@ -175,7 +182,7 @@ namespace Market
                 cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
                 cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
-                cmd.Parameters.AddWithValue("@tablet", tablet);
+                cmd.Parameters.AddWithValue("@tablet",tablet);
 
                 try
                 {
@@ -211,8 +218,9 @@ namespace Market
                         this.id = Convert.ToInt32(reader["id"]);
                         this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                         this.quantity = Convert.ToInt32(reader["quantity"]);
-                        this.imagePath = reader["imagePath"];
+                        this.image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
                         this.QRCode = reader["QRCode"].ToString();
+                        this.soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                         this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
                         this.screenSize = Convert.ToSingle(reader["screenSize"]);
                         this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
@@ -229,7 +237,7 @@ namespace Market
         
         public override string ToString()
         {
-            return $"Phone: {name}, Brand: {brand}, Model: {model}, Color: {color}, Price: {price:C}, ID: {id}, Quantity: {quantity}, QRCode: {QRCode}, OS: {operatingSystem}, Screen: {screenSize}\", Storage: {storageCapacity}GB, RAM: {ramSize}GB, Camera: {cameraQuality}MP, CPU: {cpuType}, Battery: {batteryCapacity}mAh, Tablet: {tablet}\nDescription: {description}\nImage: {imagePath}";
+            return $"Phone: {name}, Brand: {brand}, Model: {model}, Color: {color}, Price: {price:C}, ID: {id}, Quantity: {quantity}, QRCode: {QRCode}, OS: {operatingSystem}, Screen: {screenSize}\", Storage: {storageCapacity}GB, RAM: {ramSize}GB, Camera: {cameraQuality}MP, CPU: {cpuType}, Battery: {batteryCapacity}mAh,tablet, soldCounter: {tablet}\nDescription: {description}\nImage: {image}";
         }
 
         public static string Compare(Phone a, Phone b)
@@ -262,13 +270,13 @@ namespace Market
         public Fold(
             // Phone properties
             string name, string brand, string model, string color, float price, int id,
-            string description, int quantity, string imagePath, string qrCode,
+            string description, int quantity, byte[] image, string qrCode,
             string operatingSystem, float screenSize, int storageCapacity, int ramSize,
-            int cameraQuality, string cpuType, int batteryCapacity, bool tablet,
+            int cameraQuality, string cpuType, int batteryCapacity, bool tablet, int soldCounter,
             // Fold specific properties
             string foldType, string hingeMaterial, string displayType, string durabilityRating, float sizeOfOpenedScreen)
-            : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode,
-                  operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet)
+            : base(name, brand, model, color, price, id, description, quantity, image, qrCode,
+                  operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity,tablet, soldCounter)
         {
             this.foldType = foldType;
             this.hingeMaterial = hingeMaterial;
@@ -281,11 +289,11 @@ namespace Market
 
         public override void SaveToDb(string connectionString)
         {
-            string insertQuery = "INSERT INTO Folds (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
-                                 "operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity, tablet, " +
+            string insertQuery = "INSERT INTO Folds (name, brand, model, color, price, id, description, quantity, image, QRCode, " +
+                                 "operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity,tablet, soldCounter, " +
                                  "foldType, hingeMaterial, displayType, durabilityRating, sizeOfOpenedScreen) " +
-                                 "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
-                                 "@operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet, " +
+                                 "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
+                                 "@operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet, @soldCounter, " +
                                  "@foldType, @hingeMaterial, @displayType, @durabilityRating, @sizeOfOpenedScreen)";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -300,8 +308,9 @@ namespace Market
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@quantity", quantity);
-                cmd.Parameters.AddWithValue("@imagePath", (Image)imagePath);
+                cmd.Parameters.AddWithValue("@image", (byte[])image);
                 cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                 cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@screenSize", screenSize);
                 cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
@@ -309,7 +318,7 @@ namespace Market
                 cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
                 cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
-                cmd.Parameters.AddWithValue("@tablet", tablet);
+                cmd.Parameters.AddWithValue("@tablet",tablet);
 
                 // Fold-specific properties
                 cmd.Parameters.AddWithValue("@foldType", foldType);
@@ -345,8 +354,9 @@ namespace Market
                         this.id = Convert.ToInt32(reader["id"]);
                         this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                         this.quantity = Convert.ToInt32(reader["quantity"]);
-                        this.imagePath = reader["imagePath"].ToString();
+                        this.image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
                         this.QRCode = reader["QRCode"].ToString();
+                        this.soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                         this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
                         this.screenSize = Convert.ToSingle(reader["screenSize"]);
                         this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
@@ -397,10 +407,10 @@ namespace Market
 
             public Laptop(
                 string name, string brand, string model, string color, float price, int id,
-                string description, int quantity, string imagePath, string qrCode,
+                string description, int quantity, byte[] image, string qrCode, int soldCounter,
                 string operatingSystem, int storageCapacity, int ramSize, string graphicsCard,
                 string cpuType, float screenSize, string batteryLife)
-                : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode)
+                : base(name, brand, model, color, price, id, description, quantity, image, qrCode, soldCounter)
             {
                 this.operatingSystem = operatingSystem;
                 this.storageCapacity = storageCapacity;
@@ -417,9 +427,9 @@ namespace Market
             public override void SaveToDb(string connectionString)
             {
                 string insertQuery = "INSERT INTO Laptops (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
-                                     "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife) " +
+                                     "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, soldCounter) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
-                                     "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife)";
+                                     "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, @soldCounter)";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
@@ -433,9 +443,9 @@ namespace Market
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@image", image);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
-
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     // Laptop-specific properties
                     cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
@@ -472,8 +482,9 @@ namespace Market
                             this.id = Convert.ToInt32(reader["id"]);
                             this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             this.quantity = Convert.ToInt32(reader["quantity"]);
-                            this.imagePath = reader["imagePath"].ToString();
+                            this.image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
                             this.QRCode = reader["QRCode"].ToString();
+                            this.soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
 
                             // Laptop-specific properties
                             this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
@@ -522,12 +533,12 @@ namespace Market
             public GamingLaptop(
                 // Laptop properties
                 string name, string brand, string model, string color, float price, int id,
-                string description, int quantity, string imagePath, string qrCode,
+                string description, int quantity, byte[] image, string qrCode, int soldCounter,
                 string operatingSystem, int storageCapacity, int ramSize, string graphicsCard,
                 string cpuType, float screenSize, string batteryLife,
                 // GamingLaptop specific
                 string coolingSystem, string keyboardType, int frameRate)
-                : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode,
+                : base(name, brand, model, color, price, id, description, quantity, image, qrCode, soldCounter,
                       operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife)
             {
                 this.coolingSystem = coolingSystem;
@@ -540,10 +551,10 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO GammingLaptops (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
+                string insertQuery = "INSERT INTO GammingLaptops (name, brand, model, color, price, description, quantity, image, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
                                      "coolingSystem, keyboardType, frameRate) " +
-                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @image, @QRCode, " +
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
                                      "@coolingSystem, @keyboardType, @frameRate)";
 
@@ -556,11 +567,11 @@ namespace Market
                     cmd.Parameters.AddWithValue("@model", model);
                     cmd.Parameters.AddWithValue("@color", color);
                     cmd.Parameters.AddWithValue("@price", price);
-                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@image", image);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
                     cmd.Parameters.AddWithValue("@ramSize", ramSize);
@@ -601,8 +612,9 @@ namespace Market
                             this.id = Convert.ToInt32(reader["id"]);
                             this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             this.quantity = Convert.ToInt32(reader["quantity"]);
-                            this.imagePath = reader["imagePath"].ToString();
+                            this.image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
                             this.QRCode = reader["QRCode"].ToString();
+                            this.soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                             this.operatingSystem = reader["operatingSystem"] != DBNull.Value ? reader["operatingSystem"].ToString() : null;
                             this.storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
                             this.ramSize = Convert.ToInt32(reader["ramSize"]);
@@ -644,12 +656,12 @@ namespace Market
             public TwoInOne(
                 // Laptop properties
                 string name, string brand, string model, string color, float price, int id,
-                string description, int quantity, string imagePath, string qrCode,
+                string description, int quantity, byte[] image, string qrCode, int soldCounter,
                 string operatingSystem, int storageCapacity, int ramSize, string graphicsCard,
                 string cpuType, float screenSize, string batteryLife,
                 // TwoInOne specific
                 bool detachableKeyboard, string hingeType)
-                : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode,
+                : base(name, brand, model, color, price, id, description, quantity, image, qrCode, soldCounter,
                       operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife)
             {
                 this.detachableKeyboard = detachableKeyboard;
@@ -660,10 +672,10 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO TwoInOnes (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
+                string insertQuery = "INSERT INTO TwoInOnes (name, brand, model, color, price, id, description, quantity, image, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
                                      "detachableKeyboard, hingeType) " +
-                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
                                      "@detachableKeyboard, @hingeType)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -677,8 +689,9 @@ namespace Market
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@image", image);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
                     cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
                     cmd.Parameters.AddWithValue("@ramSize", ramSize);
@@ -714,8 +727,9 @@ namespace Market
                             id = Convert.ToInt32(reader["id"]);
                             description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             quantity = Convert.ToInt32(reader["quantity"]);
-                            imagePath = reader["imagePath"].ToString();
+                            image = (byte[])reader["image"];
                             QRCode = reader["QRCode"].ToString();
+                            soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                             operatingSystem = reader["operatingSystem"].ToString();
                             storageCapacity = Convert.ToInt32(reader["storageCapacity"]);
                             ramSize = Convert.ToInt32(reader["ramSize"]);
@@ -754,9 +768,9 @@ namespace Market
 
             public Cpu(
                 string name, string brand, string model, string color, float price, int id,
-                string description, int quantity, string imagePath, string qrCode,
+                string description, int quantity, byte[] image, string qrCode,
                 int cores, float frequencyGHz, string socketType)
-                : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode)
+                : base(name, brand, model, color, price, id, description, quantity, image, qrCode)
             {
                 this.cores = cores;
                 this.frequencyGHz = frequencyGHz;
@@ -767,9 +781,9 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
+                string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, id, description, quantity, image, QRCode, " +
                                      "cores, frequencyGHz, socketType) " +
-                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
                                      "@cores, @frequencyGHz, @socketType)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
@@ -782,8 +796,9 @@ namespace Market
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@image", image);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     cmd.Parameters.AddWithValue("@cores", cores);
                     cmd.Parameters.AddWithValue("@frequencyGHz", frequencyGHz);
                     cmd.Parameters.AddWithValue("@socketType", socketType);
@@ -813,8 +828,9 @@ namespace Market
                             id = Convert.ToInt32(reader["id"]);
                             description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             quantity = Convert.ToInt32(reader["quantity"]);
-                            imagePath = reader["imagePath"].ToString();
+                            image = (byte[])reader["image"];
                             QRCode = reader["QRCode"].ToString();
+                            soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                             cores = Convert.ToInt32(reader["cores"]);
                             frequencyGHz = Convert.ToSingle(reader["frequencyGHz"]);
                             socketType = reader["socketType"].ToString();
@@ -850,9 +866,9 @@ namespace Market
 
             public Gpu(
                 string name, string brand, string model, string color, float price, int id,
-                string description, int quantity, string imagePath, string qrCode,
+                string description, int quantity, byte[] image, string qrCode,
                 int memoryGB, string chipset)
-                : base(name, brand, model, color, price, id, description, quantity, imagePath, qrCode)
+                : base(name, brand, model, color, price, id, description, quantity, image, qrCode)
             {
                 this.memoryGB = memoryGB;
                 this.chipset = chipset;
@@ -864,9 +880,9 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO Gpus (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
+                string insertQuery = "INSERT INTO Gpus (name, brand, model, color, price, id, description, quantity, image, QRCode, " +
                                      "memoryGB, chipset) " +
-                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
                                      "@memoryGB, @chipset)";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
@@ -879,8 +895,9 @@ namespace Market
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
-                    cmd.Parameters.AddWithValue("@imagePath", imagePath);
+                    cmd.Parameters.AddWithValue("@image", image);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     cmd.Parameters.AddWithValue("@memoryGB", memoryGB);
                     cmd.Parameters.AddWithValue("@chipset", chipset);
 
@@ -909,8 +926,9 @@ namespace Market
                             id = Convert.ToInt32(reader["id"]);
                             description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             quantity = Convert.ToInt32(reader["quantity"]);
-                            imagePath = reader["imagePath"].ToString();
+                            image = (byte[])reader["image"];
                             QRCode = reader["QRCode"].ToString();
+                            soldCounter = reader["soldCounter"] != DBNull.Value ? Convert.ToInt32(reader["soldCounter"]) : 0;
                             memoryGB = Convert.ToInt32(reader["memoryGB"]);
                             chipset = reader["chipset"].ToString();
                         }
@@ -953,7 +971,7 @@ namespace Market
 // id: 101,
 // description: "The latest flagship with AI features.",
 // quantity: 50,
-// imagePath: "/images/s24ultra.png",
+// image: "/images/s24ultra.png",
 // qrCode: "S24ULTRA101QR",
 // operatingSystem: "Android 14",
 // screenSize: 6.8f,

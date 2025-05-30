@@ -16,6 +16,8 @@ namespace Market
     {
         private Form _loginForm;
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
+        private byte[] uploadedImageBytes = null; 
+        
         public static void SetPropertiesFromDictionary(object target, Dictionary<string, object> values)
         {
             var targetType = target.GetType();
@@ -46,7 +48,7 @@ namespace Market
                 { "price", (float)admin_price.Value },
                 { "description", admin_description.Text },
                 { "quantity", (int)admin_quantity.Value },
-                { "imagePath", admin_image_path.Text },
+                { "image", uploadedImageBytes },
                 { "QRCode", admin_qrcode.Text }
             };
 
@@ -339,6 +341,7 @@ namespace Market
             //batteryCapacity: (int)admin_phone_battery.Value,
             //tablet: admin_tablet.Checked
             //);
+            
             Dictionary<string, object> data = BuildFinalDictionary();
 
             object myDeviceInstance;
@@ -366,79 +369,262 @@ namespace Market
             // Save to database
             ////Polymorphic save based on type
             ((Electronics)myDeviceInstance).SaveToDb(myConnectionString);
-            
-            //Phone myPhone = new Phone(
-            //name: "Galaxy S24 Ultra",
-            //brand: "Samsung",
-            //model: "SM-S928B",
-            //color: "Titanium Gray",
-            //price: 1299.99f,
-            //id: 101,
-            //description: "The latest flagship with AI features.",
-            //quantity: 50,
-            //imagePath: "/images/s24ultra.png",
-            //qrCode: "S24ULTRA101QR",
-            //operatingSystem: "Android 14",
-            //screenSize: 6.8f,
-            //storageCapacity: 512,
-            //ramSize: 12,
-            //cameraQuality: 200,
-            //cpuType: "Snapdragon 8 Gen 3 for Galaxy",
-            //batteryCapacity: 5000,
-            //tablet: false
-            //);
+            /*
+            var phones = new List<Phone>
+{
+
+            new Phone(
+                name: "iPhone 15 Pro Max",
+                brand: "Apple",
+                model: "A2849",
+                color: "Natural Titanium",
+                price: 1199.00f,
+                id: 102,
+                description: "Apple's top-tier phone with a titanium body.",
+                quantity: 40,
+                image: null,
+                qrCode: "IP15PROMAX102QR",
+                operatingSystem: "iOS 17",
+                screenSize: 6.7f,
+                storageCapacity: 512,
+                ramSize: 8,
+                cameraQuality: 48,
+                cpuType: "Apple A17 Pro",
+                batteryCapacity: 4441,
+                tablet: false
+            ),
+
+            new Phone(
+                name: "Pixel 8 Pro",
+                brand: "Google",
+                model: "G1MNW",
+                color: "Obsidian",
+                price: 999.00f,
+                id: 103,
+                description: "The smartest Pixel yet, with AI-powered tools.",
+                quantity: 30,
+                image: null,
+                qrCode: "PIXEL8PRO103QR",
+                operatingSystem: "Android 14",
+                screenSize: 6.7f,
+                storageCapacity: 256,
+                ramSize: 12,
+                cameraQuality: 50,
+                cpuType: "Google Tensor G3",
+                batteryCapacity: 5050,
+                tablet: false
+            ),
+
+            new Phone(
+                name: "Galaxy Tab S9 Ultra",
+                brand: "Samsung",
+                model: "SM-X910",
+                color: "Graphite",
+                price: 1399.99f,
+                id: 104,
+                description: "Ultra-sized tablet with 14.6-inch AMOLED display.",
+                quantity: 20,
+                image: null,
+                qrCode: "TABS9ULTRA104QR",
+                operatingSystem: "Android 13",
+                screenSize: 14.6f,
+                storageCapacity: 512,
+                ramSize: 12,
+                cameraQuality: 13,
+                cpuType: "Snapdragon 8 Gen 2",
+                batteryCapacity: 11200,
+                tablet: true
+            ),
+
+            new Phone(
+                name: "OnePlus 12",
+                brand: "OnePlus",
+                model: "CPH2573",
+                color: "Silky Black",
+                price: 899.00f,
+                id: 105,
+                description: "Flagship killer with blazing fast charging.",
+                quantity: 25,
+                image: null,
+                qrCode: "ONEPLUS12105QR",
+                operatingSystem: "Android 14",
+                screenSize: 6.82f,
+                storageCapacity: 256,
+                ramSize: 16,
+                cameraQuality: 50,
+                cpuType: "Snapdragon 8 Gen 3",
+                batteryCapacity: 5400,
+                tablet: false
+            )
+        };*/
+
         }
-
-        private void admin_show_button_Click(object sender, EventArgs e)
-        {
-            //string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
-            string phone_name = "Galaxy S24 Ultra";
-            Phone myPhone = new Phone();
-            myPhone.GetData(in_name: phone_name, connectionString: myConnectionString);
-            admin_name.Text = myPhone.name;
-            admin_brand.Text = myPhone.brand;
-            admin_model.Text = myPhone.model;
-            admin_color.Text = myPhone.color;
-            admin_price.Value = (decimal)myPhone.price;
-            admin_description.Text = myPhone.description;
-            admin_quantity.Value = myPhone.quantity;
-            admin_image_path.Text = myPhone.imagePath;
-            admin_qrcode.Text = myPhone.QRCode;
-            admin_phone_os.Text = myPhone.operatingSystem;
-            admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
-            admin_phone_storage.Value = myPhone.storageCapacity;
-            admin_ram_size.Value = myPhone.ramSize;
-            admin_phone_camera.Value = myPhone.cameraQuality;
-            admin_phone_cpu.Text = myPhone.cpuType;
-            admin_phone_battery.Value = myPhone.batteryCapacity;
-            admin_tablet.Checked = myPhone.tablet;
-            admin_pictureBox.ImageLocation = Path.Combine(Application.StartupPath, myPhone.imagePath);
-        }
-
-        private void admin_laptop_groupbox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void admin_electronics_groupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void admin_fold_type_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void admin_search_Click(object sender, EventArgs e)
         {
+            string searchValue = admin_search_textBox.Text;
 
+            if (string.IsNullOrWhiteSpace(searchValue))
+            {
+                MessageBox.Show("Please fill in search value.");
+                return;
+            }
+
+            object myDeviceInstance;
+
+            if (admin_phones_radioButton.Checked)
+                myDeviceInstance = new Phone();
+            else if (admin_fold_radioButton.Checked)
+                myDeviceInstance = new Fold();
+            else if (admin_gaming_laptop_radioButton.Checked)
+                myDeviceInstance = new GamingLaptop();
+            else if (admin_two_in_one_radioButton.Checked)
+                myDeviceInstance = new TwoInOne();
+            else if (admin_laptop_radioButton.Checked)
+                myDeviceInstance = new Laptop();
+            else if (admin_cpu_radioButton.Checked)
+                myDeviceInstance = new Cpu();
+            else if (admin_gpu_radioButton.Checked)
+                myDeviceInstance = new Gpu();
+            else
+                throw new InvalidOperationException("No device type selected.");
+
+            // Call dynamic GetData
+            ((Electronics)myDeviceInstance).GetData(searchValue, myConnectionString);
+
+            // Now update the UI from myDeviceInstance
+            FillUIWithDeviceData(myDeviceInstance); // <- Make this a method to update all fields accordingly
         }
+        private void FillUIWithDeviceData(object device)
+        {
+            if (device is Electronics e)
+            {
+                admin_name.Text = e.name;
+                admin_brand.Text = e.brand;
+                admin_model.Text = e.model;
+                admin_color.Text = e.color;
+                admin_price.Value = (decimal)e.price;
+                admin_description.Text = e.description;
+                admin_quantity.Value = e.quantity;
+                admin_qrcode.Text = e.QRCode;
+
+                if (e.image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(e.image))
+                    {
+                        admin_pictureBox.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+
+            if (device is Phone p)
+            {
+                admin_phone_os.Text = p.operatingSystem;
+                admin_phone_screen_size.Value = (decimal)p.screenSize;
+                admin_phone_storage.Value = p.storageCapacity;
+                admin_ram_size.Value = p.ramSize;
+                admin_phone_camera.Value = p.cameraQuality;
+                admin_phone_cpu.Text = p.cpuType;
+                admin_phone_battery.Value = p.batteryCapacity;
+                admin_tablet.Checked = p.tablet;
+            }
+
+            if (device is Fold f)
+            {
+                admin_fold_type.Text = f.foldType;
+                admin_hinge_type_type.Text = f.hingeMaterial;
+                admin_display_type_type.Text = f.displayType;
+                admin_durability_rating_type.Text = f.durabilityRating;
+                admin_size_of_opened_screen_type.Value = (decimal)f.sizeOfOpenedScreen;
+            }
+
+            if (device is Laptop l)
+            {
+                admin_os.Text = l.operatingSystem;
+                admin_storage.Value = l.storageCapacity;
+                admin_ram.Value = l.ramSize;
+                admin_gpu.Text = l.graphicsCard;
+                admin_cpu.Text = l.cpuType;
+                admin_screen_size.Value = (decimal)l.screenSize;
+                admin_battery_life.Value = decimal.TryParse(l.batteryLife, out var bl) ? bl : 0;
+            }
+
+            if (device is GamingLaptop gl)
+            {
+                admin_cooling_system.Text = gl.coolingSystem;
+                admin_keyboard_type.Text = gl.keyboardType;
+                admin_frame_rate.Value = gl.frameRate;
+            }
+
+            if (device is TwoInOne t)
+            {
+                admin_detachable_keyboard_checkBox.Checked = t.detachableKeyboard;
+                admin_hinge_type.Text = t.hingeType;
+            }
+
+            if (device is Cpu c)
+            {
+                admin_cores.Value = c.cores;
+                admin_frequency_ghz.Value = (decimal)c.frequencyGHz;
+                admin_socket_type.Text = c.socketType;
+            }
+
+            if (device is Gpu g)
+            {
+                admin_memory_gb.Value = g.memoryGB;
+                admin_chipset.Text = g.chipset;
+            }
+        }
+
+        //private void admin_search_Click(object sender, EventArgs e)
+        //{
+        //    Phone myPhone = new Phone();
+        //    myPhone.GetData(in_name: admin_search_textBox.Text, connectionString: myConnectionString);
+        //    admin_name.Text = myPhone.name;
+        //    admin_brand.Text = myPhone.brand;
+        //    admin_model.Text = myPhone.model;
+        //    admin_color.Text = myPhone.color;
+        //    admin_price.Value = (decimal)myPhone.price;
+        //    admin_description.Text = myPhone.description;
+        //    admin_quantity.Value = myPhone.quantity;
+        //    admin_qrcode.Text = myPhone.QRCode;
+        //    admin_phone_os.Text = myPhone.operatingSystem;
+        //    admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
+        //    admin_phone_storage.Value = myPhone.storageCapacity;
+        //    admin_ram_size.Value = myPhone.ramSize;
+        //    admin_phone_camera.Value = myPhone.cameraQuality;
+        //    admin_phone_cpu.Text = myPhone.cpuType;
+        //    admin_phone_battery.Value = myPhone.batteryCapacity;
+        //    admin_tablet.Checked = myPhone.tablet;
+        //    if (myPhone.image != null)
+        //    {
+        //        using (MemoryStream ms = new MemoryStream(myPhone.image))
+        //        {
+        //            admin_pictureBox.Image = Image.FromStream(ms);
+        //        }
+        //    }
+        //}
 
         private void login_Click(object sender, EventArgs e)
         {
             this.Close();
             _loginForm.Show();
+        }
+
+        private void admin_upload_image_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Select an Image";
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // Display image in PictureBox
+                admin_pictureBox.Image = new Bitmap(ofd.FileName);
+                admin_pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                // Convert image to byte array for saving to DB
+                uploadedImageBytes = File.ReadAllBytes(ofd.FileName);
+            }
         }
     }
 }
