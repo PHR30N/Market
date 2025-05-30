@@ -14,7 +14,7 @@ namespace Market
 {
     public partial class Form1 : Form
     {
-        private Form _loginForm;
+        protected Form _loginForm;
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
         public Form1()
         {
@@ -39,6 +39,66 @@ namespace Market
             gpu_groupbox.Hide();
             _loginForm = login;
 
+        }
+        public Form1(Form login, string in_name, string type)
+        {
+            InitializeComponent();
+            admin_phone_groupbox.Hide();
+            fold_groupbox.Hide();
+            admin_laptop_groupbox.Hide();
+            gaming_laptop_groupbox.Hide();
+            admin_two_in_one_laptop_groupbox.Hide();
+            admin_cpu_groupbox.Hide();
+            gpu_groupbox.Hide();
+            _loginForm = login;
+            object myDeviceInstance;
+
+            if (type == "Phones")
+            {
+                myDeviceInstance = new Phone();
+                admin_phone_groupbox.Show();
+            }
+            else if (type == "Folds")
+            {
+                myDeviceInstance = new Fold();
+                admin_phone_groupbox.Show();
+                fold_groupbox.Show();
+            }
+            else if (type == "GammingLaptops")
+            {
+                myDeviceInstance = new GamingLaptop();
+                admin_laptop_groupbox.Show();
+                gaming_laptop_groupbox.Show();
+            }
+            else if (type == "TwoInOnes")
+            {
+                myDeviceInstance = new TwoInOne();
+                admin_laptop_groupbox.Show();
+                admin_two_in_one_laptop_groupbox.Show();
+            }
+            else if (type == "Laptops")
+            {
+                myDeviceInstance = new Laptop();
+                admin_laptop_groupbox.Show();
+            }
+            else if (type == "Cpus")
+            {
+                myDeviceInstance = new Cpu();
+                admin_cpu_groupbox.Show();
+            }
+            else if (type == "Gpus")
+            {
+                myDeviceInstance = new Gpu();
+                gpu_groupbox.Show();
+            }
+            else
+                throw new InvalidOperationException("No device type selected.");
+
+            // Call dynamic GetData
+            ((Electronics)myDeviceInstance).GetData(in_name, myConnectionString);
+
+            // Now update the UI from myDeviceInstance
+            FillUIWithDeviceData(myDeviceInstance);
         }
         private void FillUIWithDeviceData(object device)
         {
