@@ -303,7 +303,7 @@ namespace Market
             }
         }
 
-        private void search_Click(object sender, EventArgs e)
+        private void search_Click_1(object sender, EventArgs e)
         {
             string searchValue = search_textBox.Text;
 

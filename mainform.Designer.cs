@@ -31,9 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.admin_search = new System.Windows.Forms.Button();
             this.admin_electronics_groupBox = new System.Windows.Forms.GroupBox();
-            this.fold_radioButton = new System.Windows.Forms.RadioButton();
-            this.gaming_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.two_in_one_radioButton = new System.Windows.Forms.RadioButton();
+            this.gaming_laptop_radioButton = new System.Windows.Forms.RadioButton();
+            this.fold_radioButton = new System.Windows.Forms.RadioButton();
             this.gpu_radioButton = new System.Windows.Forms.RadioButton();
             this.cpu_radioButton = new System.Windows.Forms.RadioButton();
             this.laptop_radioButton = new System.Windows.Forms.RadioButton();
@@ -79,6 +79,7 @@
             this.admin_search.TabIndex = 25;
             this.admin_search.Text = "Search";
             this.admin_search.UseVisualStyleBackColor = false;
+            this.admin_search.Click += new System.EventHandler(this.admin_search_Click);
             // 
             // admin_electronics_groupBox
             // 
@@ -96,17 +97,17 @@
             this.admin_electronics_groupBox.TabStop = false;
             this.admin_electronics_groupBox.Text = "Electronics";
             // 
-            // fold_radioButton
+            // two_in_one_radioButton
             // 
-            this.fold_radioButton.AutoSize = true;
-            this.fold_radioButton.Location = new System.Drawing.Point(13, 60);
-            this.fold_radioButton.Name = "fold_radioButton";
-            this.fold_radioButton.Size = new System.Drawing.Size(79, 17);
-            this.fold_radioButton.TabIndex = 1;
-            this.fold_radioButton.TabStop = true;
-            this.fold_radioButton.Text = "Fold Phone";
-            this.fold_radioButton.UseVisualStyleBackColor = true;
-            this.fold_radioButton.CheckedChanged += new System.EventHandler(this.fold_radioButton_CheckedChanged);
+            this.two_in_one_radioButton.AutoSize = true;
+            this.two_in_one_radioButton.Location = new System.Drawing.Point(13, 146);
+            this.two_in_one_radioButton.Name = "two_in_one_radioButton";
+            this.two_in_one_radioButton.Size = new System.Drawing.Size(88, 17);
+            this.two_in_one_radioButton.TabIndex = 4;
+            this.two_in_one_radioButton.TabStop = true;
+            this.two_in_one_radioButton.Text = "2 In 1 Laptop";
+            this.two_in_one_radioButton.UseVisualStyleBackColor = true;
+            this.two_in_one_radioButton.CheckedChanged += new System.EventHandler(this.two_in_one_radioButton_CheckedChanged);
             // 
             // gaming_laptop_radioButton
             // 
@@ -120,17 +121,17 @@
             this.gaming_laptop_radioButton.UseVisualStyleBackColor = true;
             this.gaming_laptop_radioButton.CheckedChanged += new System.EventHandler(this.gaming_laptop_radioButton_CheckedChanged);
             // 
-            // two_in_one_radioButton
+            // fold_radioButton
             // 
-            this.two_in_one_radioButton.AutoSize = true;
-            this.two_in_one_radioButton.Location = new System.Drawing.Point(13, 146);
-            this.two_in_one_radioButton.Name = "two_in_one_radioButton";
-            this.two_in_one_radioButton.Size = new System.Drawing.Size(88, 17);
-            this.two_in_one_radioButton.TabIndex = 4;
-            this.two_in_one_radioButton.TabStop = true;
-            this.two_in_one_radioButton.Text = "2 In 1 Laptop";
-            this.two_in_one_radioButton.UseVisualStyleBackColor = true;
-            this.two_in_one_radioButton.CheckedChanged += new System.EventHandler(this.two_in_one_radioButton_CheckedChanged);
+            this.fold_radioButton.AutoSize = true;
+            this.fold_radioButton.Location = new System.Drawing.Point(13, 60);
+            this.fold_radioButton.Name = "fold_radioButton";
+            this.fold_radioButton.Size = new System.Drawing.Size(79, 17);
+            this.fold_radioButton.TabIndex = 1;
+            this.fold_radioButton.TabStop = true;
+            this.fold_radioButton.Text = "Fold Phone";
+            this.fold_radioButton.UseVisualStyleBackColor = true;
+            this.fold_radioButton.CheckedChanged += new System.EventHandler(this.fold_radioButton_CheckedChanged);
             // 
             // gpu_radioButton
             // 
@@ -194,6 +195,7 @@
             this.sign_out.TabIndex = 27;
             this.sign_out.Text = "Sign Out";
             this.sign_out.UseVisualStyleBackColor = false;
+            this.sign_out.Click += new System.EventHandler(this.sign_out_Click);
             // 
             // label4
             // 

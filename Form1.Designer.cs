@@ -32,6 +32,9 @@
             this.search_textBox = new System.Windows.Forms.TextBox();
             this.admin_pictureBox = new System.Windows.Forms.PictureBox();
             this.gaming_laptop_groupbox = new System.Windows.Forms.GroupBox();
+            this.admin_frame_rate = new System.Windows.Forms.NumericUpDown();
+            this.admin_keyboard_type = new System.Windows.Forms.TextBox();
+            this.admin_cooling_system = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -122,13 +125,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.close_button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.login = new System.Windows.Forms.Button();
+            this.sign_out = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.admin_frame_rate = new System.Windows.Forms.NumericUpDown();
-            this.admin_keyboard_type = new System.Windows.Forms.TextBox();
-            this.admin_cooling_system = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).BeginInit();
             this.gaming_laptop_groupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
             this.gpu_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memory_gb)).BeginInit();
             this.admin_cpu_groupbox.SuspendLayout();
@@ -155,7 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.price)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
             this.SuspendLayout();
             // 
             // search
@@ -168,6 +168,7 @@
             this.search.TabIndex = 35;
             this.search.Text = "Search";
             this.search.UseVisualStyleBackColor = false;
+            this.search.Click += new System.EventHandler(this.search_Click_1);
             // 
             // search_textBox
             // 
@@ -199,6 +200,33 @@
             this.gaming_laptop_groupbox.TabIndex = 31;
             this.gaming_laptop_groupbox.TabStop = false;
             this.gaming_laptop_groupbox.Text = "Gaming Parameters";
+            // 
+            // admin_frame_rate
+            // 
+            this.admin_frame_rate.DecimalPlaces = 2;
+            this.admin_frame_rate.Location = new System.Drawing.Point(129, 90);
+            this.admin_frame_rate.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.admin_frame_rate.Name = "admin_frame_rate";
+            this.admin_frame_rate.Size = new System.Drawing.Size(120, 20);
+            this.admin_frame_rate.TabIndex = 5;
+            // 
+            // admin_keyboard_type
+            // 
+            this.admin_keyboard_type.Location = new System.Drawing.Point(127, 56);
+            this.admin_keyboard_type.Name = "admin_keyboard_type";
+            this.admin_keyboard_type.Size = new System.Drawing.Size(123, 20);
+            this.admin_keyboard_type.TabIndex = 4;
+            // 
+            // admin_cooling_system
+            // 
+            this.admin_cooling_system.Location = new System.Drawing.Point(129, 25);
+            this.admin_cooling_system.Name = "admin_cooling_system";
+            this.admin_cooling_system.Size = new System.Drawing.Size(121, 20);
+            this.admin_cooling_system.TabIndex = 3;
             // 
             // label31
             // 
@@ -1197,24 +1225,24 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
-            this.panel1.Controls.Add(this.login);
+            this.panel1.Controls.Add(this.sign_out);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(-6, -10);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 693);
             this.panel1.TabIndex = 22;
             // 
-            // login
+            // sign_out
             // 
-            this.login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.login.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login.Location = new System.Drawing.Point(44, 519);
-            this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(150, 48);
-            this.login.TabIndex = 28;
-            this.login.Text = "Login";
-            this.login.UseVisualStyleBackColor = false;
-            this.login.Click += new System.EventHandler(this.login_Click);
+            this.sign_out.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.sign_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sign_out.Location = new System.Drawing.Point(44, 519);
+            this.sign_out.Name = "sign_out";
+            this.sign_out.Size = new System.Drawing.Size(150, 48);
+            this.sign_out.TabIndex = 28;
+            this.sign_out.Text = "Sign Out";
+            this.sign_out.UseVisualStyleBackColor = false;
+            this.sign_out.Click += new System.EventHandler(this.login_Click);
             // 
             // label3
             // 
@@ -1225,33 +1253,6 @@
             this.label3.Size = new System.Drawing.Size(187, 55);
             this.label3.TabIndex = 19;
             this.label3.Text = "martek\'";
-            // 
-            // admin_frame_rate
-            // 
-            this.admin_frame_rate.DecimalPlaces = 2;
-            this.admin_frame_rate.Location = new System.Drawing.Point(129, 90);
-            this.admin_frame_rate.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.admin_frame_rate.Name = "admin_frame_rate";
-            this.admin_frame_rate.Size = new System.Drawing.Size(120, 20);
-            this.admin_frame_rate.TabIndex = 5;
-            // 
-            // admin_keyboard_type
-            // 
-            this.admin_keyboard_type.Location = new System.Drawing.Point(127, 56);
-            this.admin_keyboard_type.Name = "admin_keyboard_type";
-            this.admin_keyboard_type.Size = new System.Drawing.Size(123, 20);
-            this.admin_keyboard_type.TabIndex = 4;
-            // 
-            // admin_cooling_system
-            // 
-            this.admin_cooling_system.Location = new System.Drawing.Point(129, 25);
-            this.admin_cooling_system.Name = "admin_cooling_system";
-            this.admin_cooling_system.Size = new System.Drawing.Size(121, 20);
-            this.admin_cooling_system.TabIndex = 3;
             // 
             // Form1
             // 
@@ -1283,6 +1284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).EndInit();
             this.gaming_laptop_groupbox.ResumeLayout(false);
             this.gaming_laptop_groupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).EndInit();
             this.gpu_groupbox.ResumeLayout(false);
             this.gpu_groupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memory_gb)).EndInit();
@@ -1320,7 +1322,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1422,7 +1423,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button close_button;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button login;
+        private System.Windows.Forms.Button sign_out;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Button admin_add;

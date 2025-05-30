@@ -16,58 +16,7 @@ namespace Market
     {
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
         private Form _loginForm;
-        public GroupBox CloneGroupBoxWithPictureAndLink(GroupBox originalGroupBox, Image image, string linkText)
-        {
-            // Create the new GroupBox and copy basic properties
-            GroupBox clone = new GroupBox
-            {
-                Size = originalGroupBox.Size,
-                Text = originalGroupBox.Text,
-                BackColor = originalGroupBox.BackColor,
-                ForeColor = originalGroupBox.ForeColor,
-                Font = originalGroupBox.Font
-            };
-
-            // Create the PictureBox
-            PictureBox pictureBox = new PictureBox
-            {
-                Image = image,
-                SizeMode = PictureBoxSizeMode.Zoom,
-                Size = new Size(100, 100), // Adjust size as needed
-            };
-
-            // Center the PictureBox
-            pictureBox.Location = new Point(
-                (clone.Width - pictureBox.Width) / 2,
-                (clone.Height - pictureBox.Height) / 2 - 20 // shift upward to make room for link below
-            );
-
-            // Create the LinkLabel
-            LinkLabel linkLabel = new LinkLabel
-            {
-                Text = linkText,
-                AutoSize = true
-            };
-
-            // Center the LinkLabel under the PictureBox
-            linkLabel.Location = new Point(
-                (clone.Width - linkLabel.PreferredWidth) / 2,
-                pictureBox.Bottom + 5
-            );
-
-            // Optional: Add click event for the link
-            linkLabel.Click += (sender, e) =>
-            {
-                MessageBox.Show("Link clicked!");
-            };
-
-            // Add controls to the cloned GroupBox
-            clone.Controls.Add(pictureBox);
-            clone.Controls.Add(linkLabel);
-
-            return clone;
-        }
-        public string in_username { get; set; }
+         public string in_username { get; set; }
         public mainform()
         {
             InitializeComponent();
@@ -200,6 +149,19 @@ namespace Market
         private void gpu_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             LoadCategoryItems(myConnectionString, flowLayoutPanel);
+        }
+
+        private void sign_out_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            _loginForm.Show();
+        }
+
+        private void admin_search_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1(_loginForm);
+            this.Close();
+            form1.Show();
         }
     }
 }
