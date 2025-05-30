@@ -129,6 +129,7 @@
     <Content Include="Resources\maximalfocus-VT4rx775FT4-unsplash.jpg" />
     <Content Include="Resources\ryzen9_7950x.png" />
     <Content Include="Resources\s24ultra.png" />
+    <Content Include="SQL_Scripts\Final SQL Market.sql" />
     <Content Include="SQL_Scripts\Login&amp;Register.sql" />
     <Content Include="SQL_Scripts\Phones1.sql" />
     <Content Include="SQL_Scripts\phones2.sql" />
