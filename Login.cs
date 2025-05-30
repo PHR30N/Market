@@ -49,16 +49,15 @@ namespace Market
                 if (userExists1 > 0)
                 {
                     //MessageBox.Show("Login successful!");
-                    this.Hide();
                     if(username1 == "admin")
                     {                         // Open the admin main form or perform any other action
-                        AdminMain adminMain = new AdminMain();
+                        AdminMain adminMain = new AdminMain(this);
                         adminMain.Show();
                     }
                     else
                     {
                         // Open the user main form or perform any other action
-                        mainform main = new mainform(username1);
+                        mainform main = new mainform(username1,this);
                         main.Show();
                     }
                     // Open the main form or perform any other action
@@ -67,6 +66,7 @@ namespace Market
                 {
                     MessageBox.Show("Invalid username or email.");
                 }
+                    this.Hide();
                 return;
             }
             string username = login_username.Text;
@@ -93,19 +93,19 @@ namespace Market
             // Check if user exists
             if (userExists > 0)
             {
-                this.Hide(); 
                 //MessageBox.Show("Login successful!");
                 if (username == "admin")
                 {                         // Open the admin main form or perform any other action
-                    AdminMain adminMain = new AdminMain();
+                    AdminMain adminMain = new AdminMain(this);
                     adminMain.Show();
                 }
                 else
                 {
                     // Open the user main form or perform any other action
-                    mainform main = new mainform(username);
+                    mainform main = new mainform(username,this);
                     main.Show();
                 }
+                this.Hide(); 
                 // Open the main form or perform any other action
             }
             else
@@ -116,7 +116,7 @@ namespace Market
 
         private void login_create_new_account_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Register register = new Register();
+            Register register = new Register(this);
             register.Show();
             this.Hide();
         }

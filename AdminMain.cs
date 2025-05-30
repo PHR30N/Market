@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Market
 {
     public partial class AdminMain : Form
     {
+        private Form _loginForm;
+
         public static void SetPropertiesFromDictionary(object target, Dictionary<string, object> values)
         {
             var targetType = target.GetType();
@@ -145,10 +148,24 @@ namespace Market
                 target[kvp.Key] = kvp.Value; // Overwrites if key already exists
         }
 
-
         public AdminMain()
         {
             InitializeComponent();
+            admin_phone_groupbox.Hide();
+            admin_fold_groupbox.Hide();
+            admin_laptop_groupbox.Hide();
+            admin_gaming_laptop_groupbox.Hide();
+            admin_two_in_one_laptop_groupbox.Hide();
+            admin_phones_radio_groupbox.Hide();
+            admin_laptop_radio_groupbox.Hide();
+            admin_cpu_groupbox.Hide();
+            admin_gpu_groupbox.Hide();
+        }
+
+        public AdminMain(Form loginForm)
+        {
+            InitializeComponent();
+            _loginForm = loginForm;
             admin_phone_groupbox.Hide();
             admin_fold_groupbox.Hide();
             admin_laptop_groupbox.Hide();
@@ -173,6 +190,7 @@ namespace Market
         private void close_button_Click_1(object sender, EventArgs e)
         {
             this.Close();
+            _loginForm.Close();
         }
 
         private void admin_phones_radioButton_CheckedChanged(object sender, EventArgs e)
@@ -196,7 +214,7 @@ namespace Market
         {
             if (admin_laptop_radioButton.Checked)
             {
-                admin_laptop_groupbox.Show();
+                
                 admin_laptop_radio_groupbox.Show();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
@@ -205,7 +223,7 @@ namespace Market
                 admin_phones_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
-
+                admin_laptop_groupbox.Show();
                 // Ensure the main laptop groupbox is visible and sub-groupboxes are hidden
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
@@ -220,7 +238,7 @@ namespace Market
         {
             if (admin_cpu_radioButton.Checked)
             {
-                admin_cpu_groupbox.Show();
+                
                 admin_gpu_groupbox.Hide();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
@@ -229,6 +247,7 @@ namespace Market
                 admin_two_in_one_laptop_groupbox.Hide();
                 admin_phones_radio_groupbox.Hide();
                 admin_laptop_radio_groupbox.Hide();
+                admin_cpu_groupbox.Show();
             }
         }
 
@@ -236,7 +255,7 @@ namespace Market
         {
             if (admin_gpu_radioButton.Checked)
             {
-                admin_gpu_groupbox.Show();
+                
                 admin_cpu_groupbox.Hide();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
@@ -245,6 +264,7 @@ namespace Market
                 admin_two_in_one_laptop_groupbox.Hide();
                 admin_phones_radio_groupbox.Hide();
                 admin_laptop_radio_groupbox.Hide();
+                admin_gpu_groupbox.Show();
             }
         }
 
@@ -284,7 +304,7 @@ namespace Market
         {
             if (admin_two_in_one_radioButton.Checked)
             {
-                admin_laptop_groupbox.Show();
+                
                 admin_two_in_one_laptop_groupbox.Show();
                 admin_laptop_radio_groupbox.Show();
                 admin_phone_groupbox.Hide();
@@ -293,6 +313,7 @@ namespace Market
                 admin_phones_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
+                admin_laptop_groupbox.Show();
             }
         }
         
@@ -399,6 +420,7 @@ namespace Market
             admin_phone_cpu.Text = myPhone.cpuType;
             admin_phone_battery.Value = myPhone.batteryCapacity;
             admin_tablet.Checked = myPhone.tablet;
+            //admin_pictureBox.ImageLocation = Path.Combine(Application.StartupPath, myPhone.imagePath);
             //MessageBox.Show("Entered Method" + myPhone.operatingSystem);
         }
 
@@ -416,5 +438,6 @@ namespace Market
         {
 
         }
+
     }
 }

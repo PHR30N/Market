@@ -13,9 +13,15 @@ namespace Market
 {
     public partial class Register: Form
     {
+        private Form _loginForm;
         public Register()
         {
             InitializeComponent();
+        }
+        public Register(Login login)
+        {
+            InitializeComponent();
+            _loginForm = login;
         }
 
         private void Register_btn_Click(object sender, EventArgs e)
@@ -104,8 +110,7 @@ namespace Market
 
         private void register_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            _loginForm.Show();
             this.Close();
         }
 

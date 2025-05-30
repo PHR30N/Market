@@ -63,9 +63,59 @@ namespace Market.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _4127298 {
+            get {
+                object obj = ResourceManager.GetObject("4127298", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ai_nuclear_energy_background_future_innovation_disruptive_technology {
+            get {
+                object obj = ResourceManager.GetObject("ai-nuclear-energy-background-future-innovation-disruptive-technology", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap login {
             get {
                 object obj = ResourceManager.GetObject("login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap maximalfocus_VT4rx775FT4_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("maximalfocus-VT4rx775FT4-unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ryzen9_7950x {
+            get {
+                object obj = ResourceManager.GetObject("ryzen9_7950x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap s24ultra {
+            get {
+                object obj = ResourceManager.GetObject("s24ultra", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
