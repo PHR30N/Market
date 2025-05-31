@@ -127,6 +127,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.sign_out = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.discount_label = new System.Windows.Forms.Label();
+            this.username = new System.Windows.Forms.TextBox();
+            this.money = new System.Windows.Forms.TextBox();
+            this.discount = new System.Windows.Forms.TextBox();
+            this.buy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).BeginInit();
             this.gaming_laptop_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
@@ -1225,6 +1232,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
+            this.panel1.Controls.Add(this.buy);
             this.panel1.Controls.Add(this.sign_out);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(-6, -10);
@@ -1254,6 +1262,67 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "martek\'";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(929, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "Username";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(929, 52);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(39, 13);
+            this.label40.TabIndex = 37;
+            this.label40.Text = "Money";
+            // 
+            // discount_label
+            // 
+            this.discount_label.AutoSize = true;
+            this.discount_label.Location = new System.Drawing.Point(929, 74);
+            this.discount_label.Name = "discount_label";
+            this.discount_label.Size = new System.Drawing.Size(49, 13);
+            this.discount_label.TabIndex = 38;
+            this.discount_label.Text = "Discount";
+            // 
+            // username
+            // 
+            this.username.Location = new System.Drawing.Point(990, 23);
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
+            this.username.Size = new System.Drawing.Size(100, 20);
+            this.username.TabIndex = 39;
+            // 
+            // money
+            // 
+            this.money.Location = new System.Drawing.Point(990, 45);
+            this.money.Name = "money";
+            this.money.Size = new System.Drawing.Size(100, 20);
+            this.money.TabIndex = 40;
+            // 
+            // discount
+            // 
+            this.discount.Location = new System.Drawing.Point(990, 67);
+            this.discount.Name = "discount";
+            this.discount.Size = new System.Drawing.Size(100, 20);
+            this.discount.TabIndex = 41;
+            // 
+            // buy
+            // 
+            this.buy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.buy.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buy.Location = new System.Drawing.Point(44, 122);
+            this.buy.Name = "buy";
+            this.buy.Size = new System.Drawing.Size(150, 48);
+            this.buy.TabIndex = 42;
+            this.buy.Text = "Buy";
+            this.buy.UseVisualStyleBackColor = false;
+            this.buy.Click += new System.EventHandler(this.buy_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1263,6 +1332,12 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1155, 684);
+            this.Controls.Add(this.discount);
+            this.Controls.Add(this.money);
+            this.Controls.Add(this.username);
+            this.Controls.Add(this.discount_label);
+            this.Controls.Add(this.label40);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.fold_groupbox);
             this.Controls.Add(this.gpu_groupbox);
             this.Controls.Add(this.search);
@@ -1425,10 +1500,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button sign_out;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Button admin_add;
         private System.Windows.Forms.NumericUpDown admin_frame_rate;
         private System.Windows.Forms.TextBox admin_keyboard_type;
         private System.Windows.Forms.TextBox admin_cooling_system;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label discount_label;
+        private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.TextBox money;
+        private System.Windows.Forms.TextBox discount;
+        private System.Windows.Forms.Button buy;
     }
 }

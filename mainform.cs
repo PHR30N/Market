@@ -16,19 +16,28 @@ namespace Market
     {
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
         private Form _loginForm;
+        UsersData user;
          public string in_username { get; set; }
         public mainform()
         {
             InitializeComponent();
         }
-        public mainform(string in_username)
-        {
-            InitializeComponent();
-        }
-        public mainform(string in_username, Login login)
+        public mainform(Login login, UsersData user)
         {
             InitializeComponent();
             _loginForm = login;
+            this.user = user;
+            money.Text = user.money.money.ToString();
+            username.Text = user.username;
+            if (user.money.discount > 0)
+            {
+                discount.Text = user.money.discount.ToString();
+            }
+            else
+            {
+                discount_label.Hide();
+                discount.Hide();
+            }
         }
         public void LoadCategoryItems(string connectionString, FlowLayoutPanel flowPanel)
         {
@@ -44,7 +53,7 @@ namespace Market
             else if (gpu_radioButton.Checked) tableName = "Gpus";
             else return; // No category selected
 
-            string query = $"SELECT id, name, image FROM {tableName}";
+            string query = $"SELECT id, name, image, quantity FROM {tableName}";
 
             List<(int Id, string Name, byte[] ImageBytes)> items = new List<(int Id, string Name, byte[] ImageBytes)>();
 
@@ -59,52 +68,55 @@ namespace Market
                         int id = Convert.ToInt32(reader["id"]);
                         string name = reader["name"].ToString();
                         byte[] image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
-
-                        items.Add((id, name, image));
+                        int quantity = Convert.ToInt32(reader["quantity"]);
+                        if (quantity > 0) // Only add items that are in stock
+                        {
+                            // Add item to the list
+                            items.Add((id, name, image));
+                        }
                     }
                 }
-            }
 
-            // Clear the panel
-            flowPanel.Controls.Clear();
+                // Clear the panel
+                flowPanel.Controls.Clear();
 
-            // Create UI for each item
-            foreach (var item in items)
-            {
-                PictureBox pictureBox = new PictureBox
+                // Create UI for each item
+                foreach (var item in items)
                 {
-                    Size = new Size(100, 100),
-                    SizeMode = PictureBoxSizeMode.Zoom,
-                    Image = item.ImageBytes != null ? ByteArrayToImage(item.ImageBytes) : null,
-                    Location = new Point(25, 20)
-                };
+                    PictureBox pictureBox = new PictureBox
+                    {
+                        Size = new Size(100, 100),
+                        SizeMode = PictureBoxSizeMode.Zoom,
+                        Image = item.ImageBytes != null ? ByteArrayToImage(item.ImageBytes) : null,
+                        Location = new Point(25, 20)
+                    };
 
-                LinkLabel linkLabel = new LinkLabel
-                {
-                    Text = item.Name,
-                    AutoSize = true,
-                    Location = new Point((150 - TextRenderer.MeasureText(item.Name, new Font("Arial", 8)).Width) / 2, pictureBox.Bottom + 5)
-                };
+                    LinkLabel linkLabel = new LinkLabel
+                    {
+                        Text = item.Name,
+                        AutoSize = true,
+                        Location = new Point((150 - TextRenderer.MeasureText(item.Name, new Font("Arial", 8)).Width) / 2, pictureBox.Bottom + 5)
+                    };
 
-                linkLabel.Click += (s, e) =>
-                {
-                    MessageBox.Show($"You clicked on {item.Name} (ID: {item.Id})");
-                    Form1 form1 = new Form1(_loginForm,item.Name,tableName);
-                    this.Close();
-                    form1.Show();
-                };
+                    linkLabel.Click += (s, e) =>
+                    {
+                        Form1 form1 = new Form1(_loginForm, item.Name, tableName, user);
+                        this.Close();
+                        form1.Show();
+                    };
 
-                GroupBox groupBox = new GroupBox
-                {
-                    Size = new Size(150, 160),
-                    BackColor = Color.White,
-                    Text = $"{tableName} #{item.Id}"
-                };
+                    GroupBox groupBox = new GroupBox
+                    {
+                        Size = new Size(150, 160),
+                        BackColor = Color.White,
+                        Text = $"{tableName} #{item.Id}"
+                    };
 
-                groupBox.Controls.Add(pictureBox);
-                groupBox.Controls.Add(linkLabel);
+                    groupBox.Controls.Add(pictureBox);
+                    groupBox.Controls.Add(linkLabel);
 
-                flowPanel.Controls.Add(groupBox);
+                    flowPanel.Controls.Add(groupBox);
+                }
             }
         }
 
@@ -159,9 +171,15 @@ namespace Market
 
         private void admin_search_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1(_loginForm);
+            Form1 form1 = new Form1(_loginForm, user);
             this.Close();
             form1.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            _loginForm.Close();
         }
     }
 }

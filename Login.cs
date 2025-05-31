@@ -13,6 +13,7 @@ namespace Market
 {
     public partial class Login : Form
     {
+        UsersData user;
         public Login()
         {
             InitializeComponent();
@@ -57,7 +58,8 @@ namespace Market
                     else
                     {
                         // Open the user main form or perform any other action
-                        mainform main = new mainform(username1,this);
+                        user = new UsersData(username1);
+                        mainform main = new mainform(this,user);
                         main.Show();
                     }
                     // Open the main form or perform any other action
@@ -102,7 +104,8 @@ namespace Market
                 else
                 {
                     // Open the user main form or perform any other action
-                    mainform main = new mainform(username,this);
+                    user = new UsersData(username);
+                    mainform main = new mainform(this, user);
                     main.Show();
                 }
                 this.Hide(); 

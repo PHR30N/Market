@@ -13,7 +13,8 @@ namespace Market
 {
     public partial class Register: Form
     {
-        private Form _loginForm;
+        private Login _loginForm;
+        UsersData user;
         public Register()
         {
             InitializeComponent();
@@ -83,7 +84,8 @@ namespace Market
                    // MessageBox.Show("Registration successful!");
                     // Optionally, you can redirect the user to the login form or another form
                     this.Hide(); // Close the registration form
-                    mainform main = new mainform(username);
+                    user = new UsersData(username);
+                    mainform main = new mainform(_loginForm,user);
                     main.Show();
                 }
                 else

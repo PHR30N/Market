@@ -321,26 +321,6 @@ namespace Market
         
         private void admin_add_Click(object sender, EventArgs e)
         {
-            //string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
-            //Phone myPhone = new Phone(
-            //name: admin_name.Text,
-            //brand: admin_brand.Text,
-            //model: admin_model.Text,
-            //color: admin_color.Text,
-            //price: (float)admin_price.Value,
-            //description: admin_description.Text,
-            //quantity: (int)admin_quantity.Value,
-            //imagePath: admin_image_path.Text,
-            //qrCode: admin_qrcode.Text,
-            //operatingSystem: admin_phone_os.Text,
-            //screenSize: (float)admin_phone_screen_size.Value,
-            //storageCapacity: (int)admin_phone_storage.Value,
-            //ramSize: (int)admin_ram_size.Value,
-            //cameraQuality: (int)admin_phone_camera.Value,
-            //cpuType: admin_phone_cpu.Text,
-            //batteryCapacity: (int)admin_phone_battery.Value,
-            //tablet: admin_tablet.Checked
-            //);
             
             Dictionary<string, object> data = BuildFinalDictionary();
 

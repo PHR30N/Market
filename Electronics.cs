@@ -79,7 +79,8 @@ namespace Market
         //}
 
         // Abstract method to save to DB, to be implemented by derived classes
-        public abstract void SaveToDb(string connectionString);
+        public abstract void SaveToDb(string connectionString); 
+        public abstract void SaveToDbWithoutImage(string connectionString);
 
         // Abstract method to get data, to be implemented by derived classes
         public abstract void GetData(string in_name, string connectionString);
@@ -183,6 +184,66 @@ namespace Market
                 cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
                 cmd.Parameters.AddWithValue("@tablet",tablet);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Database Error: {ex.Message}");
+                }
+            }
+        }
+        public override void SaveToDbWithoutImage(string connectionString)
+        {
+            string mergeQuery = @"
+        MERGE INTO Phones AS Target
+        USING (SELECT @name AS name) AS Source
+        ON Target.name = Source.name
+        WHEN MATCHED THEN 
+            UPDATE SET 
+                brand = @brand,
+                model = @model,
+                color = @color,
+                price = @price,
+                description = @description,
+                quantity = @quantity,
+                QRCode = @QRCode,
+                soldCounter = @soldCounter,
+                operatingSystem = @operatingSystem,
+                screenSize = @screenSize,
+                storageCapacity = @storageCapacity,
+                ramSize = @ramSize,
+                cameraQuality = @cameraQuality,
+                cpuType = @cpuType,
+                batteryCapacity = @batteryCapacity,
+                tablet = @tablet
+        WHEN NOT MATCHED THEN
+            INSERT (name, brand, model, color, price, description, quantity,  QRCode, operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity,tablet, soldCounter)
+            VALUES (@name, @brand, @model, @color, @price, @description, @quantity,  @QRCode, @operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet, @soldCounter);";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(mergeQuery, conn))
+            {
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@brand", brand);
+                cmd.Parameters.AddWithValue("@model", model);
+                cmd.Parameters.AddWithValue("@color", color);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
+                cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
+                cmd.Parameters.AddWithValue("@tablet", tablet);
 
                 try
                 {
@@ -331,6 +392,49 @@ namespace Market
                 cmd.ExecuteNonQuery();
             }
         }
+        public override void SaveToDbWithoutImage(string connectionString)
+        {
+            string insertQuery = "INSERT INTO Folds (name, brand, model, color, price, id, description, quantity, QRCode, " +
+                                 "operatingSystem, screenSize, storageCapacity, ramSize, cameraQuality, cpuType, batteryCapacity,tablet, soldCounter, " +
+                                 "foldType, hingeMaterial, displayType, durabilityRating, sizeOfOpenedScreen) " +
+                                 "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @QRCode, " +
+                                 "@operatingSystem, @screenSize, @storageCapacity, @ramSize, @cameraQuality, @cpuType, @batteryCapacity, @tablet, @soldCounter, " +
+                                 "@foldType, @hingeMaterial, @displayType, @durabilityRating, @sizeOfOpenedScreen)";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+            {
+                // Phone properties
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@brand", brand);
+                cmd.Parameters.AddWithValue("@model", model);
+                cmd.Parameters.AddWithValue("@color", color);
+                cmd.Parameters.AddWithValue("@price", price);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                cmd.Parameters.AddWithValue("@cameraQuality", cameraQuality);
+                cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@batteryCapacity", batteryCapacity);
+                cmd.Parameters.AddWithValue("@tablet", tablet);
+
+                // Fold-specific properties
+                cmd.Parameters.AddWithValue("@foldType", foldType);
+                cmd.Parameters.AddWithValue("@hingeMaterial", hingeMaterial);
+                cmd.Parameters.AddWithValue("@displayType", displayType);
+                cmd.Parameters.AddWithValue("@durabilityRating", durabilityRating);
+                cmd.Parameters.AddWithValue("@sizeOfOpenedScreen", sizeOfOpenedScreen);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
         public override void GetData(string in_name, string connectionString)
         {
             string selectQuery = "SELECT * FROM Folds WHERE name = @name";
@@ -426,9 +530,9 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO Laptops (name, brand, model, color, price, id, description, quantity, imagePath, QRCode, " +
+                string insertQuery = "INSERT INTO Laptops (name, brand, model, color, price, laptop_id, description, quantity, image, QRCode, " +
                                      "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, soldCounter) " +
-                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @imagePath, @QRCode, " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
                                      "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, @soldCounter)";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -444,6 +548,40 @@ namespace Market
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
                     cmd.Parameters.AddWithValue("@image", image);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                    // Laptop-specific properties
+                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", (object)graphicsCard ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", (object)batteryLife ?? DBNull.Value);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            public override void SaveToDbWithoutImage(string connectionString)
+            {
+                string insertQuery = "INSERT INTO Laptops (name, brand, model, color, price, laptop_id, description, quantity, QRCode, " +
+                                     "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, soldCounter) " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @QRCode, " +
+                                     "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, @soldCounter)";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    // Electronics properties
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
                     cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     // Laptop-specific properties
@@ -479,7 +617,7 @@ namespace Market
                             this.model = reader["model"].ToString();
                             this.color = reader["color"].ToString();
                             this.price = Convert.ToSingle(reader["price"]);
-                            this.id = Convert.ToInt32(reader["id"]);
+                            this.id = Convert.ToInt32(reader["laptop_id"]);
                             this.description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             this.quantity = Convert.ToInt32(reader["quantity"]);
                             this.image = reader["image"] != DBNull.Value ? (byte[])reader["image"] : null;
@@ -570,6 +708,45 @@ namespace Market
                     cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@quantity", quantity);
                     cmd.Parameters.AddWithValue("@image", image);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                    cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", (object)graphicsCard ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@cpuType", (object)cpuType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", (object)batteryLife ?? DBNull.Value);
+
+                    // GamingLaptop-specific attributes
+                    cmd.Parameters.AddWithValue("@coolingSystem", (object)coolingSystem ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@keyboardType", (object)keyboardType ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@frameRate", frameRate);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            public override void SaveToDbWithoutImage(string connectionString)
+            {
+                string insertQuery = "INSERT INTO GammingLaptops (name, brand, model, color, price, description, quantity, QRCode, " +
+                                     "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
+                                     "coolingSystem, keyboardType, frameRate) " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @description, @quantity, @QRCode, " +
+                                     "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
+                                     "@coolingSystem, @keyboardType, @frameRate)";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    // Laptop base attributes
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
                     cmd.Parameters.AddWithValue("@QRCode", QRCode);
                     cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
                     cmd.Parameters.AddWithValue("@operatingSystem", (object)operatingSystem ?? DBNull.Value);
@@ -706,7 +883,41 @@ namespace Market
                     cmd.ExecuteNonQuery();
                 }
             }
+            public override void SaveToDbWithoutImage(string connectionString)
+            {
+                string insertQuery = "INSERT INTO TwoInOnes (name, brand, model, color, price, id, description, quantity, QRCode, " +
+                                     "operatingSystem, storageCapacity, ramSize, graphicsCard, cpuType, screenSize, batteryLife, " +
+                                     "detachableKeyboard, hingeType) " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @QRCode, " +
+                                     "@operatingSystem, @storageCapacity, @ramSize, @graphicsCard, @cpuType, @screenSize, @batteryLife, " +
+                                     "@detachableKeyboard, @hingeType)";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                    cmd.Parameters.AddWithValue("@operatingSystem", operatingSystem);
+                    cmd.Parameters.AddWithValue("@storageCapacity", storageCapacity);
+                    cmd.Parameters.AddWithValue("@ramSize", ramSize);
+                    cmd.Parameters.AddWithValue("@graphicsCard", graphicsCard);
+                    cmd.Parameters.AddWithValue("@cpuType", cpuType);
+                    cmd.Parameters.AddWithValue("@screenSize", screenSize);
+                    cmd.Parameters.AddWithValue("@batteryLife", batteryLife);
+                    cmd.Parameters.AddWithValue("@detachableKeyboard", detachableKeyboard);
+                    cmd.Parameters.AddWithValue("@hingeType", hingeType);
 
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
             public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM TwoInOnes WHERE name = @name";
@@ -781,7 +992,7 @@ namespace Market
 
             public override void SaveToDb(string connectionString)
             {
-                string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, id, description, quantity, image, QRCode, " +
+                string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, cpu_id, description, quantity, image, QRCode, " +
                                      "cores, frequencyGHz, socketType) " +
                                      "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @image, @QRCode, " +
                                      "@cores, @frequencyGHz, @socketType)";
@@ -807,7 +1018,33 @@ namespace Market
                     cmd.ExecuteNonQuery();
                 }
             }
+            public override void SaveToDbWithoutImage(string connectionString)
+            {
+                string insertQuery = "INSERT INTO Cpus (name, brand, model, color, price, cpu_id, description, quantity, QRCode, " +
+                                     "cores, frequencyGHz, socketType) " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @QRCode, " +
+                                     "@cores, @frequencyGHz, @socketType)";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                    cmd.Parameters.AddWithValue("@cores", cores);
+                    cmd.Parameters.AddWithValue("@frequencyGHz", frequencyGHz);
+                    cmd.Parameters.AddWithValue("@socketType", socketType);
 
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
             public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM Cpus WHERE name = @name";
@@ -825,7 +1062,7 @@ namespace Market
                             model = reader["model"].ToString();
                             color = reader["color"].ToString();
                             price = Convert.ToSingle(reader["price"]);
-                            id = Convert.ToInt32(reader["id"]);
+                            id = Convert.ToInt32(reader["cpu_id"]);
                             description = reader["description"] != DBNull.Value ? reader["description"].ToString() : null;
                             quantity = Convert.ToInt32(reader["quantity"]);
                             image = (byte[])reader["image"];
@@ -905,7 +1142,32 @@ namespace Market
                     cmd.ExecuteNonQuery();
                 }
             }
+            public override void SaveToDbWithoutImage(string connectionString)
+            {
+                string insertQuery = "INSERT INTO Gpus (name, brand, model, color, price, id, description, quantity, QRCode, " +
+                                     "memoryGB, chipset) " +
+                                     "VALUES (@name, @brand, @model, @color, @price, @id, @description, @quantity, @QRCode, " +
+                                     "@memoryGB, @chipset)";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@brand", brand);
+                    cmd.Parameters.AddWithValue("@model", model);
+                    cmd.Parameters.AddWithValue("@color", color);
+                    cmd.Parameters.AddWithValue("@price", price);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@description", (object)description ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@QRCode", QRCode);
+                    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+                    cmd.Parameters.AddWithValue("@memoryGB", memoryGB);
+                    cmd.Parameters.AddWithValue("@chipset", chipset);
 
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
             public override void GetData(string in_name, string connectionString)
             {
                 string selectQuery = "SELECT * FROM Gpus WHERE name = @name";

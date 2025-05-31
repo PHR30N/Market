@@ -42,19 +42,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.username = new System.Windows.Forms.TextBox();
+            this.money = new System.Windows.Forms.TextBox();
+            this.discount_label = new System.Windows.Forms.Label();
+            this.discount = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.admin_electronics_groupBox.SuspendLayout();
-            this.flowLayoutPanel.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -216,74 +211,73 @@
             this.button6.TabIndex = 20;
             this.button6.Text = "Close";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.Controls.Add(this.groupBox8);
-            this.flowLayoutPanel.Controls.Add(this.groupBox9);
             this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(240, 20);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(240, 78);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(528, 653);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(528, 595);
             this.flowLayoutPanel.TabIndex = 24;
             // 
-            // groupBox8
+            // label1
             // 
-            this.groupBox8.Controls.Add(this.pictureBox1);
-            this.groupBox8.Controls.Add(this.linkLabel1);
-            this.groupBox8.Location = new System.Drawing.Point(3, 3);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(256, 153);
-            this.groupBox8.TabIndex = 12;
-            this.groupBox8.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.label1.Location = new System.Drawing.Point(240, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 29);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Username";
             // 
-            // pictureBox1
+            // label2
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(254, 113);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.label2.Location = new System.Drawing.Point(563, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 29);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Money";
             // 
-            // linkLabel1
+            // username
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(84, 135);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
+            this.username.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.username.Location = new System.Drawing.Point(376, 3);
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
+            this.username.Size = new System.Drawing.Size(181, 29);
+            this.username.TabIndex = 27;
             // 
-            // groupBox9
+            // money
             // 
-            this.groupBox9.Controls.Add(this.pictureBox2);
-            this.groupBox9.Controls.Add(this.linkLabel2);
-            this.groupBox9.Location = new System.Drawing.Point(3, 162);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(256, 153);
-            this.groupBox9.TabIndex = 5;
-            this.groupBox9.TabStop = false;
+            this.money.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.money.Location = new System.Drawing.Point(658, 3);
+            this.money.Name = "money";
+            this.money.ReadOnly = true;
+            this.money.Size = new System.Drawing.Size(181, 29);
+            this.money.TabIndex = 28;
             // 
-            // pictureBox2
+            // discount_label
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 19);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(254, 113);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.discount_label.AutoSize = true;
+            this.discount_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.discount_label.Location = new System.Drawing.Point(845, 3);
+            this.discount_label.Name = "discount_label";
+            this.discount_label.Size = new System.Drawing.Size(83, 24);
+            this.discount_label.TabIndex = 29;
+            this.discount_label.Text = "Discount";
             // 
-            // linkLabel2
+            // discount
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(84, 135);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel2.TabIndex = 0;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "linkLabel2";
+            this.discount.Location = new System.Drawing.Point(934, 8);
+            this.discount.Name = "discount";
+            this.discount.ReadOnly = true;
+            this.discount.Size = new System.Drawing.Size(100, 20);
+            this.discount.TabIndex = 30;
             // 
             // mainform
             // 
@@ -291,6 +285,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1160, 686);
+            this.Controls.Add(this.discount);
+            this.Controls.Add(this.discount_label);
+            this.Controls.Add(this.money);
+            this.Controls.Add(this.username);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.panel1);
@@ -303,14 +303,8 @@
             this.panel1.PerformLayout();
             this.admin_electronics_groupBox.ResumeLayout(false);
             this.admin_electronics_groupBox.PerformLayout();
-            this.flowLayoutPanel.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -321,12 +315,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button sign_out;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.GroupBox admin_electronics_groupBox;
         private System.Windows.Forms.RadioButton fold_radioButton;
         private System.Windows.Forms.RadioButton gaming_laptop_radioButton;
@@ -336,5 +324,11 @@
         private System.Windows.Forms.RadioButton laptop_radioButton;
         private System.Windows.Forms.RadioButton phones_radioButton;
         private System.Windows.Forms.Button admin_search;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.TextBox money;
+        private System.Windows.Forms.Label discount_label;
+        private System.Windows.Forms.TextBox discount;
     }
 }
