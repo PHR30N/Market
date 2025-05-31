@@ -468,35 +468,6 @@ namespace Market
             }
         }
 
-        //private void admin_search_Click(object sender, EventArgs e)
-        //{
-        //    Phone myPhone = new Phone();
-        //    myPhone.GetData(in_name: admin_search_textBox.Text, connectionString: myConnectionString);
-        //    admin_name.Text = myPhone.name;
-        //    admin_brand.Text = myPhone.brand;
-        //    admin_model.Text = myPhone.model;
-        //    admin_color.Text = myPhone.color;
-        //    admin_price.Value = (decimal)myPhone.price;
-        //    admin_description.Text = myPhone.description;
-        //    admin_quantity.Value = myPhone.quantity;
-        //    admin_qrcode.Text = myPhone.QRCode;
-        //    admin_phone_os.Text = myPhone.operatingSystem;
-        //    admin_phone_screen_size.Value = (decimal)myPhone.screenSize;
-        //    admin_phone_storage.Value = myPhone.storageCapacity;
-        //    admin_ram_size.Value = myPhone.ramSize;
-        //    admin_phone_camera.Value = myPhone.cameraQuality;
-        //    admin_phone_cpu.Text = myPhone.cpuType;
-        //    admin_phone_battery.Value = myPhone.batteryCapacity;
-        //    admin_tablet.Checked = myPhone.tablet;
-        //    if (myPhone.image != null)
-        //    {
-        //        using (MemoryStream ms = new MemoryStream(myPhone.image))
-        //        {
-        //            admin_pictureBox.Image = Image.FromStream(ms);
-        //        }
-        //    }
-        //}
-
         private void login_Click(object sender, EventArgs e)
         {
             this.Close();

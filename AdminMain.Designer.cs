@@ -1299,7 +1299,6 @@
             this.Controls.Add(this.admin_groupbox);
             this.Controls.Add(this.close_button);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdminMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminMain";
