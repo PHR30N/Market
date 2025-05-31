@@ -61,6 +61,7 @@ namespace Market
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 conn.Open();
+                //laptop and cpu error
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
