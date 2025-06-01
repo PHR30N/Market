@@ -376,8 +376,17 @@ namespace Market
             int soldCounter = 0; // Initialize to avoid unassigned variable issues
 
             // Decrease quantity and update user's money
+            if (quantity.Value > quantity.Minimum)
+            {
+                quantity.Value -= 1;
+            }
+            else
+            {
+                MessageBox.Show("Quantity cannot be less than the minimum value.");
+                return;
+            }
+
             user.UpdateMoney((int)price.Value);
-            quantity.Value -= 1;
 
             // Step 1: Read current soldCounter value
             string selectQuery = $"SELECT soldCounter FROM {type} WHERE name = @name";
