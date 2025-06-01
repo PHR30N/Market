@@ -69,7 +69,6 @@ namespace Market
                 conn.Close();
                 conn.Dispose();
             }
-            this.money.money = 10000; // Default money for testing
         }
         public void UpdateMoney(int amount)
         {
@@ -79,17 +78,17 @@ namespace Market
                 return;
             }
             this.money.UpdateMoney(amount);
-            string connectionString = "Server=localhost;Database=MarketDB;Integrated Security=True;";
-            string updateQuery = "UPDATE login SET money = @money WHERE id = @id";
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(updateQuery, conn);
-            cmd.Parameters.AddWithValue("@money", this.money.money);
-            cmd.Parameters.AddWithValue("@id", this.id);
-            // Open the connection
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            // Close the connection
-            conn.Close();
+            //string connectionString = "Server=localhost;Database=MarketDB;Integrated Security=True;";
+            //string updateQuery = "UPDATE login SET money = @money WHERE id = @id";
+            //SqlConnection conn = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(updateQuery, conn);
+            //cmd.Parameters.AddWithValue("@money", this.money.money);
+            //cmd.Parameters.AddWithValue("@id", this.id);
+            //// Open the connection
+            //conn.Open();
+            //cmd.ExecuteNonQuery();
+            //// Close the connection
+            //conn.Close();
         }
         public void Connect(string un)
         {

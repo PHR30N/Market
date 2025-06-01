@@ -18,7 +18,7 @@ namespace Market
 {
     public partial class Form1 : Form
     {
-        protected Form _loginForm;
+        public Login _loginForm;
         UsersData user;
         string type = null;
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
@@ -33,7 +33,7 @@ namespace Market
             admin_cpu_groupbox.Hide();
             gpu_groupbox.Hide();
         }
-        public Form1(Form login, UsersData user)
+        public Form1(Login login, UsersData user)
         {
             InitializeComponent();
             admin_phone_groupbox.Hide();
@@ -57,7 +57,7 @@ namespace Market
                 discount.Hide();
             }
         }
-        public Form1(Form login, string in_name, string type, UsersData user)
+        public Form1(Login login, string in_name, string type, UsersData user)
         {
             InitializeComponent();
             admin_phone_groupbox.Hide();
@@ -250,8 +250,8 @@ namespace Market
                 admin_laptop_groupbox.Hide();
                 gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                phones_radio_groupbox.Show();
-                laptop_radio_groupbox.Hide();
+                //phones_radio_groupbox.Show();
+                //laptop_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 gpu_groupbox.Hide();
                 fold_radioButton.Checked = false;
@@ -373,7 +373,7 @@ namespace Market
 
         private void buy_Click(object sender, EventArgs e)
         {
-            int soldCounter = 0; // Initialize to avoid unassigned variable issues
+            //int soldCounter = 0; // Initialize to avoid unassigned variable issues
 
             // Decrease quantity and update user's money
             if (quantity.Value > quantity.Minimum)
@@ -389,49 +389,49 @@ namespace Market
             user.UpdateMoney((int)price.Value);
 
             // Step 1: Read current soldCounter value
-            string selectQuery = $"SELECT soldCounter FROM {type} WHERE name = @name";
-            using (SqlConnection conn = new SqlConnection(myConnectionString))
-            using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
-            {
-                cmd.Parameters.AddWithValue("@name", name.Text);
-                conn.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        soldCounter = Convert.ToInt32(reader["soldCounter"]) + 1;
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Item with name '{name.Text}' not found in table '{type}'.");
-                        return; // Exit early if item not found
-                    }
-                }
-            }
+            //string selectQuery = $"SELECT soldCounter FROM {type} WHERE name = @name";
+            //using (SqlConnection conn = new SqlConnection(myConnectionString))
+            //using (SqlCommand cmd = new SqlCommand(selectQuery, conn))
+            //{
+            //    cmd.Parameters.AddWithValue("@name", name.Text);
+            //    conn.Open();
+            //    using (SqlDataReader reader = cmd.ExecuteReader())
+            //    {
+            //        if (reader.Read())
+            //        {
+            //            soldCounter = Convert.ToInt32(reader["soldCounter"]) + 1;
+            //        }
+            //        else
+            //        {
+            //            Box.Show($"Item with name '{name.Text}' not found in table '{type}'.");
+            //            return; // Exit early if item not found
+            //        }
+            //    }
+            //}
 
             // Step 2: Update soldCounter value
-            string updateQuery = $"UPDATE {type} SET soldCounter = @soldCounter WHERE name = @name";
-            using (SqlConnection conn = new SqlConnection(myConnectionString))
-            using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
-            {
-                cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
-                cmd.Parameters.AddWithValue("@name", name.Text);
+            //string updateQuery = $"UPDATE {type} SET soldCounter = @soldCounter WHERE name = @name";
+            //using (SqlConnection conn = new SqlConnection(myConnectionString))
+            //using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+            //{
+            //    cmd.Parameters.AddWithValue("@soldCounter", soldCounter);
+            //    cmd.Parameters.AddWithValue("@name", name.Text);
 
-                try
-                {
-                    conn.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected == 0)
-                    {
-                        MessageBox.Show("Update failed: No matching record found.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Database Error: {ex.Message}");
-                    return;
-                }
-            }
+            //    try
+            //    {
+            //        conn.Open();
+            //        int rowsAffected = cmd.ExecuteNonQuery();
+            //        if (rowsAffected == 0)
+            //        {
+            //            MessageBox.Show("Update failed: No matching record found.");
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show($"Database Error: {ex.Message}");
+            //        return;
+            //    }
+            //}
 
             // Final updates
             Update(); // Save additional changes if any
@@ -632,6 +632,12 @@ namespace Market
             }
         }
 
+        private void main_Click(object sender, EventArgs e)
+        {
+            mainform mainform = new mainform(_loginForm, user);
+            mainform.Show();
+            this.Close();
+        }
     }
 
 }

@@ -32,6 +32,7 @@ namespace Market
             string password = register_password.Text;
             string email = register_email.Text;
             string full_name = register_full_name.Text;
+            int money = (int)register_money.Value;
             string account_type = "Customer";
             if (register_confirm_password.Text != register_password.Text)
             {
@@ -62,7 +63,7 @@ namespace Market
             if (register_confirm_password.Text == register_password.Text)
             {
                 // Insert the new user into the database
-                string insertQuery = "INSERT INTO login (username, password, email, full_name,account_type) VALUES (@username, @password, @email, @full_name, @account_type)";
+                string insertQuery = "INSERT INTO login (username, password, email, full_name,account_type,money) VALUES (@username, @password, @email, @full_name, @account_type, @money)";
 
             
                 SqlConnection insertConn = new SqlConnection(connectionString);
@@ -72,6 +73,7 @@ namespace Market
                 insertCmd.Parameters.AddWithValue("@email", email);
                 insertCmd.Parameters.AddWithValue("@full_name", full_name);
                 insertCmd.Parameters.AddWithValue("@account_type", account_type);
+                insertCmd.Parameters.AddWithValue("@money", money);
                 // Open the connection
                 insertConn.Open();
                 // Execute the insert command

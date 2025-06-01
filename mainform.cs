@@ -15,7 +15,7 @@ namespace Market
     public partial class mainform: Form
     {
         string myConnectionString = "Data Source=localhost;Initial Catalog=MarketDB;Integrated Security=True;TrustServerCertificate=True";
-        private Form _loginForm;
+        public Login _loginForm;
         UsersData user;
          public string in_username { get; set; }
         public mainform()

@@ -118,9 +118,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.admin_detachable_keyboard_checkBox = new System.Windows.Forms.CheckBox();
             this.admin_electronics_groupBox = new System.Windows.Forms.GroupBox();
-            this.admin_phones_radio_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_fold_radioButton = new System.Windows.Forms.RadioButton();
-            this.admin_laptop_radio_groupbox = new System.Windows.Forms.GroupBox();
             this.admin_gaming_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_two_in_one_radioButton = new System.Windows.Forms.RadioButton();
             this.admin_gpu_radioButton = new System.Windows.Forms.RadioButton();
@@ -156,8 +154,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
             this.admin_two_in_one_laptop_groupbox.SuspendLayout();
             this.admin_electronics_groupBox.SuspendLayout();
-            this.admin_phones_radio_groupbox.SuspendLayout();
-            this.admin_laptop_radio_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1129,8 +1125,9 @@
             // 
             // admin_electronics_groupBox
             // 
-            this.admin_electronics_groupBox.Controls.Add(this.admin_phones_radio_groupbox);
-            this.admin_electronics_groupBox.Controls.Add(this.admin_laptop_radio_groupbox);
+            this.admin_electronics_groupBox.Controls.Add(this.admin_two_in_one_radioButton);
+            this.admin_electronics_groupBox.Controls.Add(this.admin_gaming_laptop_radioButton);
+            this.admin_electronics_groupBox.Controls.Add(this.admin_fold_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.admin_gpu_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.admin_cpu_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.admin_laptop_radioButton);
@@ -1142,45 +1139,24 @@
             this.admin_electronics_groupBox.TabStop = false;
             this.admin_electronics_groupBox.Text = "Electronics";
             // 
-            // admin_phones_radio_groupbox
-            // 
-            this.admin_phones_radio_groupbox.Controls.Add(this.admin_fold_radioButton);
-            this.admin_phones_radio_groupbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_phones_radio_groupbox.Location = new System.Drawing.Point(9, 38);
-            this.admin_phones_radio_groupbox.Name = "admin_phones_radio_groupbox";
-            this.admin_phones_radio_groupbox.Size = new System.Drawing.Size(70, 59);
-            this.admin_phones_radio_groupbox.TabIndex = 7;
-            this.admin_phones_radio_groupbox.TabStop = false;
-            // 
             // admin_fold_radioButton
             // 
             this.admin_fold_radioButton.AutoSize = true;
-            this.admin_fold_radioButton.Location = new System.Drawing.Point(0, 19);
+            this.admin_fold_radioButton.Location = new System.Drawing.Point(9, 57);
             this.admin_fold_radioButton.Name = "admin_fold_radioButton";
-            this.admin_fold_radioButton.Size = new System.Drawing.Size(53, 19);
+            this.admin_fold_radioButton.Size = new System.Drawing.Size(45, 17);
             this.admin_fold_radioButton.TabIndex = 1;
             this.admin_fold_radioButton.TabStop = true;
             this.admin_fold_radioButton.Text = "Fold";
             this.admin_fold_radioButton.UseVisualStyleBackColor = true;
             this.admin_fold_radioButton.CheckedChanged += new System.EventHandler(this.admin_fold_radioButton_CheckedChanged);
             // 
-            // admin_laptop_radio_groupbox
-            // 
-            this.admin_laptop_radio_groupbox.Controls.Add(this.admin_gaming_laptop_radioButton);
-            this.admin_laptop_radio_groupbox.Controls.Add(this.admin_two_in_one_radioButton);
-            this.admin_laptop_radio_groupbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.admin_laptop_radio_groupbox.Location = new System.Drawing.Point(178, 38);
-            this.admin_laptop_radio_groupbox.Name = "admin_laptop_radio_groupbox";
-            this.admin_laptop_radio_groupbox.Size = new System.Drawing.Size(108, 69);
-            this.admin_laptop_radio_groupbox.TabIndex = 8;
-            this.admin_laptop_radio_groupbox.TabStop = false;
-            // 
             // admin_gaming_laptop_radioButton
             // 
             this.admin_gaming_laptop_radioButton.AutoSize = true;
-            this.admin_gaming_laptop_radioButton.Location = new System.Drawing.Point(26, 19);
+            this.admin_gaming_laptop_radioButton.Location = new System.Drawing.Point(204, 57);
             this.admin_gaming_laptop_radioButton.Name = "admin_gaming_laptop_radioButton";
-            this.admin_gaming_laptop_radioButton.Size = new System.Drawing.Size(75, 19);
+            this.admin_gaming_laptop_radioButton.Size = new System.Drawing.Size(61, 17);
             this.admin_gaming_laptop_radioButton.TabIndex = 3;
             this.admin_gaming_laptop_radioButton.TabStop = true;
             this.admin_gaming_laptop_radioButton.Text = "Gaming";
@@ -1190,9 +1166,9 @@
             // admin_two_in_one_radioButton
             // 
             this.admin_two_in_one_radioButton.AutoSize = true;
-            this.admin_two_in_one_radioButton.Location = new System.Drawing.Point(26, 38);
+            this.admin_two_in_one_radioButton.Location = new System.Drawing.Point(204, 80);
             this.admin_two_in_one_radioButton.Name = "admin_two_in_one_radioButton";
-            this.admin_two_in_one_radioButton.Size = new System.Drawing.Size(61, 19);
+            this.admin_two_in_one_radioButton.Size = new System.Drawing.Size(52, 17);
             this.admin_two_in_one_radioButton.TabIndex = 4;
             this.admin_two_in_one_radioButton.TabStop = true;
             this.admin_two_in_one_radioButton.Text = "2 In 1";
@@ -1340,10 +1316,6 @@
             this.admin_two_in_one_laptop_groupbox.PerformLayout();
             this.admin_electronics_groupBox.ResumeLayout(false);
             this.admin_electronics_groupBox.PerformLayout();
-            this.admin_phones_radio_groupbox.ResumeLayout(false);
-            this.admin_phones_radio_groupbox.PerformLayout();
-            this.admin_laptop_radio_groupbox.ResumeLayout(false);
-            this.admin_laptop_radio_groupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1400,8 +1372,6 @@
         private System.Windows.Forms.RadioButton admin_laptop_radioButton;
         private System.Windows.Forms.RadioButton admin_fold_radioButton;
         private System.Windows.Forms.RadioButton admin_phones_radioButton;
-        private System.Windows.Forms.GroupBox admin_laptop_radio_groupbox;
-        private System.Windows.Forms.GroupBox admin_phones_radio_groupbox;
         private System.Windows.Forms.TextBox admin_phone_cpu;
         private System.Windows.Forms.TextBox admin_phone_os;
         private System.Windows.Forms.Label label22;

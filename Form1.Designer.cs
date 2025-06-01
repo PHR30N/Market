@@ -70,9 +70,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.admin_detachable_keyboard_checkBox = new System.Windows.Forms.CheckBox();
             this.admin_electronics_groupBox = new System.Windows.Forms.GroupBox();
-            this.phones_radio_groupbox = new System.Windows.Forms.GroupBox();
             this.fold_radioButton = new System.Windows.Forms.RadioButton();
-            this.laptop_radio_groupbox = new System.Windows.Forms.GroupBox();
             this.gaming_laptop_radioButton = new System.Windows.Forms.RadioButton();
             this.two_in_one_radioButton = new System.Windows.Forms.RadioButton();
             this.gpu_radioButton = new System.Windows.Forms.RadioButton();
@@ -125,6 +123,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.close_button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.main = new System.Windows.Forms.Button();
+            this.buy = new System.Windows.Forms.Button();
             this.sign_out = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -133,7 +133,6 @@
             this.username = new System.Windows.Forms.TextBox();
             this.money = new System.Windows.Forms.TextBox();
             this.discount = new System.Windows.Forms.TextBox();
-            this.buy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.admin_pictureBox)).BeginInit();
             this.gaming_laptop_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_frame_rate)).BeginInit();
@@ -149,8 +148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.admin_storage)).BeginInit();
             this.admin_two_in_one_laptop_groupbox.SuspendLayout();
             this.admin_electronics_groupBox.SuspendLayout();
-            this.phones_radio_groupbox.SuspendLayout();
-            this.laptop_radio_groupbox.SuspendLayout();
             this.fold_groupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_size_of_opened_screen_type)).BeginInit();
             this.admin_phone_groupbox.SuspendLayout();
@@ -607,8 +604,9 @@
             // 
             // admin_electronics_groupBox
             // 
-            this.admin_electronics_groupBox.Controls.Add(this.phones_radio_groupbox);
-            this.admin_electronics_groupBox.Controls.Add(this.laptop_radio_groupbox);
+            this.admin_electronics_groupBox.Controls.Add(this.two_in_one_radioButton);
+            this.admin_electronics_groupBox.Controls.Add(this.gaming_laptop_radioButton);
+            this.admin_electronics_groupBox.Controls.Add(this.fold_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.gpu_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.cpu_radioButton);
             this.admin_electronics_groupBox.Controls.Add(this.laptop_radioButton);
@@ -620,45 +618,24 @@
             this.admin_electronics_groupBox.TabStop = false;
             this.admin_electronics_groupBox.Text = "Electronics";
             // 
-            // phones_radio_groupbox
-            // 
-            this.phones_radio_groupbox.Controls.Add(this.fold_radioButton);
-            this.phones_radio_groupbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phones_radio_groupbox.Location = new System.Drawing.Point(42, 47);
-            this.phones_radio_groupbox.Name = "phones_radio_groupbox";
-            this.phones_radio_groupbox.Size = new System.Drawing.Size(70, 59);
-            this.phones_radio_groupbox.TabIndex = 7;
-            this.phones_radio_groupbox.TabStop = false;
-            // 
             // fold_radioButton
             // 
             this.fold_radioButton.AutoSize = true;
-            this.fold_radioButton.Location = new System.Drawing.Point(0, 19);
+            this.fold_radioButton.Location = new System.Drawing.Point(10, 49);
             this.fold_radioButton.Name = "fold_radioButton";
-            this.fold_radioButton.Size = new System.Drawing.Size(53, 19);
+            this.fold_radioButton.Size = new System.Drawing.Size(45, 17);
             this.fold_radioButton.TabIndex = 1;
             this.fold_radioButton.TabStop = true;
             this.fold_radioButton.Text = "Fold";
             this.fold_radioButton.UseVisualStyleBackColor = true;
             this.fold_radioButton.CheckedChanged += new System.EventHandler(this.fold_radioButton_CheckedChanged);
             // 
-            // laptop_radio_groupbox
-            // 
-            this.laptop_radio_groupbox.Controls.Add(this.gaming_laptop_radioButton);
-            this.laptop_radio_groupbox.Controls.Add(this.two_in_one_radioButton);
-            this.laptop_radio_groupbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.laptop_radio_groupbox.Location = new System.Drawing.Point(204, 47);
-            this.laptop_radio_groupbox.Name = "laptop_radio_groupbox";
-            this.laptop_radio_groupbox.Size = new System.Drawing.Size(108, 69);
-            this.laptop_radio_groupbox.TabIndex = 8;
-            this.laptop_radio_groupbox.TabStop = false;
-            // 
             // gaming_laptop_radioButton
             // 
             this.gaming_laptop_radioButton.AutoSize = true;
-            this.gaming_laptop_radioButton.Location = new System.Drawing.Point(26, 19);
+            this.gaming_laptop_radioButton.Location = new System.Drawing.Point(204, 49);
             this.gaming_laptop_radioButton.Name = "gaming_laptop_radioButton";
-            this.gaming_laptop_radioButton.Size = new System.Drawing.Size(75, 19);
+            this.gaming_laptop_radioButton.Size = new System.Drawing.Size(61, 17);
             this.gaming_laptop_radioButton.TabIndex = 3;
             this.gaming_laptop_radioButton.TabStop = true;
             this.gaming_laptop_radioButton.Text = "Gaming";
@@ -668,9 +645,9 @@
             // two_in_one_radioButton
             // 
             this.two_in_one_radioButton.AutoSize = true;
-            this.two_in_one_radioButton.Location = new System.Drawing.Point(26, 38);
+            this.two_in_one_radioButton.Location = new System.Drawing.Point(204, 72);
             this.two_in_one_radioButton.Name = "two_in_one_radioButton";
-            this.two_in_one_radioButton.Size = new System.Drawing.Size(61, 19);
+            this.two_in_one_radioButton.Size = new System.Drawing.Size(52, 17);
             this.two_in_one_radioButton.TabIndex = 4;
             this.two_in_one_radioButton.TabStop = true;
             this.two_in_one_radioButton.Text = "2 In 1";
@@ -1232,6 +1209,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))));
+            this.panel1.Controls.Add(this.main);
             this.panel1.Controls.Add(this.buy);
             this.panel1.Controls.Add(this.sign_out);
             this.panel1.Controls.Add(this.label3);
@@ -1239,6 +1217,30 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 693);
             this.panel1.TabIndex = 22;
+            // 
+            // main
+            // 
+            this.main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.main.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.main.Location = new System.Drawing.Point(42, 322);
+            this.main.Name = "main";
+            this.main.Size = new System.Drawing.Size(150, 48);
+            this.main.TabIndex = 43;
+            this.main.Text = "Main";
+            this.main.UseVisualStyleBackColor = false;
+            this.main.Click += new System.EventHandler(this.main_Click);
+            // 
+            // buy
+            // 
+            this.buy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
+            this.buy.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buy.Location = new System.Drawing.Point(44, 122);
+            this.buy.Name = "buy";
+            this.buy.Size = new System.Drawing.Size(150, 48);
+            this.buy.TabIndex = 42;
+            this.buy.Text = "Buy";
+            this.buy.UseVisualStyleBackColor = false;
+            this.buy.Click += new System.EventHandler(this.buy_Click);
             // 
             // sign_out
             // 
@@ -1311,18 +1313,6 @@
             this.discount.Size = new System.Drawing.Size(100, 20);
             this.discount.TabIndex = 41;
             // 
-            // buy
-            // 
-            this.buy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(153)))));
-            this.buy.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buy.Location = new System.Drawing.Point(44, 122);
-            this.buy.Name = "buy";
-            this.buy.Size = new System.Drawing.Size(150, 48);
-            this.buy.TabIndex = 42;
-            this.buy.Text = "Buy";
-            this.buy.UseVisualStyleBackColor = false;
-            this.buy.Click += new System.EventHandler(this.buy_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1377,10 +1367,6 @@
             this.admin_two_in_one_laptop_groupbox.PerformLayout();
             this.admin_electronics_groupBox.ResumeLayout(false);
             this.admin_electronics_groupBox.PerformLayout();
-            this.phones_radio_groupbox.ResumeLayout(false);
-            this.phones_radio_groupbox.PerformLayout();
-            this.laptop_radio_groupbox.ResumeLayout(false);
-            this.laptop_radio_groupbox.PerformLayout();
             this.fold_groupbox.ResumeLayout(false);
             this.fold_groupbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.admin_size_of_opened_screen_type)).EndInit();
@@ -1443,9 +1429,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.CheckBox admin_detachable_keyboard_checkBox;
         private System.Windows.Forms.GroupBox admin_electronics_groupBox;
-        private System.Windows.Forms.GroupBox phones_radio_groupbox;
         private System.Windows.Forms.RadioButton fold_radioButton;
-        private System.Windows.Forms.GroupBox laptop_radio_groupbox;
         private System.Windows.Forms.RadioButton gaming_laptop_radioButton;
         private System.Windows.Forms.RadioButton two_in_one_radioButton;
         private System.Windows.Forms.RadioButton gpu_radioButton;
@@ -1510,5 +1494,6 @@
         private System.Windows.Forms.TextBox money;
         private System.Windows.Forms.TextBox discount;
         private System.Windows.Forms.Button buy;
+        private System.Windows.Forms.Button main;
     }
 }

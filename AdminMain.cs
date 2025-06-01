@@ -118,7 +118,10 @@ namespace Market
                 MergeDict(finalData, phoneData);
 
             if (admin_fold_radioButton.Checked)
+            {
+                MergeDict(finalData, phoneData);
                 MergeDict(finalData, foldData);
+            }
 
             if (admin_laptop_radioButton.Checked)
                 MergeDict(finalData, laptopData);
@@ -158,8 +161,8 @@ namespace Market
             admin_laptop_groupbox.Hide();
             admin_gaming_laptop_groupbox.Hide();
             admin_two_in_one_laptop_groupbox.Hide();
-            admin_phones_radio_groupbox.Hide();
-            admin_laptop_radio_groupbox.Hide();
+            //admin_phones_radio_groupbox.Hide();
+            //admin_laptop_radio_groupbox.Hide();
             admin_cpu_groupbox.Hide();
             admin_gpu_groupbox.Hide();
         }
@@ -173,8 +176,8 @@ namespace Market
             admin_laptop_groupbox.Hide();
             admin_gaming_laptop_groupbox.Hide();
             admin_two_in_one_laptop_groupbox.Hide();
-            admin_phones_radio_groupbox.Hide();
-            admin_laptop_radio_groupbox.Hide();
+            //admin_phones_radio_groupbox.Hide();
+            //admin_laptop_radio_groupbox.Hide();
             admin_cpu_groupbox.Hide();
             admin_gpu_groupbox.Hide();
         }
@@ -204,11 +207,15 @@ namespace Market
                 admin_laptop_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Show();
-                admin_laptop_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Show();
+                //admin_laptop_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
                 admin_fold_radioButton.Checked = false;
+            }
+            else
+            {
+                admin_phones_radioButton.Checked = false; // Uncheck the phones radio button if it's not selected
             }
         }
 
@@ -217,12 +224,12 @@ namespace Market
             if (admin_laptop_radioButton.Checked)
             {
                 
-                admin_laptop_radio_groupbox.Show();
+                //admin_laptop_radio_groupbox.Show();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
                 admin_laptop_groupbox.Show();
@@ -233,6 +240,10 @@ namespace Market
                 // Uncheck subcategory radio buttons to reset state
                 admin_gaming_laptop_radioButton.Checked = false;
                 admin_two_in_one_radioButton.Checked = false;
+            }
+            else
+            {
+                admin_laptop_radioButton.Checked = false; // Uncheck the laptop radio button if it's not selected
             }
         }
 
@@ -247,9 +258,14 @@ namespace Market
                 admin_laptop_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Hide();
-                admin_laptop_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Hide();
+                //admin_laptop_radio_groupbox.Hide();
                 admin_cpu_groupbox.Show();
+                admin_fold_radioButton.Checked = false;
+            }
+            else
+            {
+                admin_cpu_radioButton.Checked = false; // Uncheck the CPU radio button if it's not selected
             }
         }
 
@@ -264,9 +280,13 @@ namespace Market
                 admin_laptop_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Hide();
-                admin_laptop_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Hide();
+                //admin_laptop_radio_groupbox.Hide();
                 admin_gpu_groupbox.Show();
+            }
+            else
+            {
+                admin_gpu_radioButton.Checked = false; // Uncheck the GPU radio button if it's not selected
             }
         }
 
@@ -279,10 +299,14 @@ namespace Market
                 admin_laptop_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Show();
-                admin_laptop_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Show();
+                //admin_laptop_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
+            }
+            else
+            {
+                admin_fold_radioButton.Checked = false; // Uncheck the fold radio button if it's not selected
             }
         }
 
@@ -292,13 +316,17 @@ namespace Market
             {
                 admin_laptop_groupbox.Show();
                 admin_gaming_laptop_groupbox.Show();
-                admin_laptop_radio_groupbox.Show();
+                //admin_laptop_radio_groupbox.Show();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
                 admin_two_in_one_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
+            }
+            else
+            {
+                admin_gaming_laptop_radioButton.Checked = false; // Uncheck the gaming laptop radio button if it's not selected
             }
         }
 
@@ -308,14 +336,18 @@ namespace Market
             {
                 
                 admin_two_in_one_laptop_groupbox.Show();
-                admin_laptop_radio_groupbox.Show();
+                //admin_laptop_radio_groupbox.Show();
                 admin_phone_groupbox.Hide();
                 admin_fold_groupbox.Hide();
                 admin_gaming_laptop_groupbox.Hide();
-                admin_phones_radio_groupbox.Hide();
+                //admin_phones_radio_groupbox.Hide();
                 admin_cpu_groupbox.Hide();
                 admin_gpu_groupbox.Hide();
                 admin_laptop_groupbox.Show();
+            }
+            else
+            {
+                admin_two_in_one_radioButton.Checked = false; // Uncheck the two-in-one radio button if it's not selected
             }
         }
         
