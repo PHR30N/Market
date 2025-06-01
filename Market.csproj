@@ -136,6 +136,7 @@
     <Content Include="SQL_Scripts\Phones1.sql" />
     <Content Include="SQL_Scripts\phones2.sql" />
     <Content Include="SQL_Scripts\SQLQuery1.sql" />
+    <Content Include="SQL_Scripts\Working.sql" />
     <None Include="Resources\login.png" />
     <Content Include="SQL_Scripts\InitialSetup.sql" />
   </ItemGroup>
